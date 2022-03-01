@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "692536037664",
+    "project_id": "lori-4297a",
+    "storage_bucket": "lori-4297a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:692536037664:android:efdd422aead3de14e6c745",
+        "android_client_info": {
+          "package_name": "com.example.lori"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "692536037664-s0fdice21kmgn1ce6h7l8o1td3i06avs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA3jHHhTMbZlVIgeDMBF-wXp-FqTxJ5vuQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "692536037664-s0fdice21kmgn1ce6h7l8o1td3i06avs.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
