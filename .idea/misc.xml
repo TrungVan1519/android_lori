@@ -10,6 +10,7 @@
         <entry key="app/src/main/res/drawable/ic_circle_image_background.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.2578125" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.22916666666666666" />
+        <entry key="app/src/main/res/layout/activity_register.xml" value="0.2509057971014493" />
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.2128623188405797" />
       </map>
     </option>
