@@ -2,9 +2,9 @@ package com.example.lori.activities
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import androidx.appcompat.app.AppCompatActivity
 import com.example.lori.R
 
 @SuppressLint("CustomSplashScreen")
@@ -16,7 +16,7 @@ class SplashActivity : AppCompatActivity() {
         // delay 3000ms
         @Suppress("DEPRECATION")
         Handler().postDelayed({
-            startActivity(Intent(this, MainActivity::class.java))
+            startActivity(Intent(this, LoginActivity::class.java))
             finish()
         }, 3000)
     }

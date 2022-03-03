@@ -3,9 +3,10 @@ package com.example.lori.widgets
 import android.content.Context
 import android.graphics.Typeface
 import android.util.AttributeSet
-import androidx.appcompat.widget.AppCompatTextView
+import androidx.appcompat.widget.AppCompatButton
 
-class BoldMontserratTextView(context: Context, attrs: AttributeSet) : AppCompatTextView(context, attrs) {
+class BoldMontserratButton(context: Context, attrs: AttributeSet) :
+    AppCompatButton(context, attrs) {
 
     init {
         applyFont()

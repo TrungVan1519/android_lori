@@ -20,7 +20,6 @@
         <item name="windowActionBar">false</item>
         <item name="android:windowFullscreen">true</item>
         <item name="android:windowContentOverlay">@null</item>
-
     </style>
     <style name="Theme.Lori.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
     <style name="Theme.Lori.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
