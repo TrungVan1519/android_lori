@@ -13,7 +13,6 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
 
-        // delay 3000ms
         @Suppress("DEPRECATION")
         Handler().postDelayed({
             startActivity(Intent(this, LoginActivity::class.java))
