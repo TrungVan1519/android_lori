@@ -16,6 +16,7 @@ class ActionBar(context: Context, attrs: AttributeSet) : Toolbar(context, attrs)
         val activity = context as AppCompatActivity
 
         activity.setSupportActionBar(this)
+        activity.supportActionBar?.title = ""
         activity.supportActionBar?.setDisplayHomeAsUpEnabled(true)
         activity.supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_black_color_back_24dp)
         setNavigationOnClickListener { activity.onBackPressed() }

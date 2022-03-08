@@ -1,0 +1,49 @@
+package com.example.lori.activities
+
+import android.os.Bundle
+import android.os.Handler
+import com.example.lori.R
+import com.google.firebase.auth.FirebaseAuth
+import kotlinx.android.synthetic.main.activity_forgot_password.*
+
+class ForgotPasswordActivity : BaseActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_forgot_password)
+
+        btSubmit.setOnClickListener {
+            val email = etEmail.text.toString().trim { it <= ' ' }
+
+            if (email.isEmpty()) {
+                showSnackBar(resources.getString(R.string.err_msg_enter_email), true)
+            } else {
+                showProgressDialog(resources.getString(R.string.please_wait))
+
+                FirebaseAuth.getInstance()
+                    .sendPasswordResetEmail(email)
+                    .addOnCompleteListener { task ->
+                        hideProgressDialog()
+
+                        if (task.isSuccessful) {
+                            showSnackBar(
+                                resources.getString(R.string.email_sent_success),
+                                false
+                            )
+
+                            @Suppress("DEPRECATION")
+                            Handler().postDelayed({
+                                // todo sign out logged in user
+                                if (FirebaseAuth.getInstance().currentUser != null) {
+                                    FirebaseAuth.getInstance().signOut()
+                                }
+
+                                finish()
+                            }, 3000)
+                        } else {
+                            showSnackBar(task.exception!!.message.toString(), true)
+                        }
+                    }
+            }
+        }
+    }
+}

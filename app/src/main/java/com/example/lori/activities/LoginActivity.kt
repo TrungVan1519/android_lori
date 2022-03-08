@@ -25,7 +25,7 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.tvForgotPassword -> {
-//                    startActivity(Intent(this, ForgotPasswordActivity::class.java))
+                startActivity(Intent(this, ForgotPasswordActivity::class.java))
             }
             R.id.btLogin -> {
                 loginUser()
