@@ -33,7 +33,7 @@ open class BaseActivity : AppCompatActivity() {
         pbProgress.show()
     }
 
-    protected fun hideProgressDialog() {
+    fun hideProgressDialog() {
         pbProgress.dismiss()
     }
 }

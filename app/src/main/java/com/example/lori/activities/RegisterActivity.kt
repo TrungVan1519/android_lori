@@ -3,10 +3,14 @@ package com.example.lori.activities
 import android.os.Bundle
 import android.os.Handler
 import android.text.TextUtils
+import android.util.Log
 import android.view.View
 import com.example.lori.R
+import com.example.lori.models.User
+import com.example.lori.utils.Constants
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.SetOptions
 import kotlinx.android.synthetic.main.activity_register.*
 
 class RegisterActivity : BaseActivity(), View.OnClickListener {
@@ -14,7 +18,7 @@ class RegisterActivity : BaseActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
 
-        if (beAlreadyRegistered()) {
+        if (FirebaseAuth.getInstance().currentUser != null) {
             finish()
         }
 
@@ -33,10 +37,6 @@ class RegisterActivity : BaseActivity(), View.OnClickListener {
         }
     }
 
-    private fun beAlreadyRegistered(): Boolean {
-        return FirebaseAuth.getInstance().currentUser != null
-    }
-
     private fun registerUser() {
         if (validateRegisterDetails()) {
             showProgressDialog(resources.getString(R.string.please_wait))
@@ -46,23 +46,48 @@ class RegisterActivity : BaseActivity(), View.OnClickListener {
                     etEmail.text.toString().trim { it <= ' ' },
                     etPassword.text.toString().trim { it <= ' ' })
                 .addOnCompleteListener { task ->
-                    hideProgressDialog()
-
                     if (task.isSuccessful) {
-                        val firebaseUser: FirebaseUser = task.result!!.user!!
-                        showSnackBar(
-                            "${resources.getString(R.string.success_register)} with user id is ${firebaseUser.uid}",
-                            false
+                        val user = User(
+                            task.result!!.user!!.uid,
+                            etFirstName.text.toString().trim { it <= ' ' },
+                            etLastName.text.toString().trim { it <= ' ' },
+                            etEmail.text.toString().trim { it <= ' ' }
                         )
 
-                        @Suppress("DEPRECATION")
-                        Handler().postDelayed({
-                            // todo sign out new user because this user is logged in automatically after registering
-                            FirebaseAuth.getInstance().signOut()
-                            finish()
-                        }, 3000)
+                        // Save to "users" table in FireStore DB
+                        FirebaseFirestore.getInstance()
+                            .collection(Constants.USERS)
+                            .document(user.id)
+                            .set(user, SetOptions.merge())
+                            .addOnSuccessListener {
+                                hideProgressDialog()
+                                showSnackBar(resources.getString(R.string.success_register), false)
+
+                                Handler().postDelayed({
+                                    // todo sign out new user because this user is logged in automatically after registering
+                                    FirebaseAuth.getInstance().signOut()
+                                    finish()
+                                }, Constants.DELAYED_MILLIS)
+                            }
+                            .addOnFailureListener { e ->
+                                hideProgressDialog()
+                                showSnackBar(resources.getString(R.string.fail_register), true)
+
+                                Log.e(
+                                    javaClass.simpleName,
+                                    "Error while saving user details.",
+                                    e
+                                )
+                            }
                     } else {
+                        hideProgressDialog()
                         showSnackBar(task.exception!!.message.toString(), true)
+
+                        Log.e(
+                            javaClass.simpleName,
+                            "Error while registering the user.",
+                            task.exception
+                        )
                     }
                 }
         }

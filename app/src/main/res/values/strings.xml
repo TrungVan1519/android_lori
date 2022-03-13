@@ -23,11 +23,25 @@
     <string name="err_msg_enter_confirm_password">Please enter confirm password.</string>
     <string name="err_msg_password_and_confirm_password_mismatch">Password and confirm password does not match.</string>
     <string name="err_msg_agree_terms_and_condition">Please agree terms and condition.</string>
-    <string name="success_register">Register successfully</string>
-    <string name="success_login">Login successfully</string>
     <string name="please_wait">Please Wait&#8230;</string>
     <string name="title_forgot_password">FORGOT PASSWORD?</string>
     <string name="forgot_password_title_description">Enter your username and e-mail address we\'ll send you a email to reset your password</string>
     <string name="btn_lbl_submit">Submit</string>
     <string name="email_sent_success">\"Email sent successfully to reset your password! \"</string>
+    <string name="title_complete_profile">COMPLETE YOUR PROFILE</string>
+    <string name="et_hint_mobile_number">Mobile Number</string>
+    <string name="rb_lbl_male">MALE</string>
+    <string name="rb_lbl_female">FEMALE</string>
+    <string name="btn_lbl_save">Save</string>
+    <string name="btn_lbl_cancel">Cancel</string>
+    <string name="read_storage_permission_denied">Oops, you just denied the permission for storage. You can also allow it from settings.</string>
+    <string name="image_selection_failed">Image selection Failed!</string>
+    <string name="err_msg_enter_mobile_number">Please enter mobile number.</string>
+    <string name="msg_profile_update_success">Your profile is updated successfully.</string>
+
+    <string name="success_register">Register successfully</string>
+    <string name="success_login">Login successfully</string>
+    <string name="fail_register">Register fail</string>
+    <string name="fail_login">Log in fail</string>
+    <string name="fail_update_profile">Update profile fail</string>
 </resources>
