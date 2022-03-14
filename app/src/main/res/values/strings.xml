@@ -44,4 +44,6 @@
     <string name="fail_register">Register fail</string>
     <string name="fail_login">Log in fail</string>
     <string name="fail_update_profile">Update profile fail</string>
+    <string name="fail_upload_image">Fail to upload the image</string>
+    <string name="success_upload_image">Upload the image successfully</string>
 </resources>

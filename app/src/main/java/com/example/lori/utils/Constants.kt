@@ -28,5 +28,9 @@ object Constants {
     // Firebase DB field names
     const val MOBILE = "mobile"
     const val GENDER = "gender"
+    const val FIRST_NAME = "firstName"
+    const val LAST_NAME = "lastName"
     const val PROFILE_COMPLETED = "profileCompleted"
+    const val IMAGE = "image"
+    const val USER_PROFILE_IMAGE = "User_Profile_Image"
 }

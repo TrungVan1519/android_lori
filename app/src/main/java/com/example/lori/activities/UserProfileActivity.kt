@@ -8,24 +8,25 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
-import android.provider.MediaStore
 import android.text.TextUtils
 import android.util.Log
 import android.view.View
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.bumptech.glide.Glide
 import com.example.lori.R
 import com.example.lori.models.User
 import com.example.lori.utils.Constants
+import com.example.lori.utils.ImageUtils
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.activity_user_profile.*
 import java.io.IOException
 
 class UserProfileActivity : BaseActivity(), View.OnClickListener {
 
     private lateinit var user: User
+    private var selectedImageFileUri: Uri? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,7 +37,23 @@ class UserProfileActivity : BaseActivity(), View.OnClickListener {
             etFirstName.setText(user.firstName)
             etLastName.setText(user.lastName)
             etEmail.setText(user.email)
-            etMobileNumber.setText(user.mobile.toString())
+            etMobileNumber.setText(if (user.mobile != 0L) user.mobile.toString() else "")
+        }
+
+        if (user.profileCompleted == 0) {
+            etFirstName.isEnabled = false
+            etLastName.isEnabled = false
+            etEmail.isEnabled = false
+        } else {
+            etEmail.isEnabled = false
+            etMobileNumber.setText(if (user.mobile != 0L) user.mobile.toString() else "")
+            if (user.gender == Constants.MALE) {
+                rbMale.isChecked = true
+            } else {
+                rbFemale.isChecked = false
+            }
+
+            ImageUtils.loadUserPicture(this, user.image, ivUserPhoto)
         }
 
         ivUserPhoto.setOnClickListener(this)
@@ -62,49 +79,63 @@ class UserProfileActivity : BaseActivity(), View.OnClickListener {
                     return
                 }
 
-                showImageChooser()
+                ImageUtils.showImageChooser(this)
             }
             R.id.btSave -> {
                 if (validateUserProfileDetails()) {
                     val userHashMap = HashMap<String, Any>()
+                    userHashMap[Constants.FIRST_NAME] =
+                        etFirstName.text.toString().trim { it <= ' ' }
+                    userHashMap[Constants.LAST_NAME] =
+                        etLastName.text.toString().trim { it <= ' ' }
                     userHashMap[Constants.GENDER] =
                         if (rbMale.isChecked) Constants.MALE else Constants.FEMALE
                     userHashMap[Constants.MOBILE] =
                         etMobileNumber.text.toString().trim { it <= ' ' }.toLong()
-                    userHashMap[Constants.PROFILE_COMPLETED] = 1 // not completed = 0
+                    userHashMap[Constants.PROFILE_COMPLETED] = 1 // 0: incomplete - 1: completed
 
                     showProgressDialog(resources.getString(R.string.please_wait))
 
-                    // Update user details.
-                    FirebaseFirestore.getInstance()
-                        .collection(Constants.USERS)
-                        .document(FirebaseAuth.getInstance().currentUser?.uid ?: "")
-                        .update(userHashMap)
-                        .addOnSuccessListener {
-                            hideProgressDialog()
-                            showSnackBar(
-                                resources.getString(R.string.msg_profile_update_success),
-                                false
+                    // Upload user image.
+                    if (selectedImageFileUri != null) {
+                        FirebaseStorage.getInstance().reference
+                            .child(
+                                "${Constants.USER_PROFILE_IMAGE}${System.currentTimeMillis()}.${
+                                    ImageUtils.getFileExtension(
+                                        this,
+                                        selectedImageFileUri!!
+                                    )
+                                }"
                             )
+                            .putFile(selectedImageFileUri!!)
+                            .addOnSuccessListener { taskSnapshot ->
+                                // Get the downloadable url from the task snapshot
+                                taskSnapshot.metadata!!.reference!!.downloadUrl
+                                    .addOnSuccessListener { url ->
+                                        showSnackBar(
+                                            resources.getString(R.string.success_upload_image),
+                                            false
+                                        )
 
-                            Handler().postDelayed({
-                                startActivity(Intent(this, MainActivity::class.java))
-                                finish()
-                            }, Constants.DELAYED_MILLIS)
-                        }
-                        .addOnFailureListener { e ->
-                            hideProgressDialog()
-                            showSnackBar(
-                                resources.getString(R.string.fail_update_profile),
-                                false
-                            )
+                                        userHashMap[Constants.IMAGE] = url.toString()
+                                        updateUserDetails(userHashMap)
+                                    }
+                            }
+                            .addOnFailureListener { exception ->
+                                showSnackBar(
+                                    resources.getString(R.string.fail_upload_image),
+                                    true
+                                )
 
-                            Log.e(
-                                javaClass.simpleName,
-                                "Error while updating the user details.",
-                                e
-                            )
-                        }
+                                Log.e(
+                                    javaClass.simpleName,
+                                    exception.message,
+                                    exception
+                                )
+                            }
+                    } else {
+                        updateUserDetails(userHashMap)
+                    }
                 }
             }
             R.id.btCancel -> {
@@ -112,6 +143,39 @@ class UserProfileActivity : BaseActivity(), View.OnClickListener {
                 finish()
             }
         }
+    }
+
+    private fun updateUserDetails(userHashMap: HashMap<String, Any>) {
+        // Update user details.
+        FirebaseFirestore.getInstance()
+            .collection(Constants.USERS)
+            .document(FirebaseAuth.getInstance().currentUser?.uid ?: "")
+            .update(userHashMap)
+            .addOnSuccessListener {
+                hideProgressDialog()
+                showSnackBar(
+                    resources.getString(R.string.msg_profile_update_success),
+                    false
+                )
+
+                Handler().postDelayed({
+                    startActivity(Intent(this, MainActivity::class.java))
+                    finish()
+                }, Constants.DELAYED_MILLIS)
+            }
+            .addOnFailureListener { e ->
+                hideProgressDialog()
+                showSnackBar(
+                    resources.getString(R.string.fail_update_profile),
+                    true
+                )
+
+                Log.e(
+                    javaClass.simpleName,
+                    "Error while updating the user details.",
+                    e
+                )
+            }
     }
 
     /**
@@ -130,7 +194,7 @@ class UserProfileActivity : BaseActivity(), View.OnClickListener {
 
         if (requestCode == Constants.READ_STORAGE_PERMISSION_CODE) {
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                showImageChooser()
+                ImageUtils.showImageChooser(this)
             } else {
                 showSnackBar(
                     resources.getString(R.string.read_storage_permission_denied),
@@ -162,12 +226,12 @@ class UserProfileActivity : BaseActivity(), View.OnClickListener {
                 if (requestCode == Constants.PICK_IMAGE_REQUEST_CODE && data != null) {
                     try {
                         // Load the user image in the ImageView.
-                        Glide
-                            .with(this)
-                            .load(Uri.parse(data.data!!.toString())) // URI of the image
-                            .centerCrop() // Scale type of the image.
-                            .placeholder(R.drawable.ic_user_image_placeholder) // A default place holder if image is failed to load.
-                            .into(ivUserPhoto) // the view in which the image will be loaded.
+                        selectedImageFileUri = data.data
+                        ImageUtils.loadUserPicture(
+                            this,
+                            selectedImageFileUri!!,
+                            ivUserPhoto
+                        )
                     } catch (e: IOException) {
                         showSnackBar(resources.getString(R.string.image_selection_failed), true)
                         Log.e(javaClass.simpleName, "Errors while upload user photo", e)
@@ -191,15 +255,5 @@ class UserProfileActivity : BaseActivity(), View.OnClickListener {
                 true
             }
         }
-    }
-
-    private fun showImageChooser() {
-        // Launch the image selection of phone storage using the constant code.
-        startActivityForResult(
-            Intent(
-                Intent.ACTION_PICK,
-                MediaStore.Images.Media.EXTERNAL_CONTENT_URI
-            ), Constants.PICK_IMAGE_REQUEST_CODE
-        )
     }
 }
