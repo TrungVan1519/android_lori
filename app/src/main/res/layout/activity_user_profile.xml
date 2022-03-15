@@ -54,7 +54,7 @@
                     android:id="@+id/ivUserPhoto"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_margin="@dimen/tiny_margin"
+                    android:layout_margin="@dimen/micro_margin"
                     android:background="@color/colorLightGrey"
                     android:contentDescription="@string/content_description"
                     android:scaleType="fitXY"
@@ -210,7 +210,7 @@
                 app:layout_constraintTop_toBottomOf="@id/rgGender" />
 
             <com.example.lori.widgets.BoldMontserratButton
-                android:id="@+id/btCancel"
+                android:id="@+id/btLogout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -219,7 +219,7 @@
                 android:foreground="?attr/selectableItemBackground"
                 android:gravity="center"
                 android:padding="@dimen/small_padding"
-                android:text="@string/label_btn_cancel"
+                android:text="@string/label_btn_logout"
                 android:textColor="@android:color/white"
                 android:textSize="@dimen/big_size_text"
                 app:layout_constraintBottom_toBottomOf="parent"

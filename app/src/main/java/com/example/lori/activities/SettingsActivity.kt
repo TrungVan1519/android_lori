@@ -62,10 +62,7 @@ class SettingsActivity : BaseActivity(), View.OnClickListener {
                 user = document.toObject(User::class.java)!!
 
                 ImageUtils.loadUserPicture(this, user!!.image, ivUserPhoto)
-                tvName.text = getSharedPreferences(
-                    Constants.LORI_PREFERENCES,
-                    Context.MODE_PRIVATE
-                ).getString(Constants.LOGGED_IN_USERNAME, "")
+                tvName.text = "${user!!.firstName} ${user!!.lastName}"
                 tvEmail.text = user!!.email
                 tvMobileNumber.text = user!!.mobile.toString()
                 tvGender.text = user!!.gender

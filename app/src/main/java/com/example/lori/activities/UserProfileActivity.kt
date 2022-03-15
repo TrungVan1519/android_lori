@@ -38,10 +38,10 @@ class UserProfileActivity : BaseActivity(), View.OnClickListener {
             etLastName.setText(user.lastName)
             etEmail.setText(user.email)
             etMobileNumber.setText(if (user.mobile != 0L) user.mobile.toString() else "")
-            if (user.gender == Constants.MALE) {
-                rbMale.isChecked = true
-            } else {
+            if (user.gender == Constants.FEMALE) {
                 rbFemale.isChecked = true
+            } else {
+                rbMale.isChecked = true
             }
         }
 
@@ -56,7 +56,7 @@ class UserProfileActivity : BaseActivity(), View.OnClickListener {
 
         ivUserPhoto.setOnClickListener(this)
         btSave.setOnClickListener(this)
-        btCancel.setOnClickListener(this)
+        btLogout.setOnClickListener(this)
     }
 
     override fun onClick(v: View?) {
@@ -136,8 +136,12 @@ class UserProfileActivity : BaseActivity(), View.OnClickListener {
                     }
                 }
             }
-            R.id.btCancel -> {
+            R.id.btLogout -> {
                 FirebaseAuth.getInstance().signOut()
+
+                val intent = Intent(this, LoginActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                startActivity(intent)
                 finish()
             }
         }
@@ -245,6 +249,14 @@ class UserProfileActivity : BaseActivity(), View.OnClickListener {
 
     private fun validateUserProfileDetails(): Boolean {
         return when {
+            TextUtils.isEmpty(etFirstName.text.toString().trim { it <= ' ' }) -> {
+                showSnackBar(resources.getString(R.string.err_msg_enter_first_name), true)
+                false
+            }
+            TextUtils.isEmpty(etLastName.text.toString().trim { it <= ' ' }) -> {
+                showSnackBar(resources.getString(R.string.err_msg_enter_last_name), true)
+                false
+            }
             TextUtils.isEmpty(etMobileNumber.text.toString().trim { it <= ' ' }) -> {
                 showSnackBar(resources.getString(R.string.err_msg_enter_mobile_number), true)
                 false
