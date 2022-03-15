@@ -38,6 +38,11 @@ class UserProfileActivity : BaseActivity(), View.OnClickListener {
             etLastName.setText(user.lastName)
             etEmail.setText(user.email)
             etMobileNumber.setText(if (user.mobile != 0L) user.mobile.toString() else "")
+            if (user.gender == Constants.MALE) {
+                rbMale.isChecked = true
+            } else {
+                rbFemale.isChecked = true
+            }
         }
 
         if (user.profileCompleted == 0) {
@@ -46,13 +51,6 @@ class UserProfileActivity : BaseActivity(), View.OnClickListener {
             etEmail.isEnabled = false
         } else {
             etEmail.isEnabled = false
-            etMobileNumber.setText(if (user.mobile != 0L) user.mobile.toString() else "")
-            if (user.gender == Constants.MALE) {
-                rbMale.isChecked = true
-            } else {
-                rbFemale.isChecked = false
-            }
-
             ImageUtils.loadUserPicture(this, user.image, ivUserPhoto)
         }
 
@@ -159,7 +157,7 @@ class UserProfileActivity : BaseActivity(), View.OnClickListener {
                 )
 
                 Handler().postDelayed({
-                    startActivity(Intent(this, MainActivity::class.java))
+                    startActivity(Intent(this, DashboardActivity::class.java))
                     finish()
                 }, Constants.DELAYED_MILLIS)
             }

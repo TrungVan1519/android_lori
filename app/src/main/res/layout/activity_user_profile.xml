@@ -20,7 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:paddingStart="@dimen/toolbar_title_paddingStart"
+            android:paddingStart="@dimen/actionbar_padding"
             android:paddingEnd="0dp"
             android:text="@string/title_complete_profile"
             android:textColor="@color/white"

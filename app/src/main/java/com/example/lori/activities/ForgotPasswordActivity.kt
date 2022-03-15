@@ -3,6 +3,7 @@ package com.example.lori.activities
 import android.os.Bundle
 import android.os.Handler
 import com.example.lori.R
+import com.example.lori.utils.Constants
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_forgot_password.*
 
@@ -37,7 +38,7 @@ class ForgotPasswordActivity : BaseActivity() {
                                 }
 
                                 finish()
-                            }, 3000)
+                            }, Constants.DELAYED_MILLIS)
                         } else {
                             showSnackBar(task.exception!!.message.toString(), true)
                         }

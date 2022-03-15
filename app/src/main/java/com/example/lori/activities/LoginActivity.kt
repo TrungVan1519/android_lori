@@ -19,7 +19,7 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
         setContentView(R.layout.activity_login)
 
         if (FirebaseAuth.getInstance().currentUser != null) {
-            startActivity(Intent(this, MainActivity::class.java))
+            startActivity(Intent(this, DashboardActivity::class.java))
             finish()
         }
 
@@ -80,7 +80,7 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
                                     intent.putExtra(Constants.EXTRA_USER_DETAILS, user)
                                     startActivity(intent)
                                 } else {
-                                    startActivity(Intent(this, MainActivity::class.java))
+                                    startActivity(Intent(this, DashboardActivity::class.java))
                                 }
                             }
                             .addOnFailureListener { e ->

@@ -9,5 +9,5 @@
         android:startColor="@color/gradient_start"
         android:type="linear" />
 
-    <corners android:radius="@dimen/button_background_radius" />
+    <corners android:radius="@dimen/medium_radius" />
 </shape>

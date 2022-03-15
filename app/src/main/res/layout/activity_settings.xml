@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.SettingsActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:scrollbars="none"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <FrameLayout
+                android:id="@+id/flHeaderBg"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/medium_size_container">
+
+                <ImageView
+                    android:id="@+id/ivHeaderBg"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:contentDescription="@string/content_description"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/ic_bg" />
+
+                <com.example.lori.widgets.ActionBar
+                    android:id="@+id/tbActionBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:background="@drawable/ic_bg"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <com.example.lori.widgets.BoldMontserratTextView
+                        android:id="@+id/tvTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:paddingStart="@dimen/actionbar_padding"
+                        android:paddingEnd="0dp"
+                        android:text="@string/title_settings"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/big_size_text" />
+                </com.example.lori.widgets.ActionBar>
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/flUserImage"
+                android:layout_width="@dimen/small_size_container"
+                android:layout_height="@dimen/small_size_container"
+                android:layout_below="@id/flHeaderBg"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/user_image_margin">
+
+                <ImageView
+                    android:id="@+id/ivUserPhoto"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="@dimen/micro_margin"
+                    android:contentDescription="@string/content_description"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/im_user_placeholder" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/ic_user_image_placeholder" />
+            </FrameLayout>
+
+            <com.example.lori.widgets.BoldMontserratTextView
+                android:id="@+id/tvEdit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/flHeaderBg"
+                android:layout_alignParentEnd="true"
+                android:layout_margin="@dimen/small_margin"
+                android:background="@drawable/ic_item_grey_border_background"
+                android:foreground="?attr/selectableItemBackgroundBorderless"
+                android:padding="@dimen/small_padding"
+                android:text="@string/label_edit"
+                android:textColor="@color/colorSecondaryText"
+                android:textSize="@dimen/small_size_text" />
+
+            <com.example.lori.widgets.BoldMontserratTextView
+                android:id="@+id/tvName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/flUserImage"
+                android:layout_centerHorizontal="true"
+                android:layout_marginHorizontal="@dimen/tiny_margin"
+                android:layout_marginTop="@dimen/small_margin"
+                android:layout_marginBottom="@dimen/micro_margin"
+                android:textColor="@color/colorDarkGrey"
+                android:textSize="@dimen/big_size_text"
+                tools:text="Trung Van" />
+
+            <com.example.lori.widgets.BoldMontserratTextView
+                android:id="@+id/tvEmail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvName"
+                android:layout_centerHorizontal="true"
+                android:layout_marginHorizontal="@dimen/tiny_margin"
+                android:layout_marginTop="@dimen/micro_margin"
+                android:layout_marginBottom="@dimen/micro_margin"
+                android:textColor="@color/colorSecondaryText"
+                android:textSize="@dimen/big_size_text"
+                tools:text="trung@gmail.com" />
+
+            <LinearLayout
+                android:id="@+id/llMoGen"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvEmail"
+                android:layout_margin="@dimen/micro_margin"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <com.example.lori.widgets.BoldMontserratTextView
+                    android:id="@+id/tvGender"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorSecondaryText"
+                    android:textSize="@dimen/medium_size_text"
+                    tools:text="Male" />
+
+                <com.example.lori.widgets.BoldMontserratTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginHorizontal="@dimen/tiny_margin"
+                    android:text="-"
+                    android:textColor="@color/colorSecondaryText"
+                    android:textSize="@dimen/big_size_text" />
+
+                <com.example.lori.widgets.BoldMontserratTextView
+                    android:id="@+id/tvMobileNumber"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorSecondaryText"
+                    android:textSize="@dimen/medium_size_text"
+                    tools:text="0123456789" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/llAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/llMoGen"
+                android:layout_margin="@dimen/small_margin"
+                android:background="@drawable/ic_item_grey_border_background"
+                android:foreground="?attr/selectableItemBackground"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="@dimen/small_padding">
+
+                <com.example.lori.widgets.BoldMontserratTextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/tiny_margin"
+                    android:layout_weight="1"
+                    android:text="@string/label_addresses"
+                    android:textColor="@color/colorSecondaryText"
+                    android:textSize="@dimen/big_size_text" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="@string/content_description"
+                    android:src="@drawable/ic_chevron_right_24dp" />
+            </LinearLayout>
+
+            <com.example.lori.widgets.BoldMontserratButton
+                android:id="@+id/btLogout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/llAddress"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/small_margin"
+                android:background="@drawable/ic_button_background"
+                android:foreground="?attr/selectableItemBackground"
+                android:gravity="center"
+                android:padding="@dimen/small_padding"
+                android:text="@string/label_btn_logout"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/big_size_text" />
+        </RelativeLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
