@@ -14,15 +14,19 @@
         <entry key="app/src/main/res/drawable/ic_black_color_back_24dp.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_button_background.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_circle_image_background.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_drawable_gender_tab_selector.xml" value="0.116" />
+        <entry key="app/src/main/res/drawable/ic_drawable_gender_tab_text_color_selector.xml" value="0.116" />
+        <entry key="app/src/main/res/drawable/ic_user_image_placeholder.xml" value="0.116" />
         <entry key="app/src/main/res/drawable/user_image_background.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_base.xml" value="0.2509057971014493" />
         <entry key="app/src/main/res/layout/activity_forgot_password.xml" value="0.22592592592592592" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.2578125" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/activity_register.xml" value="0.22592592592592592" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.2578125" />
+        <entry key="app/src/main/res/layout/activity_register.xml" value="0.2578125" />
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.2128623188405797" />
-        <entry key="app/src/main/res/layout/activity_user_profile.xml" value="0.22592592592592592" />
+        <entry key="app/src/main/res/layout/activity_user_profile.xml" value="0.2578125" />
         <entry key="app/src/main/res/layout/layout_dialog_progress.xml" value="0.2578125" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.116" />
       </map>
     </option>
   </component>

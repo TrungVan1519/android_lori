@@ -44,7 +44,7 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
 
     private fun loginUser() {
         if (validateLoginDetails()) {
-            showProgressDialog(resources.getString(R.string.please_wait))
+            showProgressDialog(resources.getString(R.string.label_please_wait))
 
             FirebaseAuth.getInstance()
                 .signInWithEmailAndPassword(
@@ -85,7 +85,7 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
                             }
                             .addOnFailureListener { e ->
                                 hideProgressDialog()
-                                showSnackBar(resources.getString(R.string.fail_login), true)
+                                showSnackBar(resources.getString(R.string.fail_to_login), true)
 
                                 Log.e(
                                     javaClass.simpleName,

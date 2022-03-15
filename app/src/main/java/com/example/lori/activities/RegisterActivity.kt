@@ -39,7 +39,7 @@ class RegisterActivity : BaseActivity(), View.OnClickListener {
 
     private fun registerUser() {
         if (validateRegisterDetails()) {
-            showProgressDialog(resources.getString(R.string.please_wait))
+            showProgressDialog(resources.getString(R.string.label_please_wait))
 
             FirebaseAuth.getInstance()
                 .createUserWithEmailAndPassword(
@@ -61,7 +61,10 @@ class RegisterActivity : BaseActivity(), View.OnClickListener {
                             .set(user, SetOptions.merge())
                             .addOnSuccessListener {
                                 hideProgressDialog()
-                                showSnackBar(resources.getString(R.string.success_register), false)
+                                showSnackBar(
+                                    resources.getString(R.string.success_to_register),
+                                    false
+                                )
 
                                 Handler().postDelayed({
                                     // todo sign out new user because this user is logged in automatically after registering
@@ -71,7 +74,7 @@ class RegisterActivity : BaseActivity(), View.OnClickListener {
                             }
                             .addOnFailureListener { e ->
                                 hideProgressDialog()
-                                showSnackBar(resources.getString(R.string.fail_register), true)
+                                showSnackBar(resources.getString(R.string.fail_to_register), true)
 
                                 Log.e(
                                     javaClass.simpleName,

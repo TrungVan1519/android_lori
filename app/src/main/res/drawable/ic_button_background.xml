@@ -10,5 +10,4 @@
         android:type="linear" />
 
     <corners android:radius="@dimen/button_background_radius" />
-
 </shape>

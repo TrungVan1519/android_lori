@@ -1,49 +1,54 @@
 <resources>
     <string name="app_name">Lori</string>
     <string name="content_description">image</string>
+
+    <string name="label_dont_have_an_account">Don\'t have an account?</string>
+    <string name="label_register"><u>Register</u></string>
+    <string name="label_create_an_account">CREATE AN ACCOUNT</string>
+    <string name="label_i_agree_to_the_terms_and_condition">I Agree To The <u>Terms &amp; Condition</u></string>
+    <string name="label_already_have_an_account">Already have an account?</string>
+    <string name="label_login"><u>Login</u></string>
+    <string name="label_please_wait">Please Wait&#8230;</string>
+    <string name="label_forgot_password">Forgot Password?</string>
+    <string name="label_btn_login">Login</string>
+    <string name="label_btn_register">Register</string>
+    <string name="label_btn_submit">Submit</string>
+    <string name="label_rb_male">Male</string>
+    <string name="label_rb_female">Female</string>
+    <string name="label_btn_save">Save</string>
+    <string name="label_btn_cancel">Cancel</string>
+
     <string name="title_login">LOGIN</string>
-    <string name="et_hint_email_id">Email ID</string>
-    <string name="et_hint_password">Password</string>
-    <string name="lbl_forgot_password">Forgot Password?</string>
-    <string name="btn_lbl_login">Login</string>
-    <string name="don_t_have_an_account">Don\'t have an account?</string>
-    <string name="register"><u>Register</u></string>
-    <string name="create_an_account">CREATE AN ACCOUNT</string>
+    <string name="title_forgot_password">FORGOT PASSWORD?</string>
+    <string name="title_complete_profile">COMPLETE YOUR PROFILE</string>
+    <string name="subtitle_forgot_password">Enter your username and e-mail address we\'ll send you a email to reset your password</string>
+
+    <string name="hint_email_id">Email ID</string>
+    <string name="hint_password">Password</string>
     <string name="hint_last_name">Last name</string>
     <string name="hint_first_name">First name</string>
-    <string name="et_hint_confirm_password">Confirm Password</string>
-    <string name="i_agree_to_the_terms_and_condition">I Agree To The <u> Terms &amp; Condition </u></string>
-    <string name="btn_lbl_register">Register</string>
-    <string name="already_have_an_account">Already have an account?</string>
-    <string name="login"><u>Login</u></string>
-    <string name="err_msg_enter_first_name">Please enter first name.</string>
-    <string name="err_msg_enter_last_name">Please enter last name.</string>
-    <string name="err_msg_enter_email">Please enter email.</string>
-    <string name="err_msg_enter_password">Please enter password.</string>
-    <string name="err_msg_enter_confirm_password">Please enter confirm password.</string>
-    <string name="err_msg_password_and_confirm_password_mismatch">Password and confirm password does not match.</string>
-    <string name="err_msg_agree_terms_and_condition">Please agree terms and condition.</string>
-    <string name="please_wait">Please Wait&#8230;</string>
-    <string name="title_forgot_password">FORGOT PASSWORD?</string>
-    <string name="forgot_password_title_description">Enter your username and e-mail address we\'ll send you a email to reset your password</string>
-    <string name="btn_lbl_submit">Submit</string>
-    <string name="email_sent_success">\"Email sent successfully to reset your password! \"</string>
-    <string name="title_complete_profile">COMPLETE YOUR PROFILE</string>
-    <string name="et_hint_mobile_number">Mobile Number</string>
-    <string name="rb_lbl_male">MALE</string>
-    <string name="rb_lbl_female">FEMALE</string>
-    <string name="btn_lbl_save">Save</string>
-    <string name="btn_lbl_cancel">Cancel</string>
-    <string name="read_storage_permission_denied">Oops, you just denied the permission for storage. You can also allow it from settings.</string>
-    <string name="image_selection_failed">Image selection Failed!</string>
-    <string name="err_msg_enter_mobile_number">Please enter mobile number.</string>
-    <string name="msg_profile_update_success">Your profile is updated successfully.</string>
+    <string name="hint_confirm_password">Confirm Password</string>
+    <string name="hint_mobile_number">Mobile Number</string>
 
-    <string name="success_register">Register successfully</string>
-    <string name="success_login">Login successfully</string>
-    <string name="fail_register">Register fail</string>
-    <string name="fail_login">Log in fail</string>
-    <string name="fail_update_profile">Update profile fail</string>
-    <string name="fail_upload_image">Fail to upload the image</string>
-    <string name="success_upload_image">Upload the image successfully</string>
+    <string name="err_msg_enter_first_name">Please enter first name</string>
+    <string name="err_msg_enter_last_name">Please enter last name</string>
+    <string name="err_msg_enter_email">Please enter email</string>
+    <string name="err_msg_enter_password">Please enter password</string>
+    <string name="err_msg_enter_confirm_password">Please enter confirm password</string>
+    <string name="err_msg_password_and_confirm_password_mismatch">Password and confirm password does not match</string>
+    <string name="err_msg_agree_terms_and_condition">Please agree terms and condition</string>
+    <string name="err_msg_enter_mobile_number">Please enter mobile number</string>
+    <string name="err_msg_read_storage_permission_denied">Oops, you just denied the permission for storage. You can also allow it from settings</string>
+
+    <string name="success_to_send_email">Email sent successfully to reset your password!</string>
+    <string name="success_to_update_profile">Your profile is updated successfully</string>
+    <string name="success_to_register">Register successfully</string>
+    <string name="success_to_login">Login successfully</string>
+    <string name="success_to_upload_image">Upload the image successfully</string>
+
+    <string name="fail_to_register">Fail to register</string>
+    <string name="fail_to_select_image">Fail to select the image</string>
+    <string name="fail_to_login">Fail to log in</string>
+    <string name="fail_to_update_profile">Fail to update the profile</string>
+    <string name="fail_to_upload_image">Fail to upload the image</string>
 </resources>

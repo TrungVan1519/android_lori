@@ -10,7 +10,7 @@
     <FrameLayout
         android:id="@+id/flHeaderImage"
         android:layout_width="wrap_content"
-        android:layout_height="@dimen/auth_header_image_height"
+        android:layout_height="@dimen/medium_size_container"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -36,10 +36,10 @@
         android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="35dp"
+        android:layout_marginTop="@dimen/big_margin"
         android:text="@string/title_login"
         android:textColor="@color/colorPrimaryText"
-        android:textSize="@dimen/title_textSize"
+        android:textSize="@dimen/big_size_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/flHeaderImage" />
@@ -49,10 +49,8 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="35dp"
-        android:layout_marginEnd="16dp"
-        android:hint="@string/et_hint_email_id"
+        android:layout_margin="@dimen/small_margin"
+        android:hint="@string/hint_email_id"
         android:textColorHint="@color/colorSecondaryText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -63,9 +61,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textEmailAddress"
-            android:padding="@dimen/et_padding"
+            android:padding="@dimen/small_padding"
             android:textColor="@color/colorPrimaryText"
-            android:textSize="@dimen/et_textSize"
+            android:textSize="@dimen/medium_size_text"
             tools:text="abc@gmail.com" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -74,10 +72,8 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="16dp"
-        android:hint="@string/et_hint_password"
+        android:layout_margin="@dimen/small_margin"
+        android:hint="@string/hint_password"
         android:textColorHint="@color/colorSecondaryText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -88,9 +84,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPassword"
-            android:padding="@dimen/et_padding"
+            android:padding="@dimen/small_padding"
             android:textColor="@color/colorPrimaryText"
-            android:textSize="@dimen/et_textSize"
+            android:textSize="@dimen/medium_size_text"
             tools:text="123456" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -98,12 +94,12 @@
         android:id="@+id/tvForgotPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="@dimen/small_margin"
         android:foreground="?attr/selectableItemBackground"
-        android:padding="@dimen/clickable_text_view_padding"
-        android:text="@string/lbl_forgot_password"
+        android:padding="@dimen/tiny_padding"
+        android:text="@string/label_forgot_password"
         android:textColor="@color/colorSecondaryText"
-        android:textSize="@dimen/forgot_password_textSize"
+        android:textSize="@dimen/small_size_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tilPassword" />
 
@@ -112,17 +108,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="16dp"
+        android:layout_margin="@dimen/small_padding"
         android:background="@drawable/ic_button_background"
         android:foreground="?attr/selectableItemBackground"
         android:gravity="center"
-        android:paddingTop="@dimen/btn_padding"
-        android:paddingBottom="@dimen/btn_padding"
-        android:text="@string/btn_lbl_login"
+        android:padding="@dimen/small_padding"
+        android:text="@string/label_btn_login"
         android:textColor="@android:color/white"
-        android:textSize="@dimen/btn_textSize"
+        android:textSize="@dimen/small_size_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvForgotPassword" />
@@ -130,7 +123,7 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="25dp"
+        android:layout_margin="@dimen/small_padding"
         android:gravity="center_vertical"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
@@ -141,19 +134,19 @@
             android:id="@+id/tvDontHaveAnAccount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="@dimen/clickable_text_view_padding"
-            android:text="@string/don_t_have_an_account"
+            android:padding="@dimen/tiny_padding"
+            android:text="@string/label_dont_have_an_account"
             android:textColor="@color/colorSecondaryText"
-            android:textSize="@dimen/lbl_text_view_textSize" />
+            android:textSize="@dimen/medium_size_text" />
 
         <com.example.lori.widgets.BoldMontserratTextView
             android:id="@+id/tvRegister"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:foreground="?attr/selectableItemBackground"
-            android:padding="@dimen/clickable_text_view_padding"
-            android:text="@string/register"
+            android:padding="@dimen/tiny_padding"
+            android:text="@string/label_register"
             android:textColor="@color/colorSecondaryText"
-            android:textSize="@dimen/lbl_text_view_textSize" />
+            android:textSize="@dimen/medium_size_text" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -94,7 +94,7 @@ class UserProfileActivity : BaseActivity(), View.OnClickListener {
                         etMobileNumber.text.toString().trim { it <= ' ' }.toLong()
                     userHashMap[Constants.PROFILE_COMPLETED] = 1 // 0: incomplete - 1: completed
 
-                    showProgressDialog(resources.getString(R.string.please_wait))
+                    showProgressDialog(resources.getString(R.string.label_please_wait))
 
                     // Upload user image.
                     if (selectedImageFileUri != null) {
@@ -113,7 +113,7 @@ class UserProfileActivity : BaseActivity(), View.OnClickListener {
                                 taskSnapshot.metadata!!.reference!!.downloadUrl
                                     .addOnSuccessListener { url ->
                                         showSnackBar(
-                                            resources.getString(R.string.success_upload_image),
+                                            resources.getString(R.string.success_to_upload_image),
                                             false
                                         )
 
@@ -123,7 +123,7 @@ class UserProfileActivity : BaseActivity(), View.OnClickListener {
                             }
                             .addOnFailureListener { exception ->
                                 showSnackBar(
-                                    resources.getString(R.string.fail_upload_image),
+                                    resources.getString(R.string.fail_to_upload_image),
                                     true
                                 )
 
@@ -154,7 +154,7 @@ class UserProfileActivity : BaseActivity(), View.OnClickListener {
             .addOnSuccessListener {
                 hideProgressDialog()
                 showSnackBar(
-                    resources.getString(R.string.msg_profile_update_success),
+                    resources.getString(R.string.success_to_update_profile),
                     false
                 )
 
@@ -166,7 +166,7 @@ class UserProfileActivity : BaseActivity(), View.OnClickListener {
             .addOnFailureListener { e ->
                 hideProgressDialog()
                 showSnackBar(
-                    resources.getString(R.string.fail_update_profile),
+                    resources.getString(R.string.fail_to_update_profile),
                     true
                 )
 
@@ -197,7 +197,7 @@ class UserProfileActivity : BaseActivity(), View.OnClickListener {
                 ImageUtils.showImageChooser(this)
             } else {
                 showSnackBar(
-                    resources.getString(R.string.read_storage_permission_denied),
+                    resources.getString(R.string.err_msg_read_storage_permission_denied),
                     true
                 )
             }
@@ -233,13 +233,13 @@ class UserProfileActivity : BaseActivity(), View.OnClickListener {
                             ivUserPhoto
                         )
                     } catch (e: IOException) {
-                        showSnackBar(resources.getString(R.string.image_selection_failed), true)
+                        showSnackBar(resources.getString(R.string.fail_to_select_image), true)
                         Log.e(javaClass.simpleName, "Errors while upload user photo", e)
                     }
                 }
             }
             Activity.RESULT_CANCELED -> {
-                showSnackBar(resources.getString(R.string.image_selection_failed), true)
+                showSnackBar(resources.getString(R.string.fail_to_select_image), true)
                 Log.e("Request Cancelled", "Image selection cancelled")
             }
         }

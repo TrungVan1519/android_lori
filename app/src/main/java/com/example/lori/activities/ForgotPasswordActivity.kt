@@ -17,7 +17,7 @@ class ForgotPasswordActivity : BaseActivity() {
             if (email.isEmpty()) {
                 showSnackBar(resources.getString(R.string.err_msg_enter_email), true)
             } else {
-                showProgressDialog(resources.getString(R.string.please_wait))
+                showProgressDialog(resources.getString(R.string.label_please_wait))
 
                 FirebaseAuth.getInstance()
                     .sendPasswordResetEmail(email)
@@ -26,11 +26,10 @@ class ForgotPasswordActivity : BaseActivity() {
 
                         if (task.isSuccessful) {
                             showSnackBar(
-                                resources.getString(R.string.email_sent_success),
+                                resources.getString(R.string.success_to_send_email),
                                 false
                             )
 
-                            @Suppress("DEPRECATION")
                             Handler().postDelayed({
                                 // todo sign out logged in user
                                 if (FirebaseAuth.getInstance().currentUser != null) {

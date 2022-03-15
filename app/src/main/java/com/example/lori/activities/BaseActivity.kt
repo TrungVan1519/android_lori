@@ -1,6 +1,5 @@
 package com.example.lori.activities
 
-import android.annotation.SuppressLint
 import android.app.Dialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -12,7 +11,6 @@ open class BaseActivity : AppCompatActivity() {
 
     private lateinit var pbProgress: Dialog
 
-    @SuppressLint("ShowToast")
     protected fun showSnackBar(message: String, isErrorMessage: Boolean) {
         val color = if (isErrorMessage) R.color.colorSnackBarError else R.color.colorSnackBarSuccess
         val snackBar = Snackbar.make(
