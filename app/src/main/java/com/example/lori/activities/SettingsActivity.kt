@@ -1,6 +1,5 @@
 package com.example.lori.activities
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -61,7 +60,7 @@ class SettingsActivity : BaseActivity(), View.OnClickListener {
                 // Convert to User Data model object
                 user = document.toObject(User::class.java)!!
 
-                ImageUtils.loadUserPicture(this, user!!.image, ivUserPhoto)
+                ImageUtils.loadUserImage(this, user!!.image, ivUserPhoto)
                 tvName.text = "${user!!.firstName} ${user!!.lastName}"
                 tvEmail.text = user!!.email
                 tvMobileNumber.text = user!!.mobile.toString()
@@ -73,7 +72,7 @@ class SettingsActivity : BaseActivity(), View.OnClickListener {
 
                 Log.e(
                     javaClass.simpleName,
-                    "Errors while getting user details.",
+                    "Errors while getting user.",
                     e
                 )
             }

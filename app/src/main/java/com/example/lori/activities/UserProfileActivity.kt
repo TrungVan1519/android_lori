@@ -51,7 +51,7 @@ class UserProfileActivity : BaseActivity(), View.OnClickListener {
             etEmail.isEnabled = false
         } else {
             etEmail.isEnabled = false
-            ImageUtils.loadUserPicture(this, user.image, ivUserPhoto)
+            ImageUtils.loadUserImage(this, user.image, ivUserPhoto)
         }
 
         ivUserPhoto.setOnClickListener(this)
@@ -120,6 +120,7 @@ class UserProfileActivity : BaseActivity(), View.OnClickListener {
                                     }
                             }
                             .addOnFailureListener { e ->
+                                hideProgressDialog()
                                 showSnackBar(
                                     resources.getString(R.string.fail_to_upload_image),
                                     true
@@ -127,7 +128,7 @@ class UserProfileActivity : BaseActivity(), View.OnClickListener {
 
                                 Log.e(
                                     javaClass.simpleName,
-                                    "Errors while uploading the image",
+                                    "Errors while uploading image",
                                     e
                                 )
                             }
@@ -174,7 +175,7 @@ class UserProfileActivity : BaseActivity(), View.OnClickListener {
 
                 Log.e(
                     javaClass.simpleName,
-                    "Errors while updating the user details.",
+                    "Errors while updating user.",
                     e
                 )
             }
@@ -229,14 +230,14 @@ class UserProfileActivity : BaseActivity(), View.OnClickListener {
                     try {
                         // Load the user image in the ImageView.
                         selectedImageFileUri = data.data
-                        ImageUtils.loadUserPicture(
+                        ImageUtils.loadUserImage(
                             this,
                             selectedImageFileUri!!,
                             ivUserPhoto
                         )
                     } catch (e: IOException) {
                         showSnackBar(resources.getString(R.string.fail_to_select_image), true)
-                        Log.e(javaClass.simpleName, "Errors while upload user photo", e)
+                        Log.e(javaClass.simpleName, "Errors while uploading image.", e)
                     }
                 }
             }

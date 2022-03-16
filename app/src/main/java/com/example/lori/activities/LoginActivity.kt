@@ -89,7 +89,7 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
 
                                 Log.e(
                                     javaClass.simpleName,
-                                    "Errors while getting user details.",
+                                    "Errors while getting user.",
                                     e
                                 )
                             }

@@ -27,14 +27,25 @@ object ImageUtils {
     }
 
     /**
-     * Load image from Uri or URL for the user profile picture.
+     * Load image from Uri or URL for the user profile image.
      */
-    fun loadUserPicture(context: Context, image: Any, imageView: ImageView) {
+    fun loadUserImage(context: Context, image: Any, imageView: ImageView) {
         Glide
             .with(context)
             .load(image) // Uri or URL of the image
             .centerCrop() // Scale type of the image.
             .placeholder(R.drawable.im_user_placeholder) // A default place holder if image is failed to load.
+            .into(imageView) // the view in which the image will be loaded.
+    }
+
+    /**
+     * Load image from Uri or URL for the product image.
+     */
+    fun loadProductImage(context: Context, image: Any, imageView: ImageView) {
+        Glide
+            .with(context)
+            .load(image) // Uri or URL of the image
+            .centerCrop() // Scale type of the image.
             .into(imageView) // the view in which the image will be loaded.
     }
 

@@ -127,7 +127,7 @@ class AddProductsActivity : BaseActivity(), View.OnClickListener {
 
                                 Log.e(
                                     javaClass.simpleName,
-                                    "Errors while saving the product details.",
+                                    "Errors while saving product.",
                                     e
                                 )
                             }
@@ -140,9 +140,8 @@ class AddProductsActivity : BaseActivity(), View.OnClickListener {
                     true
                 )
 
-                Log.e(javaClass.simpleName, "Errors while uploading the image", e)
+                Log.e(javaClass.simpleName, "Errors while uploading image.", e)
             }
-
     }
 
     /**
@@ -194,14 +193,14 @@ class AddProductsActivity : BaseActivity(), View.OnClickListener {
                     try {
                         // Load the user image in the ImageView.
                         selectedImageFileUri = data.data
-                        ImageUtils.loadUserPicture(
+                        ImageUtils.loadUserImage(
                             this,
                             selectedImageFileUri!!,
                             ivProductImage
                         )
                     } catch (e: IOException) {
                         showSnackBar(resources.getString(R.string.fail_to_select_image), true)
-                        Log.e(javaClass.simpleName, "Errors while upload product image", e)
+                        Log.e(javaClass.simpleName, "Errors while uploading image.", e)
                     }
                 }
             }

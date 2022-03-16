@@ -23,7 +23,7 @@
 
     <string name="title_login">LOGIN</string>
     <string name="title_forgot_password">FORGOT PASSWORD?</string>
-    <string name="title_profile">YOUR PROFILE</string>
+    <string name="title_profile">PROFILE</string>
     <string name="subtitle_forgot_password">Enter your username and e-mail address we\'ll send you a email to reset your password</string>
     <string name="title_activity_dashboard">DASHBOARD ACTIVITY</string>
     <string name="title_dashboard">DASHBOARD</string>
@@ -76,7 +76,7 @@
     <string name="fail_to_get_user_details">Fail to get your details</string>
 
     <string name="success_to_add_products">Your product is uploaded successfully</string>
-    <string name="no_products_added_yet">No products added yet!</string>
+    <string name="label_no_products_found">No products added yet!</string>
     <string name="no_dashboard_item_found">No items found!</string>
 
     <string name="product_delete_success_message">Your product is deleted successfully</string>
