@@ -17,7 +17,8 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/giant_padding">
 
             <FrameLayout
                 android:id="@+id/flHeaderBg"
@@ -193,7 +194,7 @@
                 android:padding="@dimen/small_padding"
                 android:text="@string/label_btn_logout"
                 android:textColor="@android:color/white"
-                android:textSize="@dimen/big_size_text" />
+                android:textSize="@dimen/small_size_text" />
         </RelativeLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

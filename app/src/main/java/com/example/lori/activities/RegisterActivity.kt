@@ -78,7 +78,7 @@ class RegisterActivity : BaseActivity(), View.OnClickListener {
 
                                 Log.e(
                                     javaClass.simpleName,
-                                    "Error while saving user details.",
+                                    "Errors while saving user details.",
                                     e
                                 )
                             }
@@ -88,7 +88,7 @@ class RegisterActivity : BaseActivity(), View.OnClickListener {
 
                         Log.e(
                             javaClass.simpleName,
-                            "Error while registering the user.",
+                            "Errors while registering the user.",
                             task.exception
                         )
                     }

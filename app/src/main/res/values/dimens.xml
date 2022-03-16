@@ -11,6 +11,7 @@
     <dimen name="medium_padding">18dp</dimen>
     <dimen name="large_padding">20dp</dimen>
     <dimen name="big_padding">30dp</dimen>
+    <dimen name="giant_padding">50dp</dimen>
 
     <dimen name="user_image_margin">-75dp</dimen>
     <dimen name="micro_margin">3dp</dimen>

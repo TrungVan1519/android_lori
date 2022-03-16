@@ -22,7 +22,7 @@
             android:gravity="center"
             android:paddingStart="@dimen/actionbar_padding"
             android:paddingEnd="0dp"
-            android:text="@string/label_create_an_account"
+            android:text="@string/title_create_an_account"
             android:textColor="@color/white"
             android:textSize="@dimen/big_size_text" />
     </com.example.lori.widgets.ActionBar>
@@ -39,7 +39,8 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/giant_padding">
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tilFirstName"
@@ -190,7 +191,7 @@
                 android:padding="@dimen/tiny_padding"
                 android:text="@string/label_btn_register"
                 android:textColor="@android:color/white"
-                android:textSize="@dimen/big_size_text"
+                android:textSize="@dimen/small_size_text"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/llTermsAndCondition" />

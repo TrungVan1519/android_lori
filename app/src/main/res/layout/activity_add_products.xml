@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.UserProfileActivity">
+    tools:context=".activities.AddProductsActivity">
 
     <com.example.lori.widgets.ActionBar
         android:id="@+id/tbActionBar"
@@ -22,7 +22,7 @@
             android:gravity="center"
             android:paddingStart="@dimen/actionbar_padding"
             android:paddingEnd="0dp"
-            android:text="@string/title_profile"
+            android:text="@string/title_add_products"
             android:textColor="@color/white"
             android:textSize="@dimen/big_size_text" />
     </com.example.lori.widgets.ActionBar>
@@ -43,44 +43,46 @@
             android:paddingBottom="@dimen/giant_padding">
 
             <FrameLayout
-                android:id="@+id/flUserImage"
-                android:layout_width="@dimen/small_size_container"
-                android:layout_height="@dimen/small_size_container"
-                android:layout_marginTop="@dimen/giant_margin"
+                android:id="@+id/flProductImage"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/medium_size_container"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
-                    android:id="@+id/ivUserPhoto"
+                    android:id="@+id/ivProductImage"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_margin="@dimen/micro_margin"
-                    android:background="@color/colorLightGrey"
+                    android:background="@color/colorImageViewBackground"
                     android:contentDescription="@string/content_description"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/im_user_placeholder" />
+                    android:scaleType="fitXY" />
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/ic_user_image_placeholder" />
+                <ImageView
+                    android:id="@+id/ivAddUpdateProducts"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end|bottom"
+                    android:contentDescription="@string/content_description"
+                    android:foreground="?attr/selectableItemBackgroundBorderless"
+                    android:padding="@dimen/small_padding"
+                    android:src="@drawable/ic_add_photo_24dp" />
             </FrameLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/tilFirstName"
+                android:id="@+id/tilProductTitle"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/small_margin"
-                android:hint="@string/hint_first_name"
+                android:hint="@string/hint_product_title"
                 android:textColorHint="@color/colorSecondaryText"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/flUserImage">
+                app:layout_constraintTop_toBottomOf="@id/flProductImage">
 
                 <com.example.lori.widgets.BoldMontserratEditText
-                    android:id="@+id/etFirstName"
+                    android:id="@+id/etProductTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="text"
@@ -90,111 +92,75 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/tilLastName"
+                android:id="@+id/tilProductPrice"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/small_margin"
-                android:hint="@string/hint_last_name"
+                android:hint="@string/hint_product_price"
                 android:textColorHint="@color/colorSecondaryText"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tilFirstName">
+                app:layout_constraintTop_toBottomOf="@id/tilProductTitle">
 
                 <com.example.lori.widgets.BoldMontserratEditText
-                    android:id="@+id/etLastName"
+                    android:id="@+id/etProductPrice"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="text"
+                    android:inputType="number"
+                    android:padding="@dimen/small_padding"
+                    android:textColor="@color/colorPrimaryText"
+                    android:textSize="@dimen/medium_size_text" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilProductDescription"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/small_margin"
+                android:hint="@string/hint_product_description"
+                android:textColorHint="@color/colorSecondaryText"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tilProductPrice">
+
+                <com.example.lori.widgets.BoldMontserratEditText
+                    android:id="@+id/etProductDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textMultiLine"
+                    android:minLines="3"
                     android:padding="@dimen/small_padding"
                     android:textColor="@color/colorPrimaryText"
                     android:textSize="@dimen/medium_size_text" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/tilEmail"
+                android:id="@+id/tilProductQuantity"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/small_margin"
-                android:hint="@string/hint_email_id"
+                android:hint="@string/hint_product_quantity"
                 android:textColorHint="@color/colorSecondaryText"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tilLastName">
+                app:layout_constraintTop_toBottomOf="@id/tilProductDescription">
 
                 <com.example.lori.widgets.BoldMontserratEditText
-                    android:id="@+id/etEmail"
+                    android:id="@+id/etProductQuantity"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textEmailAddress"
+                    android:inputType="number"
                     android:padding="@dimen/small_padding"
                     android:textColor="@color/colorPrimaryText"
                     android:textSize="@dimen/medium_size_text" />
             </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/tilMobileNumber"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/small_margin"
-                android:hint="@string/hint_mobile_number"
-                android:textColorHint="@color/colorSecondaryText"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tilEmail">
-
-                <com.example.lori.widgets.BoldMontserratEditText
-                    android:id="@+id/etMobileNumber"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="phone"
-                    android:padding="@dimen/small_padding"
-                    android:textColor="@color/colorPrimaryText"
-                    android:textSize="@dimen/medium_size_text" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <RadioGroup
-                android:id="@+id/rgGender"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/tiny_size_container"
-                android:layout_margin="@dimen/small_margin"
-                android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tilMobileNumber">
-
-                <com.example.lori.widgets.BoldMontserratRadioButton
-                    android:id="@+id/rbMale"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginEnd="@dimen/tiny_margin"
-                    android:layout_weight="1"
-                    android:background="@drawable/ic_drawable_gender_tab_selector"
-                    android:button="@null"
-                    android:checked="true"
-                    android:gravity="center"
-                    android:text="@string/label_rb_male"
-                    android:textColor="@drawable/ic_drawable_gender_tab_text_color_selector"
-                    android:textStyle="bold" />
-
-                <com.example.lori.widgets.BoldMontserratRadioButton
-                    android:id="@+id/rbFemale"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="@dimen/tiny_margin"
-                    android:layout_weight="1"
-                    android:background="@drawable/ic_drawable_gender_tab_selector"
-                    android:button="@null"
-                    android:gravity="center"
-                    android:text="@string/label_rb_female"
-                    android:textColor="@drawable/ic_drawable_gender_tab_text_color_selector"
-                    android:textStyle="bold" />
-            </RadioGroup>
 
             <com.example.lori.widgets.BoldMontserratButton
-                android:id="@+id/btSave"
+                android:id="@+id/btSubmit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -203,30 +169,12 @@
                 android:foreground="?attr/selectableItemBackground"
                 android:gravity="center"
                 android:padding="@dimen/small_padding"
-                android:text="@string/label_btn_save"
+                android:text="@string/label_btn_submit"
                 android:textColor="@android:color/white"
                 android:textSize="@dimen/small_size_text"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/rgGender" />
-
-            <com.example.lori.widgets.BoldMontserratButton
-                android:id="@+id/btLogout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_margin="@dimen/small_margin"
-                android:background="@drawable/ic_button_background"
-                android:foreground="?attr/selectableItemBackground"
-                android:gravity="center"
-                android:padding="@dimen/small_padding"
-                android:text="@string/label_btn_logout"
-                android:textColor="@android:color/white"
-                android:textSize="@dimen/small_size_text"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/btSave" />
+                app:layout_constraintTop_toBottomOf="@id/tilProductQuantity" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

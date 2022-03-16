@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
+    android:paddingBottom="@dimen/giant_padding"
     tools:context=".activities.LoginActivity">
 
     <FrameLayout
@@ -108,7 +109,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_margin="@dimen/small_padding"
+        android:layout_margin="@dimen/small_margin"
         android:background="@drawable/ic_button_background"
         android:foreground="?attr/selectableItemBackground"
         android:gravity="center"

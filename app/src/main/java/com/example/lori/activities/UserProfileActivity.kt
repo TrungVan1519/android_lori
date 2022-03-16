@@ -119,7 +119,7 @@ class UserProfileActivity : BaseActivity(), View.OnClickListener {
                                         updateUserDetails(userHashMap)
                                     }
                             }
-                            .addOnFailureListener { exception ->
+                            .addOnFailureListener { e ->
                                 showSnackBar(
                                     resources.getString(R.string.fail_to_upload_image),
                                     true
@@ -127,8 +127,8 @@ class UserProfileActivity : BaseActivity(), View.OnClickListener {
 
                                 Log.e(
                                     javaClass.simpleName,
-                                    exception.message,
-                                    exception
+                                    "Errors while uploading the image",
+                                    e
                                 )
                             }
                     } else {
@@ -174,7 +174,7 @@ class UserProfileActivity : BaseActivity(), View.OnClickListener {
 
                 Log.e(
                     javaClass.simpleName,
-                    "Error while updating the user details.",
+                    "Errors while updating the user details.",
                     e
                 )
             }

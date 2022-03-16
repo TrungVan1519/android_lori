@@ -73,7 +73,7 @@ class SettingsActivity : BaseActivity(), View.OnClickListener {
 
                 Log.e(
                     javaClass.simpleName,
-                    "Error while getting user details.",
+                    "Errors while getting user details.",
                     e
                 )
             }
