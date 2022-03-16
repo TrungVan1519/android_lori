@@ -38,32 +38,7 @@ class AllProductsAdapter(
 
     override fun getItemCount() = products.size
 
-
-    override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
-        super.onAttachedToRecyclerView(recyclerView)
-
-        ItemTouchHelper(object : SwipeToEditCallback(context) {
-            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                updateProduct(viewHolder.adapterPosition)
-            }
-        }).attachToRecyclerView(recyclerView)
-
-        ItemTouchHelper(object : SwipeToDeleteCallback(context) {
-            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                deleteProduct(viewHolder.adapterPosition)
-            }
-        }).attachToRecyclerView(recyclerView)
-    }
-
     private fun getProduct(position: Int) {
-
-    }
-
-    private fun updateProduct(position: Int) {
-
-    }
-
-    private fun deleteProduct(position: Int) {
 
     }
 

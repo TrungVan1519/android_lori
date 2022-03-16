@@ -23,8 +23,6 @@ class DashboardFragment : BaseFragment() {
 
         // For using the option menu in fragment we need to add it
         setHasOptionsMenu(true)
-
-        getAllProducts()
     }
 
     override fun onCreateView(
@@ -49,6 +47,11 @@ class DashboardFragment : BaseFragment() {
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        getAllProducts()
     }
 
     private fun getAllProducts() {

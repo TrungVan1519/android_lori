@@ -39,7 +39,6 @@ class MyProductsAdapter(
 
     override fun getItemCount() = products.size
 
-
     override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
         super.onAttachedToRecyclerView(recyclerView)
 

@@ -23,8 +23,6 @@ class ProductsFragment : BaseFragment() {
 
         // For using the option menu in fragment we need to add it
         setHasOptionsMenu(true)
-
-        getMyProducts()
     }
 
     override fun onCreateView(
@@ -49,6 +47,11 @@ class ProductsFragment : BaseFragment() {
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        getMyProducts()
     }
 
     private fun getMyProducts() {

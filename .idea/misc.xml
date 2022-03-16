@@ -44,10 +44,12 @@
         <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.10625" />
         <entry key="app/src/main/res/layout/fragment_notifications.xml" value="0.17083333333333334" />
         <entry key="app/src/main/res/layout/fragment_products.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/item_dashboard_layout.xml" value="0.10625" />
+        <entry key="app/src/main/res/layout/item_dashboard_layout.xml" value="0.165" />
         <entry key="app/src/main/res/layout/item_list_layout.xml" value="0.12916666666666668" />
+        <entry key="app/src/main/res/layout/layout_all_products.xml" value="0.1" />
         <entry key="app/src/main/res/layout/layout_dialog_progress.xml" value="0.2578125" />
         <entry key="app/src/main/res/layout/layout_item_list.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/layout_my_products.xml" value="0.10625" />
         <entry key="app/src/main/res/menu/add_product_menu.xml" value="0.2578125" />
         <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.1" />
         <entry key="app/src/main/res/menu/dashboard_menu.xml" value="0.1962962962962963" />
