@@ -41,7 +41,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <com.example.lori.widgets.BoldMontserratTextView
-            android:id="@+id/tvItemName"
+            android:id="@+id/tvItemTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/item_value_text_color"

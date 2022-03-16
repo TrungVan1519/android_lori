@@ -63,7 +63,9 @@ class ProductsFragment : BaseFragment() {
 
                 val products = ArrayList<Product>()
                 querySnapshot.documents.forEach { documentSnapshot ->
-                    products.add(documentSnapshot.toObject(Product::class.java)!!)
+                    val product = documentSnapshot.toObject(Product::class.java)!!
+                    product.id = documentSnapshot.id
+                    products.add(product)
                 }
 
                 if (products.size > 0) {
@@ -71,9 +73,9 @@ class ProductsFragment : BaseFragment() {
                     tvNoProductsFound.visibility = View.GONE
 
                     rvMyProducts.layoutManager = LinearLayoutManager(activity)
-                    rvMyProducts.setHasFixedSize(false)
+                    rvMyProducts.setHasFixedSize(true)
                     rvMyProducts.adapter =
-                        MyProductsAdapter(requireActivity(), products, R.layout.layout_item_list)
+                        MyProductsAdapter(requireActivity(), products, R.layout.layout_my_products)
                 } else {
                     rvMyProducts.visibility = View.GONE
                     tvNoProductsFound.visibility = View.VISIBLE

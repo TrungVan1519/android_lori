@@ -20,12 +20,14 @@
         <entry key="app/src/main/res/drawable/ic_drawable_gender_tab_text_color_selector.xml" value="0.116" />
         <entry key="app/src/main/res/drawable/ic_edit_24dp.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_home_black_24dp.xml" value="0.117" />
+        <entry key="app/src/main/res/drawable/ic_item_grey_border_background.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_rv_item_image_background.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_user_image_placeholder.xml" value="0.116" />
         <entry key="app/src/main/res/drawable/ic_vector_add_photo.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_vector_chevron_right.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_vector_delete.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_vector_orders.xml" value="0.1365" />
+        <entry key="app/src/main/res/drawable/item_dashboard_background.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/item_grey_border_background.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/rv_item_image_background.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/user_image_background.xml" value="0.1" />
@@ -39,8 +41,10 @@
         <entry key="app/src/main/res/layout/activity_settings.xml" value="0.12314814814814815" />
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.2128623188405797" />
         <entry key="app/src/main/res/layout/activity_user_profile.xml" value="0.12314814814814815" />
+        <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.10625" />
         <entry key="app/src/main/res/layout/fragment_notifications.xml" value="0.17083333333333334" />
         <entry key="app/src/main/res/layout/fragment_products.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/item_dashboard_layout.xml" value="0.10625" />
         <entry key="app/src/main/res/layout/item_list_layout.xml" value="0.12916666666666668" />
         <entry key="app/src/main/res/layout/layout_dialog_progress.xml" value="0.2578125" />
         <entry key="app/src/main/res/layout/layout_item_list.xml" value="0.1" />

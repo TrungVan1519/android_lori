@@ -10,9 +10,9 @@ import com.example.lori.models.Product
 import com.example.lori.utils.ImageUtils
 import com.example.lori.utils.SwipeToDeleteCallback
 import com.example.lori.utils.SwipeToEditCallback
-import kotlinx.android.synthetic.main.layout_my_products.view.*
+import kotlinx.android.synthetic.main.layout_all_products.view.*
 
-class MyProductsAdapter(
+class AllProductsAdapter(
     private val context: Context,
     private val products: ArrayList<Product>,
     private val layout: Int
@@ -31,7 +31,6 @@ class MyProductsAdapter(
                 ImageUtils.loadProductImage(context, product.image, holder.itemView.ivItemImage)
                 holder.itemView.tvItemTitle.text = product.title
                 holder.itemView.tvItemPrice.text = "${product.price} VND"
-                holder.itemView.ibDeleteItem.setOnClickListener { deleteProduct(position) }
                 holder.itemView.setOnClickListener { getProduct(position) }
             }
         }
