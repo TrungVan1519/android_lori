@@ -1,48 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="gender_radio_button_radius">5dp</dimen>
-    <dimen name="gender_radio_button_stroke_width">1dp</dimen>
-    <dimen name="user_image_background_stroke">4dp</dimen>
-    <dimen name="user_image_background_corner_radius">10dp</dimen>
+    <dimen name="padding_actionbar">-75dp</dimen>
+    <dimen name="padding_medium">5dp</dimen>
+    <dimen name="padding_big">16dp</dimen>
+    <dimen name="padding_massive">60dp</dimen>
 
-    <dimen name="actionbar_padding">-75dp</dimen>
-    <dimen name="nano_padding">3dp</dimen>
-    <dimen name="tiny_padding">5dp</dimen>
-    <dimen name="small_padding">16dp</dimen>
-    <dimen name="medium_padding">18dp</dimen>
-    <dimen name="large_padding">20dp</dimen>
-    <dimen name="big_padding">30dp</dimen>
-    <dimen name="giant_padding">60dp</dimen>
+    <dimen name="margin_user_image">-75dp</dimen>
+    <dimen name="margin_small">3dp</dimen>
+    <dimen name="margin_medium">5dp</dimen>
+    <dimen name="margin_big">16dp</dimen>
+    <dimen name="margin_giant">30dp</dimen>
 
-    <dimen name="user_image_margin">-75dp</dimen>
-    <dimen name="nano_margin">2dp</dimen>
-    <dimen name="micro_margin">3dp</dimen>
-    <dimen name="tiny_margin">5dp</dimen>
-    <dimen name="small_margin">16dp</dimen>
-    <dimen name="medium_margin">18dp</dimen>
-    <dimen name="large_margin">20dp</dimen>
-    <dimen name="big_margin">30dp</dimen>
-    <dimen name="giant_margin">50dp</dimen>
+    <dimen name="container_tiny">50dp</dimen>
+    <dimen name="container_small">100dp</dimen>
+    <dimen name="container_medium">150dp</dimen>
+    <dimen name="container_big">200dp</dimen>
 
-    <dimen name="tiny_size_container">50dp</dimen>
-    <dimen name="normal_size_container">100dp</dimen>
-    <dimen name="small_size_container">150dp</dimen>
-    <dimen name="medium_size_container">200dp</dimen>
+    <dimen name="text_tiny">12sp</dimen>
+    <dimen name="text_small">14sp</dimen>
+    <dimen name="text_medium">16sp</dimen>
+    <dimen name="text_big">18sp</dimen>
+    <dimen name="text_giant">50sp</dimen>
 
-    <dimen name="tiny_size_text">12sp</dimen>
-    <dimen name="small_size_text">14sp</dimen>
-    <dimen name="medium_size_text">16sp</dimen>
-    <dimen name="big_size_text">18sp</dimen>
-    <dimen name="massive_size_text">50sp</dimen>
-
-    <dimen name="tiny_radius">1dp</dimen>
-    <dimen name="normal_radius">3dp</dimen>
-    <dimen name="small_radius">5dp</dimen>
-    <dimen name="medium_radius">10dp</dimen>
-
-    <dimen name="divider_height">1dp</dimen>
-
-    <!-- Default screen margins, per the Android Design guidelines. -->
-    <dimen name="activity_horizontal_margin">16dp</dimen>
-    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="radius_tiny">1dp</dimen>
+    <dimen name="radius_small">3dp</dimen>
+    <dimen name="radius_medium">5dp</dimen>
+    <dimen name="radius_big">10dp</dimen>
 </resources>

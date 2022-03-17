@@ -18,12 +18,12 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingBottom="@dimen/giant_padding">
+            android:paddingBottom="@dimen/padding_massive">
 
             <FrameLayout
                 android:id="@+id/flHeaderBg"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/medium_size_container">
+                android:layout_height="@dimen/container_big">
 
                 <com.makeramen.roundedimageview.RoundedImageView
                     android:id="@+id/ivHeaderBg"
@@ -32,7 +32,7 @@
                     android:contentDescription="@string/content_description"
                     android:scaleType="fitXY"
                     android:src="@drawable/ic_bg"
-                    app:riv_border_color="#333333"
+                    app:riv_border_color="@color/rounded_image_border"
                     app:riv_border_width="0dp"
                     app:riv_corner_radius="0dp"
                     app:riv_mutate_background="true"
@@ -53,33 +53,33 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center"
-                        android:paddingStart="@dimen/actionbar_padding"
+                        android:paddingStart="@dimen/padding_actionbar"
                         android:paddingEnd="0dp"
                         android:text="@string/title_settings"
                         android:textColor="@color/white"
-                        android:textSize="@dimen/big_size_text" />
+                        android:textSize="@dimen/text_big" />
                 </com.example.lori.widgets.ActionBar>
             </FrameLayout>
 
             <FrameLayout
                 android:id="@+id/flUserImage"
-                android:layout_width="@dimen/small_size_container"
-                android:layout_height="@dimen/small_size_container"
+                android:layout_width="@dimen/container_medium"
+                android:layout_height="@dimen/container_medium"
                 android:layout_below="@id/flHeaderBg"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="@dimen/user_image_margin">
+                android:layout_marginTop="@dimen/margin_user_image">
 
                 <com.makeramen.roundedimageview.RoundedImageView
                     android:id="@+id/ivUserPhoto"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_margin="@dimen/micro_margin"
+                    android:layout_margin="@dimen/margin_small"
                     android:contentDescription="@string/content_description"
                     android:scaleType="fitXY"
                     android:src="@drawable/im_user_placeholder"
-                    app:riv_border_color="#333333"
-                    app:riv_border_width="@dimen/tiny_radius"
-                    app:riv_corner_radius="@dimen/small_radius"
+                    app:riv_border_color="@color/rounded_image_border"
+                    app:riv_border_width="@dimen/radius_tiny"
+                    app:riv_corner_radius="@dimen/radius_medium"
                     app:riv_mutate_background="false"
                     app:riv_oval="false"
                     app:riv_tile_mode="clamp" />
@@ -91,13 +91,13 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/flHeaderBg"
                 android:layout_alignParentEnd="true"
-                android:layout_margin="@dimen/small_margin"
+                android:layout_margin="@dimen/margin_big"
                 android:background="@drawable/ic_item_grey_border_background"
                 android:foreground="?attr/selectableItemBackgroundBorderless"
-                android:padding="@dimen/small_padding"
+                android:padding="@dimen/padding_big"
                 android:text="@string/label_edit"
-                android:textColor="@color/colorSecondaryText"
-                android:textSize="@dimen/small_size_text" />
+                android:textColor="@color/secondary_text"
+                android:textSize="@dimen/text_small" />
 
             <com.example.lori.widgets.BoldMontserratTextView
                 android:id="@+id/tvName"
@@ -105,11 +105,11 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/flUserImage"
                 android:layout_centerHorizontal="true"
-                android:layout_marginHorizontal="@dimen/tiny_margin"
-                android:layout_marginTop="@dimen/small_margin"
-                android:layout_marginBottom="@dimen/micro_margin"
-                android:textColor="@color/colorDarkGrey"
-                android:textSize="@dimen/big_size_text"
+                android:layout_marginHorizontal="@dimen/margin_medium"
+                android:layout_marginTop="@dimen/margin_big"
+                android:layout_marginBottom="@dimen/margin_small"
+                android:textColor="@color/dark_grey"
+                android:textSize="@dimen/text_big"
                 tools:text="Trung Van" />
 
             <com.example.lori.widgets.BoldMontserratTextView
@@ -118,11 +118,11 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tvName"
                 android:layout_centerHorizontal="true"
-                android:layout_marginHorizontal="@dimen/tiny_margin"
-                android:layout_marginTop="@dimen/micro_margin"
-                android:layout_marginBottom="@dimen/micro_margin"
-                android:textColor="@color/colorSecondaryText"
-                android:textSize="@dimen/big_size_text"
+                android:layout_marginHorizontal="@dimen/margin_medium"
+                android:layout_marginTop="@dimen/margin_small"
+                android:layout_marginBottom="@dimen/margin_small"
+                android:textColor="@color/secondary_text"
+                android:textSize="@dimen/text_big"
                 tools:text="trung@gmail.com" />
 
             <LinearLayout
@@ -130,7 +130,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tvEmail"
-                android:layout_margin="@dimen/micro_margin"
+                android:layout_margin="@dimen/margin_small"
                 android:gravity="center"
                 android:orientation="horizontal">
 
@@ -138,25 +138,25 @@
                     android:id="@+id/tvGender"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/colorSecondaryText"
-                    android:textSize="@dimen/medium_size_text"
+                    android:textColor="@color/secondary_text"
+                    android:textSize="@dimen/text_medium"
                     tools:text="Male" />
 
                 <com.example.lori.widgets.BoldMontserratTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginHorizontal="@dimen/tiny_margin"
+                    android:layout_marginHorizontal="@dimen/margin_medium"
                     android:text="-"
-                    android:textColor="@color/colorSecondaryText"
-                    android:textSize="@dimen/big_size_text" />
+                    android:textColor="@color/secondary_text"
+                    android:textSize="@dimen/text_big" />
 
                 <com.example.lori.widgets.BoldMontserratTextView
                     android:id="@+id/tvMobileNumber"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/colorSecondaryText"
-                    android:textSize="@dimen/medium_size_text"
+                    android:textColor="@color/secondary_text"
+                    android:textSize="@dimen/text_medium"
                     tools:text="0123456789" />
             </LinearLayout>
 
@@ -165,21 +165,21 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/llMoGen"
-                android:layout_margin="@dimen/small_margin"
+                android:layout_margin="@dimen/margin_big"
                 android:background="@drawable/ic_item_grey_border_background"
                 android:foreground="?attr/selectableItemBackground"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
-                android:padding="@dimen/small_padding">
+                android:padding="@dimen/padding_big">
 
                 <com.example.lori.widgets.BoldMontserratTextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/tiny_margin"
+                    android:layout_margin="@dimen/margin_medium"
                     android:layout_weight="1"
                     android:text="@string/label_addresses"
-                    android:textColor="@color/colorSecondaryText"
-                    android:textSize="@dimen/big_size_text" />
+                    android:textColor="@color/secondary_text"
+                    android:textSize="@dimen/text_big" />
 
                 <com.makeramen.roundedimageview.RoundedImageView
                     android:layout_width="wrap_content"
@@ -187,7 +187,7 @@
                     android:contentDescription="@string/content_description"
                     android:scaleType="fitCenter"
                     android:src="@drawable/ic_chevron_right_24dp"
-                    app:riv_border_color="#333333"
+                    app:riv_border_color="@color/rounded_image_border"
                     app:riv_border_width="2dip"
                     app:riv_corner_radius="30dip"
                     app:riv_mutate_background="true"
@@ -201,14 +201,14 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/llAddress"
                 android:layout_gravity="center"
-                android:layout_margin="@dimen/small_margin"
+                android:layout_margin="@dimen/margin_big"
                 android:background="@drawable/ic_button_background"
                 android:foreground="?attr/selectableItemBackground"
                 android:gravity="center"
-                android:padding="@dimen/small_padding"
+                android:padding="@dimen/padding_big"
                 android:text="@string/label_btn_logout"
                 android:textColor="@android:color/white"
-                android:textSize="@dimen/small_size_text" />
+                android:textSize="@dimen/text_small" />
         </RelativeLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

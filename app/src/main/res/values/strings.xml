@@ -67,6 +67,7 @@
     <string name="success_to_register">Register successfully</string>
     <string name="success_to_login">Login successfully</string>
     <string name="success_to_upload_image">Upload the image successfully</string>
+    <string name="success_to_add_products">Your product is uploaded successfully</string>
 
     <string name="fail_to_register">Fail to register</string>
     <string name="fail_to_select_image">Fail to select the image</string>
@@ -74,15 +75,13 @@
     <string name="fail_to_update_profile">Fail to update the profile</string>
     <string name="fail_to_upload_image">Fail to upload the image</string>
     <string name="fail_to_get_user_details">Fail to get your details</string>
+    <string name="fail_to_add_products">Fail to add products</string>
 
-    <string name="success_to_add_products">Your product is uploaded successfully</string>
     <string name="label_no_products_found">No products added yet!</string>
     <string name="no_dashboard_item_found">No items found!</string>
-
     <string name="product_delete_success_message">Your product is deleted successfully</string>
     <string name="delete_dialog_title">Delete</string>
     <string name="delete_dialog_message">Are you sure you want to delete the product?</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
-    <string name="fail_to_add_products">Fail to add products</string>
 </resources>

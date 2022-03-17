@@ -4,7 +4,7 @@
 
     <solid android:color="@color/white" />
     <stroke
-        android:width="@dimen/tiny_radius"
-        android:color="@color/colorBorder" />
-    <corners android:radius="@dimen/small_radius" />
+        android:width="@dimen/radius_tiny"
+        android:color="@color/rounded_image_border" />
+    <corners android:radius="@dimen/radius_medium" />
 </shape>

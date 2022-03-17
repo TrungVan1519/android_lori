@@ -20,11 +20,11 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:paddingStart="@dimen/actionbar_padding"
+            android:paddingStart="@dimen/padding_actionbar"
             android:paddingEnd="0dp"
             android:text="@string/title_add_products"
             android:textColor="@color/white"
-            android:textSize="@dimen/big_size_text" />
+            android:textSize="@dimen/text_big" />
     </com.example.lori.widgets.ActionBar>
 
     <ScrollView
@@ -40,12 +40,12 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingBottom="@dimen/giant_padding">
+            android:paddingBottom="@dimen/padding_massive">
 
             <FrameLayout
                 android:id="@+id/flProductImage"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/medium_size_container"
+                android:layout_height="@dimen/container_big"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -54,10 +54,10 @@
                     android:id="@+id/ivProductImage"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="#333333"
+                    android:background="@color/image_background"
                     android:contentDescription="@string/content_description"
                     android:scaleType="fitXY"
-                    app:riv_border_color="#333333"
+                    app:riv_border_color="@color/rounded_image_border"
                     app:riv_border_width="0dp"
                     app:riv_corner_radius="0dp"
                     app:riv_mutate_background="true"
@@ -69,13 +69,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end|bottom"
-                    android:background="#333333"
+                    android:background="@color/image_background"
                     android:contentDescription="@string/content_description"
                     android:foreground="?attr/selectableItemBackgroundBorderless"
-                    android:padding="@dimen/small_padding"
+                    android:padding="@dimen/padding_big"
                     android:scaleType="fitXY"
                     android:src="@drawable/ic_add_photo_24dp"
-                    app:riv_border_color="#333333"
+                    app:riv_border_color="@color/rounded_image_border"
                     app:riv_border_width="0dp"
                     app:riv_corner_radius="0dp"
                     app:riv_mutate_background="true"
@@ -88,9 +88,12 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/small_margin"
+                android:layout_margin="@dimen/margin_big"
                 android:hint="@string/hint_product_title"
-                android:textColorHint="@color/colorSecondaryText"
+                android:textColorHint="@color/secondary_text"
+                app:counterEnabled="true"
+                app:counterMaxLength="30"
+                app:endIconMode="clear_text"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/flProductImage">
@@ -100,9 +103,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="text"
-                    android:padding="@dimen/small_padding"
-                    android:textColor="@color/colorPrimaryText"
-                    android:textSize="@dimen/medium_size_text" />
+                    android:padding="@dimen/padding_big"
+                    android:textColor="@color/primary_text"
+                    android:textSize="@dimen/text_medium" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -110,9 +113,12 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/small_margin"
+                android:layout_margin="@dimen/margin_big"
                 android:hint="@string/hint_product_price"
-                android:textColorHint="@color/colorSecondaryText"
+                android:textColorHint="@color/secondary_text"
+                app:counterEnabled="true"
+                app:counterMaxLength="30"
+                app:endIconMode="clear_text"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tilProductTitle">
@@ -122,9 +128,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="number"
-                    android:padding="@dimen/small_padding"
-                    android:textColor="@color/colorPrimaryText"
-                    android:textSize="@dimen/medium_size_text" />
+                    android:padding="@dimen/padding_big"
+                    android:textColor="@color/primary_text"
+                    android:textSize="@dimen/text_medium" />
             </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -133,9 +139,12 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/small_margin"
+                android:layout_margin="@dimen/margin_big"
                 android:hint="@string/hint_product_description"
-                android:textColorHint="@color/colorSecondaryText"
+                android:textColorHint="@color/secondary_text"
+                app:counterEnabled="true"
+                app:counterMaxLength="30"
+                app:endIconMode="clear_text"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tilProductPrice">
@@ -146,9 +155,9 @@
                     android:layout_height="wrap_content"
                     android:inputType="textMultiLine"
                     android:minLines="3"
-                    android:padding="@dimen/small_padding"
-                    android:textColor="@color/colorPrimaryText"
-                    android:textSize="@dimen/medium_size_text" />
+                    android:padding="@dimen/padding_big"
+                    android:textColor="@color/primary_text"
+                    android:textSize="@dimen/text_medium" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -156,9 +165,12 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/small_margin"
+                android:layout_margin="@dimen/margin_big"
                 android:hint="@string/hint_product_quantity"
-                android:textColorHint="@color/colorSecondaryText"
+                android:textColorHint="@color/secondary_text"
+                app:counterEnabled="true"
+                app:counterMaxLength="30"
+                app:endIconMode="clear_text"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tilProductDescription">
@@ -168,9 +180,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="number"
-                    android:padding="@dimen/small_padding"
-                    android:textColor="@color/colorPrimaryText"
-                    android:textSize="@dimen/medium_size_text" />
+                    android:padding="@dimen/padding_big"
+                    android:textColor="@color/primary_text"
+                    android:textSize="@dimen/text_medium" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.example.lori.widgets.BoldMontserratButton
@@ -178,14 +190,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_margin="@dimen/small_margin"
+                android:layout_margin="@dimen/margin_big"
                 android:background="@drawable/ic_button_background"
                 android:foreground="?attr/selectableItemBackground"
                 android:gravity="center"
-                android:padding="@dimen/small_padding"
+                android:padding="@dimen/padding_big"
                 android:text="@string/label_btn_submit"
                 android:textColor="@android:color/white"
-                android:textSize="@dimen/small_size_text"
+                android:textSize="@dimen/text_small"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tilProductQuantity" />

@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/tiny_margin"
-    app:cardCornerRadius="@dimen/small_radius"
-    app:cardElevation="@dimen/small_radius"
-    app:contentPadding="@dimen/tiny_padding">
+    android:layout_margin="@dimen/margin_medium"
+    app:cardCornerRadius="@dimen/radius_medium"
+    app:cardElevation="@dimen/radius_medium"
+    app:contentPadding="@dimen/padding_medium">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -18,17 +18,17 @@
         <com.makeramen.roundedimageview.RoundedImageView
             android:id="@+id/ivItemImage"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/small_size_container"
-            android:layout_marginStart="@dimen/tiny_margin"
-            android:layout_marginTop="@dimen/tiny_margin"
-            android:layout_marginEnd="@dimen/tiny_margin"
-            android:layout_marginBottom="@dimen/tiny_margin"
+            android:layout_height="@dimen/container_medium"
+            android:layout_marginStart="@dimen/margin_medium"
+            android:layout_marginTop="@dimen/margin_medium"
+            android:layout_marginEnd="@dimen/margin_medium"
+            android:layout_marginBottom="@dimen/margin_medium"
             android:contentDescription="@string/content_description"
-            android:minHeight="@dimen/small_size_container"
+            android:minHeight="@dimen/container_medium"
             android:scaleType="fitXY"
-            app:riv_border_color="#333333"
-            app:riv_border_width="@dimen/tiny_radius"
-            app:riv_corner_radius="@dimen/small_radius"
+            app:riv_border_color="@color/rounded_image_border"
+            app:riv_border_width="@dimen/radius_tiny"
+            app:riv_corner_radius="@dimen/radius_medium"
             app:riv_mutate_background="false"
             app:riv_oval="false"
             app:riv_tile_mode="clamp"
@@ -40,23 +40,23 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/ivItemImage"
             android:orientation="vertical"
-            android:padding="@dimen/tiny_padding">
+            android:padding="@dimen/padding_medium">
 
             <com.example.lori.widgets.BoldMontserratTextView
                 android:id="@+id/tvItemTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/item_value_text_color"
-                android:textSize="@dimen/tiny_size_text"
+                android:textSize="@dimen/text_tiny"
                 tools:text="Item Name" />
 
-            <com.example.lori.widgets.BoldMontserratTextView
+            <com.example.lori.widgets.RegularMontserratTextView
                 android:id="@+id/tvItemPrice"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/micro_margin"
+                android:layout_marginTop="@dimen/margin_small"
                 android:textColor="@color/item_value_text_color"
-                android:textSize="@dimen/tiny_size_text"
+                android:textSize="@dimen/text_tiny"
                 tools:text="10.000 VND" />
         </LinearLayout>
     </RelativeLayout>

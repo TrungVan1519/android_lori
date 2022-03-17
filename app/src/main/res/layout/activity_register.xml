@@ -20,11 +20,11 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:paddingStart="@dimen/actionbar_padding"
+            android:paddingStart="@dimen/padding_actionbar"
             android:paddingEnd="0dp"
             android:text="@string/title_create_an_account"
             android:textColor="@color/white"
-            android:textSize="@dimen/big_size_text" />
+            android:textSize="@dimen/text_big" />
     </com.example.lori.widgets.ActionBar>
 
     <ScrollView
@@ -40,16 +40,19 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingBottom="@dimen/giant_padding">
+            android:paddingBottom="@dimen/padding_massive">
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tilFirstName"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/small_margin"
+                android:layout_margin="@dimen/margin_big"
                 android:hint="@string/hint_first_name"
-                android:textColorHint="@color/colorSecondaryText"
+                android:textColorHint="@color/secondary_text"
+                app:counterEnabled="true"
+                app:counterMaxLength="30"
+                app:endIconMode="clear_text"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -59,9 +62,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="text"
-                    android:padding="@dimen/small_padding"
-                    android:textColor="@color/colorPrimaryText"
-                    android:textSize="@dimen/medium_size_text" />
+                    android:padding="@dimen/padding_big"
+                    android:textColor="@color/primary_text"
+                    android:textSize="@dimen/text_medium" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -69,9 +72,12 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/small_margin"
+                android:layout_margin="@dimen/margin_big"
                 android:hint="@string/hint_last_name"
-                android:textColorHint="@color/colorSecondaryText"
+                android:textColorHint="@color/secondary_text"
+                app:counterEnabled="true"
+                app:counterMaxLength="30"
+                app:endIconMode="clear_text"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tilFirstName">
@@ -81,9 +87,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="text"
-                    android:padding="@dimen/small_padding"
-                    android:textColor="@color/colorPrimaryText"
-                    android:textSize="@dimen/medium_size_text" />
+                    android:padding="@dimen/padding_big"
+                    android:textColor="@color/primary_text"
+                    android:textSize="@dimen/text_medium" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -91,9 +97,12 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/small_margin"
+                android:layout_margin="@dimen/margin_big"
                 android:hint="@string/hint_email_id"
-                android:textColorHint="@color/colorSecondaryText"
+                android:textColorHint="@color/secondary_text"
+                app:counterEnabled="true"
+                app:counterMaxLength="30"
+                app:endIconMode="clear_text"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tilLastName">
@@ -103,9 +112,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textEmailAddress"
-                    android:padding="@dimen/small_padding"
-                    android:textColor="@color/colorPrimaryText"
-                    android:textSize="@dimen/medium_size_text" />
+                    android:padding="@dimen/padding_big"
+                    android:textColor="@color/primary_text"
+                    android:textSize="@dimen/text_medium" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -113,21 +122,24 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/small_margin"
+                android:layout_margin="@dimen/margin_big"
                 android:hint="@string/hint_password"
-                android:textColorHint="@color/colorSecondaryText"
+                android:textColorHint="@color/secondary_text"
+                app:counterEnabled="true"
+                app:counterMaxLength="30"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tilEmail">
+                app:layout_constraintTop_toBottomOf="@id/tilEmail"
+                app:passwordToggleEnabled="true">
 
                 <com.example.lori.widgets.BoldMontserratEditText
                     android:id="@+id/etPassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPassword"
-                    android:padding="@dimen/small_padding"
-                    android:textColor="@color/colorPrimaryText"
-                    android:textSize="@dimen/medium_size_text" />
+                    android:padding="@dimen/padding_big"
+                    android:textColor="@color/primary_text"
+                    android:textSize="@dimen/text_medium" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -135,28 +147,31 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/small_margin"
+                android:layout_margin="@dimen/margin_big"
                 android:hint="@string/hint_confirm_password"
-                android:textColorHint="@color/colorSecondaryText"
+                android:textColorHint="@color/secondary_text"
+                app:counterEnabled="true"
+                app:counterMaxLength="30"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tilPassword">
+                app:layout_constraintTop_toBottomOf="@id/tilPassword"
+                app:passwordToggleEnabled="true">
 
                 <com.example.lori.widgets.BoldMontserratEditText
                     android:id="@+id/etConfirmPassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPassword"
-                    android:padding="@dimen/small_padding"
-                    android:textColor="@color/colorPrimaryText"
-                    android:textSize="@dimen/medium_size_text" />
+                    android:padding="@dimen/padding_big"
+                    android:textColor="@color/primary_text"
+                    android:textSize="@dimen/text_medium" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <LinearLayout
                 android:id="@+id/llTermsAndCondition"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/small_margin"
+                android:layout_margin="@dimen/margin_big"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -173,10 +188,10 @@
                     android:id="@+id/tvTermsAndCondition"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/tiny_margin"
+                    android:layout_marginStart="@dimen/margin_medium"
                     android:text="@string/label_i_agree_to_the_terms_and_condition"
-                    android:textColor="@color/colorSecondaryText"
-                    android:textSize="@dimen/small_size_text" />
+                    android:textColor="@color/secondary_text"
+                    android:textSize="@dimen/text_small" />
             </LinearLayout>
 
             <com.example.lori.widgets.BoldMontserratButton
@@ -184,14 +199,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_margin="@dimen/small_margin"
+                android:layout_margin="@dimen/margin_big"
                 android:background="@drawable/ic_button_background"
                 android:foreground="?attr/selectableItemBackground"
                 android:gravity="center"
-                android:padding="@dimen/tiny_padding"
+                android:padding="@dimen/padding_medium"
                 android:text="@string/label_btn_register"
                 android:textColor="@android:color/white"
-                android:textSize="@dimen/small_size_text"
+                android:textSize="@dimen/text_small"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/llTermsAndCondition" />
@@ -199,7 +214,7 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/small_margin"
+                android:layout_margin="@dimen/margin_big"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -210,20 +225,20 @@
                     android:id="@+id/tvAlreadyHaveAnAccount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:padding="@dimen/tiny_padding"
+                    android:padding="@dimen/padding_medium"
                     android:text="@string/label_already_have_an_account"
-                    android:textColor="@color/colorSecondaryText"
-                    android:textSize="@dimen/medium_size_text" />
+                    android:textColor="@color/secondary_text"
+                    android:textSize="@dimen/text_medium" />
 
                 <com.example.lori.widgets.BoldMontserratTextView
                     android:id="@+id/tvLogin"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:foreground="?attr/selectableItemBackground"
-                    android:padding="@dimen/tiny_padding"
+                    android:padding="@dimen/padding_medium"
                     android:text="@string/label_login"
-                    android:textColor="@color/colorSecondaryText"
-                    android:textSize="@dimen/medium_size_text" />
+                    android:textColor="@color/secondary_text"
+                    android:textSize="@dimen/text_medium" />
             </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

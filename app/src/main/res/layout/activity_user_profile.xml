@@ -20,11 +20,11 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:paddingStart="@dimen/actionbar_padding"
+            android:paddingStart="@dimen/padding_actionbar"
             android:paddingEnd="0dp"
             android:text="@string/title_profile"
             android:textColor="@color/white"
-            android:textSize="@dimen/big_size_text" />
+            android:textSize="@dimen/text_big" />
     </com.example.lori.widgets.ActionBar>
 
     <ScrollView
@@ -40,23 +40,23 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingBottom="@dimen/giant_padding">
+            android:paddingBottom="@dimen/padding_massive">
 
             <com.makeramen.roundedimageview.RoundedImageView
                 android:id="@+id/ivUserPhoto"
-                android:layout_width="@dimen/small_size_container"
-                android:layout_height="@dimen/small_size_container"
-                android:layout_margin="@dimen/micro_margin"
-                android:background="@color/colorLightGrey"
+                android:layout_width="@dimen/container_medium"
+                android:layout_height="@dimen/container_medium"
+                android:layout_margin="@dimen/margin_small"
+                android:background="@color/light_grey"
                 android:contentDescription="@string/content_description"
                 android:scaleType="fitXY"
                 android:src="@drawable/im_user_placeholder"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:riv_border_color="#333333"
-                app:riv_border_width="@dimen/tiny_radius"
-                app:riv_corner_radius="@dimen/small_radius"
+                app:riv_border_color="@color/rounded_image_border"
+                app:riv_border_width="@dimen/radius_tiny"
+                app:riv_corner_radius="@dimen/radius_medium"
                 app:riv_mutate_background="false"
                 app:riv_oval="false"
                 app:riv_tile_mode="clamp" />
@@ -66,9 +66,12 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/small_margin"
+                android:layout_margin="@dimen/margin_big"
                 android:hint="@string/hint_first_name"
-                android:textColorHint="@color/colorSecondaryText"
+                android:textColorHint="@color/secondary_text"
+                app:counterEnabled="true"
+                app:counterMaxLength="30"
+                app:endIconMode="clear_text"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/ivUserPhoto">
@@ -78,9 +81,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="text"
-                    android:padding="@dimen/small_padding"
-                    android:textColor="@color/colorPrimaryText"
-                    android:textSize="@dimen/medium_size_text" />
+                    android:padding="@dimen/padding_big"
+                    android:textColor="@color/primary_text"
+                    android:textSize="@dimen/text_medium" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -88,9 +91,12 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/small_margin"
+                android:layout_margin="@dimen/margin_big"
                 android:hint="@string/hint_last_name"
-                android:textColorHint="@color/colorSecondaryText"
+                android:textColorHint="@color/secondary_text"
+                app:counterEnabled="true"
+                app:counterMaxLength="30"
+                app:endIconMode="clear_text"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tilFirstName">
@@ -100,9 +106,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="text"
-                    android:padding="@dimen/small_padding"
-                    android:textColor="@color/colorPrimaryText"
-                    android:textSize="@dimen/medium_size_text" />
+                    android:padding="@dimen/padding_big"
+                    android:textColor="@color/primary_text"
+                    android:textSize="@dimen/text_medium" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -110,9 +116,12 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/small_margin"
+                android:layout_margin="@dimen/margin_big"
                 android:hint="@string/hint_email_id"
-                android:textColorHint="@color/colorSecondaryText"
+                android:textColorHint="@color/secondary_text"
+                app:counterEnabled="true"
+                app:counterMaxLength="30"
+                app:endIconMode="clear_text"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tilLastName">
@@ -122,9 +131,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textEmailAddress"
-                    android:padding="@dimen/small_padding"
-                    android:textColor="@color/colorPrimaryText"
-                    android:textSize="@dimen/medium_size_text" />
+                    android:padding="@dimen/padding_big"
+                    android:textColor="@color/primary_text"
+                    android:textSize="@dimen/text_medium" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -132,9 +141,12 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/small_margin"
+                android:layout_margin="@dimen/margin_big"
                 android:hint="@string/hint_mobile_number"
-                android:textColorHint="@color/colorSecondaryText"
+                android:textColorHint="@color/secondary_text"
+                app:counterEnabled="true"
+                app:counterMaxLength="30"
+                app:endIconMode="clear_text"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tilEmail">
@@ -144,16 +156,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="phone"
-                    android:padding="@dimen/small_padding"
-                    android:textColor="@color/colorPrimaryText"
-                    android:textSize="@dimen/medium_size_text" />
+                    android:padding="@dimen/padding_big"
+                    android:textColor="@color/primary_text"
+                    android:textSize="@dimen/text_medium" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <RadioGroup
                 android:id="@+id/rgGender"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/tiny_size_container"
-                android:layout_margin="@dimen/small_margin"
+                android:layout_height="@dimen/container_tiny"
+                android:layout_margin="@dimen/margin_big"
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -163,7 +175,7 @@
                     android:id="@+id/rbMale"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_marginEnd="@dimen/tiny_margin"
+                    android:layout_marginEnd="@dimen/margin_medium"
                     android:layout_weight="1"
                     android:background="@drawable/ic_drawable_gender_tab_selector"
                     android:button="@null"
@@ -177,7 +189,7 @@
                     android:id="@+id/rbFemale"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_marginStart="@dimen/tiny_margin"
+                    android:layout_marginStart="@dimen/margin_medium"
                     android:layout_weight="1"
                     android:background="@drawable/ic_drawable_gender_tab_selector"
                     android:button="@null"
@@ -192,14 +204,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_margin="@dimen/small_margin"
+                android:layout_margin="@dimen/margin_big"
                 android:background="@drawable/ic_button_background"
                 android:foreground="?attr/selectableItemBackground"
                 android:gravity="center"
-                android:padding="@dimen/small_padding"
+                android:padding="@dimen/padding_big"
                 android:text="@string/label_btn_save"
                 android:textColor="@android:color/white"
-                android:textSize="@dimen/small_size_text"
+                android:textSize="@dimen/text_small"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/rgGender" />
@@ -209,14 +221,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_margin="@dimen/small_margin"
+                android:layout_margin="@dimen/margin_big"
                 android:background="@drawable/ic_button_background"
                 android:foreground="?attr/selectableItemBackground"
                 android:gravity="center"
-                android:padding="@dimen/small_padding"
+                android:padding="@dimen/padding_big"
                 android:text="@string/label_btn_logout"
                 android:textColor="@android:color/white"
-                android:textSize="@dimen/small_size_text"
+                android:textSize="@dimen/text_small"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

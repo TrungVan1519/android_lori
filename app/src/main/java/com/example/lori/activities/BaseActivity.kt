@@ -16,7 +16,7 @@ open class BaseActivity : AppCompatActivity() {
     private var doubleBackToExitPressedOnce = false
 
     protected fun showSnackBar(message: String, isErrorMessage: Boolean) {
-        val color = if (isErrorMessage) R.color.colorSnackBarError else R.color.colorSnackBarSuccess
+        val color = if (isErrorMessage) R.color.snack_bar_error else R.color.snack_bar_success
         val snackBar = Snackbar.make(
             findViewById(android.R.id.content),
             message,
