@@ -190,7 +190,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_medium"
                     android:text="@string/label_i_agree_to_the_terms_and_condition"
-                    android:textColor="@color/secondary_text"
+                    android:textColor="@color/primary_text"
                     android:textSize="@dimen/text_small" />
             </LinearLayout>
 
@@ -227,7 +227,7 @@
                     android:layout_height="wrap_content"
                     android:padding="@dimen/padding_medium"
                     android:text="@string/label_already_have_an_account"
-                    android:textColor="@color/secondary_text"
+                    android:textColor="@color/primary_text"
                     android:textSize="@dimen/text_medium" />
 
                 <com.example.lori.widgets.BoldMontserratTextView
@@ -237,7 +237,7 @@
                     android:foreground="?attr/selectableItemBackground"
                     android:padding="@dimen/padding_medium"
                     android:text="@string/label_login"
-                    android:textColor="@color/secondary_text"
+                    android:textColor="@color/primary_text"
                     android:textSize="@dimen/text_medium" />
             </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>

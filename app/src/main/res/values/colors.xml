@@ -17,9 +17,8 @@
     <color name="snack_bar_success">#2ECC71</color>
     <color name="snack_bar_error">#D35400</color>
 
-    <color name="rounded_image_border">@color/purple_500</color>
-    <color name="image_background">@color/dark_grey</color>
     <color name="primary_text">@color/dark_grey</color>
     <color name="secondary_text">@color/light_grey</color>
-    <color name="item_value_text_color">@color/dark_grey</color>
+    <color name="rounded_image_border">@color/purple_500</color>
+    <color name="image_background">@color/dark_grey</color>
 </resources>

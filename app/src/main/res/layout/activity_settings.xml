@@ -96,7 +96,7 @@
                 android:foreground="?attr/selectableItemBackgroundBorderless"
                 android:padding="@dimen/padding_big"
                 android:text="@string/label_edit"
-                android:textColor="@color/secondary_text"
+                android:textColor="@color/primary_text"
                 android:textSize="@dimen/text_small" />
 
             <com.example.lori.widgets.BoldMontserratTextView
@@ -121,7 +121,7 @@
                 android:layout_marginHorizontal="@dimen/margin_medium"
                 android:layout_marginTop="@dimen/margin_small"
                 android:layout_marginBottom="@dimen/margin_small"
-                android:textColor="@color/secondary_text"
+                android:textColor="@color/primary_text"
                 android:textSize="@dimen/text_big"
                 tools:text="trung@gmail.com" />
 
@@ -138,7 +138,7 @@
                     android:id="@+id/tvGender"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/secondary_text"
+                    android:textColor="@color/primary_text"
                     android:textSize="@dimen/text_medium"
                     tools:text="Male" />
 
@@ -148,14 +148,14 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginHorizontal="@dimen/margin_medium"
                     android:text="-"
-                    android:textColor="@color/secondary_text"
+                    android:textColor="@color/primary_text"
                     android:textSize="@dimen/text_big" />
 
                 <com.example.lori.widgets.BoldMontserratTextView
                     android:id="@+id/tvMobileNumber"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/secondary_text"
+                    android:textColor="@color/primary_text"
                     android:textSize="@dimen/text_medium"
                     tools:text="0123456789" />
             </LinearLayout>
@@ -178,7 +178,7 @@
                     android:layout_margin="@dimen/margin_medium"
                     android:layout_weight="1"
                     android:text="@string/label_addresses"
-                    android:textColor="@color/secondary_text"
+                    android:textColor="@color/primary_text"
                     android:textSize="@dimen/text_big" />
 
                 <com.makeramen.roundedimageview.RoundedImageView
