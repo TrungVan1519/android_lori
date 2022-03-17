@@ -42,30 +42,24 @@
             android:layout_height="wrap_content"
             android:paddingBottom="@dimen/giant_padding">
 
-            <FrameLayout
-                android:id="@+id/flUserImage"
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/ivUserPhoto"
                 android:layout_width="@dimen/small_size_container"
                 android:layout_height="@dimen/small_size_container"
-                android:layout_marginTop="@dimen/giant_margin"
+                android:layout_margin="@dimen/micro_margin"
+                android:background="@color/colorLightGrey"
+                android:contentDescription="@string/content_description"
+                android:scaleType="fitXY"
+                android:src="@drawable/im_user_placeholder"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <ImageView
-                    android:id="@+id/ivUserPhoto"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/micro_margin"
-                    android:background="@color/colorLightGrey"
-                    android:contentDescription="@string/content_description"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/im_user_placeholder" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/ic_user_image_placeholder" />
-            </FrameLayout>
+                app:layout_constraintTop_toTopOf="parent"
+                app:riv_border_color="#333333"
+                app:riv_border_width="@dimen/tiny_radius"
+                app:riv_corner_radius="@dimen/small_radius"
+                app:riv_mutate_background="false"
+                app:riv_oval="false"
+                app:riv_tile_mode="clamp" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tilFirstName"
@@ -77,7 +71,7 @@
                 android:textColorHint="@color/colorSecondaryText"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/flUserImage">
+                app:layout_constraintTop_toBottomOf="@id/ivUserPhoto">
 
                 <com.example.lori.widgets.BoldMontserratEditText
                     android:id="@+id/etFirstName"

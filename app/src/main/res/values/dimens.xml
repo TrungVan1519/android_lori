@@ -15,6 +15,7 @@
     <dimen name="giant_padding">60dp</dimen>
 
     <dimen name="user_image_margin">-75dp</dimen>
+    <dimen name="nano_margin">2dp</dimen>
     <dimen name="micro_margin">3dp</dimen>
     <dimen name="tiny_margin">5dp</dimen>
     <dimen name="small_margin">16dp</dimen>
@@ -24,6 +25,7 @@
     <dimen name="giant_margin">50dp</dimen>
 
     <dimen name="tiny_size_container">50dp</dimen>
+    <dimen name="normal_size_container">100dp</dimen>
     <dimen name="small_size_container">150dp</dimen>
     <dimen name="medium_size_container">200dp</dimen>
 
@@ -34,6 +36,7 @@
     <dimen name="massive_size_text">50sp</dimen>
 
     <dimen name="tiny_radius">1dp</dimen>
+    <dimen name="normal_radius">3dp</dimen>
     <dimen name="small_radius">5dp</dimen>
     <dimen name="medium_radius">10dp</dimen>
 

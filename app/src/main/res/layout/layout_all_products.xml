@@ -1,59 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/tiny_margin"
-    android:background="@drawable/ic_item_dashboard_background"
-    android:gravity="center"
-    android:orientation="vertical"
-    android:padding="@dimen/nano_padding">
+    app:cardCornerRadius="@dimen/small_radius"
+    app:cardElevation="@dimen/small_radius"
+    app:contentPadding="@dimen/tiny_padding">
 
-    <ImageView
-        android:id="@+id/ivItemImage"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/small_size_container"
-        android:layout_margin="@dimen/tiny_margin"
-        android:background="@color/colorImageViewBackground"
-        android:contentDescription="@string/content_description"
-        android:minHeight="@dimen/small_size_container"
-        android:scaleType="fitXY"
-        android:src="@drawable/im_bg" />
-
-    <View
-        android:id="@+id/vDivider"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/divider_height"
-        android:layout_below="@id/ivItemImage"
-        android:background="@color/colorBorder" />
-
-    <LinearLayout
-        android:id="@+id/llItemDetails"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/vDivider"
-        android:background="@color/dashboard_item_details_bg"
-        android:orientation="vertical"
-        android:padding="@dimen/tiny_padding">
+        android:gravity="center"
+        android:orientation="vertical">
 
-        <com.example.lori.widgets.BoldMontserratTextView
-            android:id="@+id/tvItemTitle"
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/ivItemImage"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/small_size_container"
+            android:layout_marginStart="@dimen/tiny_margin"
+            android:layout_marginTop="@dimen/tiny_margin"
+            android:layout_marginEnd="@dimen/tiny_margin"
+            android:layout_marginBottom="@dimen/tiny_margin"
+            android:contentDescription="@string/content_description"
+            android:minHeight="@dimen/small_size_container"
+            android:scaleType="fitXY"
+            app:riv_border_color="#333333"
+            app:riv_border_width="@dimen/tiny_radius"
+            app:riv_corner_radius="@dimen/small_radius"
+            app:riv_mutate_background="false"
+            app:riv_oval="false"
+            app:riv_tile_mode="clamp"
+            tools:src="@tools:sample/backgrounds/scenic" />
+
+        <LinearLayout
+            android:id="@+id/llItemDetails"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/item_value_text_color"
-            android:textSize="@dimen/tiny_size_text"
-            android:textStyle="bold"
-            tools:text="Item Name" />
+            android:layout_below="@id/ivItemImage"
+            android:orientation="vertical"
+            android:padding="@dimen/tiny_padding">
 
-        <com.example.lori.widgets.RegularMontserratTextView
-            android:id="@+id/tvItemPrice"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/micro_margin"
-            android:textColor="@color/item_value_text_color"
-            android:textSize="@dimen/tiny_size_text"
-            android:textStyle="bold"
-            tools:text="$100.00" />
-    </LinearLayout>
-</RelativeLayout>
+            <com.example.lori.widgets.BoldMontserratTextView
+                android:id="@+id/tvItemTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/item_value_text_color"
+                android:textSize="@dimen/tiny_size_text"
+                tools:text="Item Name" />
+
+            <com.example.lori.widgets.BoldMontserratTextView
+                android:id="@+id/tvItemPrice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/micro_margin"
+                android:textColor="@color/item_value_text_color"
+                android:textSize="@dimen/tiny_size_text"
+                tools:text="10.000 VND" />
+        </LinearLayout>
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

@@ -1,74 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginVertical="@dimen/tiny_margin"
-    android:background="@color/white"
-    android:orientation="vertical"
-    android:padding="@dimen/small_padding">
+    android:layout_margin="@dimen/tiny_margin"
+    app:cardCornerRadius="@dimen/small_radius"
+    app:cardElevation="@dimen/small_radius"
+    app:contentPadding="@dimen/tiny_padding">
 
-    <LinearLayout
-        android:id="@+id/llItemImage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/ic_rv_item_image_background"
-        android:padding="@dimen/nano_padding"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-        <ImageView
+        <com.makeramen.roundedimageview.RoundedImageView
             android:id="@+id/ivItemImage"
-            android:layout_width="@dimen/tiny_size_container"
-            android:layout_height="@dimen/tiny_size_container"
+            android:layout_width="@dimen/normal_size_container"
+            android:layout_height="@dimen/normal_size_container"
+            android:layout_margin="@dimen/micro_margin"
+            android:background="@color/colorLightGrey"
             android:contentDescription="@string/content_description"
+            android:minHeight="@dimen/small_size_container"
             android:scaleType="fitXY"
-            tools:src="@tools:sample/avatars"/>
-    </LinearLayout>
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:riv_border_color="#333333"
+            app:riv_border_width="@dimen/tiny_radius"
+            app:riv_corner_radius="@dimen/small_radius"
+            app:riv_mutate_background="false"
+            app:riv_oval="false"
+            app:riv_tile_mode="clamp"
+            tools:src="@tools:sample/avatars" />
 
-    <LinearLayout
-        android:id="@+id/llItemDetails"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/tiny_margin"
-        android:gravity="center"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/ibDeleteItem"
-        app:layout_constraintStart_toEndOf="@id/llItemImage"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <com.example.lori.widgets.BoldMontserratTextView
-            android:id="@+id/tvItemTitle"
-            android:layout_width="match_parent"
+        <LinearLayout
+            android:id="@+id/llItemDetails"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textColor="@color/item_value_text_color"
-            android:textSize="@dimen/small_size_text"
-            tools:text="Name" />
+            android:layout_marginHorizontal="@dimen/tiny_margin"
+            android:gravity="center"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/ibDeleteItem"
+            app:layout_constraintStart_toEndOf="@id/ivItemImage"
+            app:layout_constraintTop_toTopOf="parent">
 
-        <com.example.lori.widgets.RegularMontserratTextView
-            android:id="@+id/tvItemPrice"
-            android:layout_width="match_parent"
+            <com.example.lori.widgets.BoldMontserratTextView
+                android:id="@+id/tvItemTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/item_value_text_color"
+                android:textSize="@dimen/small_size_text"
+                tools:text="Name" />
+
+            <com.example.lori.widgets.RegularMontserratTextView
+                android:id="@+id/tvItemPrice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/tiny_margin"
+                android:textColor="@color/item_value_text_color"
+                android:textSize="@dimen/tiny_size_text"
+                android:textStyle="bold"
+                tools:text="10.000 VND" />
+        </LinearLayout>
+
+        <ImageButton
+            android:id="@+id/ibDeleteItem"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/tiny_margin"
-            android:textColor="@color/item_value_text_color"
-            android:textSize="@dimen/tiny_size_text"
-            android:textStyle="bold"
-            tools:text="10.000VND" />
-    </LinearLayout>
-
-    <ImageButton
-        android:id="@+id/ibDeleteItem"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@android:color/transparent"
-        android:contentDescription="@string/content_description"
-        android:foreground="?attr/selectableItemBackgroundBorderless"
-        android:padding="@dimen/tiny_padding"
-        android:src="@drawable/ic_delete_red_24dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/llItemDetails"
-        app:layout_constraintTop_toTopOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+            android:background="@android:color/transparent"
+            android:contentDescription="@string/content_description"
+            android:foreground="?attr/selectableItemBackgroundBorderless"
+            android:padding="@dimen/tiny_padding"
+            android:src="@drawable/ic_delete_red_24dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/llItemDetails"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

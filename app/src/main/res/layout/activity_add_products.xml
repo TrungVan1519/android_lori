@@ -50,23 +50,37 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <ImageView
+                <com.makeramen.roundedimageview.RoundedImageView
                     android:id="@+id/ivProductImage"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@color/colorImageViewBackground"
+                    android:background="#333333"
                     android:contentDescription="@string/content_description"
-                    android:scaleType="fitXY" />
+                    android:scaleType="fitXY"
+                    app:riv_border_color="#333333"
+                    app:riv_border_width="0dp"
+                    app:riv_corner_radius="0dp"
+                    app:riv_mutate_background="true"
+                    app:riv_oval="false"
+                    app:riv_tile_mode="clamp" />
 
-                <ImageView
+                <com.makeramen.roundedimageview.RoundedImageView
                     android:id="@+id/ivAddUpdateProducts"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end|bottom"
+                    android:background="#333333"
                     android:contentDescription="@string/content_description"
                     android:foreground="?attr/selectableItemBackgroundBorderless"
                     android:padding="@dimen/small_padding"
-                    android:src="@drawable/ic_add_photo_24dp" />
+                    android:scaleType="fitXY"
+                    android:src="@drawable/ic_add_photo_24dp"
+                    app:riv_border_color="#333333"
+                    app:riv_border_width="0dp"
+                    app:riv_corner_radius="0dp"
+                    app:riv_mutate_background="true"
+                    app:riv_oval="false"
+                    app:riv_tile_mode="clamp" />
             </FrameLayout>
 
             <com.google.android.material.textfield.TextInputLayout

@@ -25,13 +25,19 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/medium_size_container">
 
-                <ImageView
+                <com.makeramen.roundedimageview.RoundedImageView
                     android:id="@+id/ivHeaderBg"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:contentDescription="@string/content_description"
                     android:scaleType="fitXY"
-                    android:src="@drawable/ic_bg" />
+                    android:src="@drawable/ic_bg"
+                    app:riv_border_color="#333333"
+                    app:riv_border_width="0dp"
+                    app:riv_corner_radius="0dp"
+                    app:riv_mutate_background="true"
+                    app:riv_oval="false"
+                    app:riv_tile_mode="clamp" />
 
                 <com.example.lori.widgets.ActionBar
                     android:id="@+id/tbActionBar"
@@ -63,19 +69,20 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="@dimen/user_image_margin">
 
-                <ImageView
+                <com.makeramen.roundedimageview.RoundedImageView
                     android:id="@+id/ivUserPhoto"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_margin="@dimen/micro_margin"
                     android:contentDescription="@string/content_description"
                     android:scaleType="fitXY"
-                    android:src="@drawable/im_user_placeholder" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/ic_user_image_placeholder" />
+                    android:src="@drawable/im_user_placeholder"
+                    app:riv_border_color="#333333"
+                    app:riv_border_width="@dimen/tiny_radius"
+                    app:riv_corner_radius="@dimen/small_radius"
+                    app:riv_mutate_background="false"
+                    app:riv_oval="false"
+                    app:riv_tile_mode="clamp" />
             </FrameLayout>
 
             <com.example.lori.widgets.BoldMontserratTextView
@@ -174,11 +181,18 @@
                     android:textColor="@color/colorSecondaryText"
                     android:textSize="@dimen/big_size_text" />
 
-                <ImageView
+                <com.makeramen.roundedimageview.RoundedImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:contentDescription="@string/content_description"
-                    android:src="@drawable/ic_chevron_right_24dp" />
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_chevron_right_24dp"
+                    app:riv_border_color="#333333"
+                    app:riv_border_width="2dip"
+                    app:riv_corner_radius="30dip"
+                    app:riv_mutate_background="true"
+                    app:riv_oval="true"
+                    app:riv_tile_mode="clamp" />
             </LinearLayout>
 
             <com.example.lori.widgets.BoldMontserratButton
