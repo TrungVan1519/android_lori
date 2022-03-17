@@ -18,7 +18,6 @@
             android:layout_width="@dimen/container_small"
             android:layout_height="@dimen/container_small"
             android:layout_margin="@dimen/margin_small"
-            android:background="@color/light_grey"
             android:contentDescription="@string/content_description"
             android:minHeight="@dimen/container_medium"
             android:scaleType="fitXY"
@@ -35,7 +34,7 @@
 
         <LinearLayout
             android:id="@+id/llItemDetails"
-            android:layout_width="0dp"
+            android:layout_width="@dimen/none"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/margin_medium"
             android:gravity="center"

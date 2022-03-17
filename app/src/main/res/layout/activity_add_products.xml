@@ -21,7 +21,7 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:paddingStart="@dimen/padding_actionbar"
-            android:paddingEnd="0dp"
+            android:paddingEnd="@dimen/none"
             android:text="@string/title_add_products"
             android:textColor="@color/white"
             android:textSize="@dimen/text_big" />
@@ -29,7 +29,7 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="@dimen/none"
         android:fillViewport="true"
         android:scrollbars="none"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -58,8 +58,8 @@
                     android:contentDescription="@string/content_description"
                     android:scaleType="fitXY"
                     app:riv_border_color="@color/rounded_image_border"
-                    app:riv_border_width="0dp"
-                    app:riv_corner_radius="0dp"
+                    app:riv_border_width="@dimen/none"
+                    app:riv_corner_radius="@dimen/none"
                     app:riv_mutate_background="true"
                     app:riv_oval="false"
                     app:riv_tile_mode="clamp" />
@@ -69,15 +69,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end|bottom"
-                    android:background="@color/image_background"
                     android:contentDescription="@string/content_description"
                     android:foreground="?attr/selectableItemBackgroundBorderless"
                     android:padding="@dimen/padding_big"
                     android:scaleType="fitXY"
                     android:src="@drawable/ic_add_photo_24dp"
                     app:riv_border_color="@color/rounded_image_border"
-                    app:riv_border_width="0dp"
-                    app:riv_corner_radius="0dp"
+                    app:riv_border_width="@dimen/none"
+                    app:riv_corner_radius="@dimen/none"
                     app:riv_mutate_background="true"
                     app:riv_oval="false"
                     app:riv_tile_mode="clamp" />

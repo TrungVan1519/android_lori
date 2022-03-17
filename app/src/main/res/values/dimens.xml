@@ -26,4 +26,6 @@
     <dimen name="radius_small">3dp</dimen>
     <dimen name="radius_medium">5dp</dimen>
     <dimen name="radius_big">10dp</dimen>
+
+    <dimen name="none">0dp</dimen>
 </resources>

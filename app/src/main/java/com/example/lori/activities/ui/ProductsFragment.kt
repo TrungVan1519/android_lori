@@ -54,7 +54,7 @@ class ProductsFragment : BaseFragment() {
         getMyProducts()
     }
 
-    private fun getMyProducts() {
+    fun getMyProducts() {
         showProgressDialog(resources.getString(R.string.label_please_wait))
 
         FirebaseFirestore.getInstance()
@@ -78,7 +78,7 @@ class ProductsFragment : BaseFragment() {
                     rvMyProducts.layoutManager = LinearLayoutManager(activity)
                     rvMyProducts.setHasFixedSize(true)
                     rvMyProducts.adapter =
-                        MyProductsAdapter(requireActivity(), products, R.layout.layout_my_products)
+                        MyProductsAdapter(this, products, R.layout.layout_my_products)
                 } else {
                     rvMyProducts.visibility = View.GONE
                     tvNoProductsFound.visibility = View.VISIBLE

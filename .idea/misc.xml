@@ -40,7 +40,7 @@
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.12314814814814815" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.2578125" />
         <entry key="app/src/main/res/layout/activity_register.xml" value="0.12314814814814815" />
-        <entry key="app/src/main/res/layout/activity_settings.xml" value="0.12314814814814815" />
+        <entry key="app/src/main/res/layout/activity_settings.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.2128623188405797" />
         <entry key="app/src/main/res/layout/activity_user_profile.xml" value="0.12314814814814815" />
         <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.10625" />

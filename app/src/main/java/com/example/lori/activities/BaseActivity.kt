@@ -15,18 +15,22 @@ open class BaseActivity : AppCompatActivity() {
     private lateinit var pbProgress: Dialog
     private var doubleBackToExitPressedOnce = false
 
-    protected fun showSnackBar(message: String, isErrorMessage: Boolean) {
-        val color = if (isErrorMessage) R.color.snack_bar_error else R.color.snack_bar_success
+    fun showSnackBar(message: String, isErrorMessage: Boolean) {
         val snackBar = Snackbar.make(
             findViewById(android.R.id.content),
             message,
             Snackbar.LENGTH_LONG
         )
-        snackBar.view.setBackgroundColor(ContextCompat.getColor(this, color))
+        snackBar.view.setBackgroundColor(
+            ContextCompat.getColor(
+                this,
+                if (isErrorMessage) R.color.snack_bar_error else R.color.snack_bar_success
+            )
+        )
         snackBar.show()
     }
 
-    protected fun showProgressDialog(text: String) {
+    fun showProgressDialog(text: String) {
         pbProgress = Dialog(this)
         pbProgress.setContentView(R.layout.layout_dialog_progress)
         pbProgress.tvProgress.text = text
