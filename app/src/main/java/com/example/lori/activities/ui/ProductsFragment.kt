@@ -12,6 +12,7 @@ import com.example.lori.models.Product
 import com.example.lori.utils.Constants
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 import kotlinx.android.synthetic.main.fragment_products.*
 
 class ProductsFragment : BaseFragment() {
@@ -60,6 +61,7 @@ class ProductsFragment : BaseFragment() {
         FirebaseFirestore.getInstance()
             .collection(Constants.PRODUCTS)
             .whereEqualTo(Constants.UID, FirebaseAuth.getInstance().currentUser!!.uid)
+            .orderBy(Constants.TITLE, Query.Direction.ASCENDING)
             .get()
             .addOnSuccessListener { querySnapshot ->
                 hideProgressDialog()

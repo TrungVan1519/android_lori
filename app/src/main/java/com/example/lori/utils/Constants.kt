@@ -20,7 +20,6 @@ object Constants {
     const val PRODUCTS = "products"
 
     // Firebase DB field names
-    const val UID = "uid"
     const val FIRST_NAME = "firstName"
     const val LAST_NAME = "lastName"
     const val IMAGE = "image"
@@ -29,6 +28,8 @@ object Constants {
     const val PROFILE_COMPLETED = "profileCompleted"
     const val USER_PROFILE_IMAGE = "User_Profile_Image"
 
+    const val TITLE = "title"
+    const val UID = "uid"
     const val PRODUCT_IMAGE = "Product_Image"
 
     // Constant variables for Gender

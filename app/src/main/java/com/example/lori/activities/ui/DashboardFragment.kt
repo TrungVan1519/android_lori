@@ -11,6 +11,7 @@ import com.example.lori.activities.adapters.AllProductsAdapter
 import com.example.lori.models.Product
 import com.example.lori.utils.Constants
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 import kotlinx.android.synthetic.main.fragment_dashboard.*
 import kotlinx.android.synthetic.main.fragment_products.tvNoProductsFound
 
@@ -59,6 +60,7 @@ class DashboardFragment : BaseFragment() {
 
         FirebaseFirestore.getInstance()
             .collection(Constants.PRODUCTS)
+            .orderBy(Constants.TITLE, Query.Direction.ASCENDING)
             .get()
             .addOnSuccessListener { querySnapshot ->
                 hideProgressDialog()
