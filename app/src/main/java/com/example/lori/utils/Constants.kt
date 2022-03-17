@@ -9,6 +9,7 @@ object Constants {
     const val LORI_PREFERENCES = "Lori"
     const val LOGGED_IN_USERNAME = "logged_in_username"
     const val EXTRA_USER_DETAILS = "extra_user_details"
+    const val EXTRA_PRODUCT_ID = "extra_product_id"
 
     // Permission codes
     const val PICK_IMAGE_REQUEST_CODE = 1

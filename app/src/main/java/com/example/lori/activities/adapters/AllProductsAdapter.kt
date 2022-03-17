@@ -1,12 +1,15 @@
 package com.example.lori.activities.adapters
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
+import com.example.lori.activities.ProductDetailsActivity
 import com.example.lori.models.Product
+import com.example.lori.utils.Constants
 import com.example.lori.utils.ImageUtils
 import com.example.lori.utils.SwipeToDeleteCallback
 import com.example.lori.utils.SwipeToEditCallback
@@ -31,15 +34,17 @@ class AllProductsAdapter(
                 ImageUtils.loadProductImage(context, product.image, holder.itemView.ivItemImage)
                 holder.itemView.tvItemTitle.text = product.title
                 holder.itemView.tvItemPrice.text = "${product.price} VND"
-                holder.itemView.setOnClickListener { getProduct(position) }
+                holder.itemView.setOnClickListener { getProduct(product.id) }
             }
         }
     }
 
     override fun getItemCount() = products.size
 
-    private fun getProduct(position: Int) {
-
+    private fun getProduct(id: String) {
+        val intent = Intent(context, ProductDetailsActivity::class.java)
+        intent.putExtra(Constants.EXTRA_PRODUCT_ID, id)
+        context.startActivity(intent)
     }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view)

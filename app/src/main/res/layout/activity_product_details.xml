@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.ProductDetailsActivity">
+
+    <com.example.lori.widgets.ActionBar
+        android:id="@+id/tbActionBar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@drawable/ic_bg"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.example.lori.widgets.BoldMontserratTextView
+            android:id="@+id/tvTitle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:paddingStart="@dimen/padding_actionbar"
+            android:paddingEnd="@dimen/none"
+            android:text="@string/title_product_details"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_big" />
+    </com.example.lori.widgets.ActionBar>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/none"
+        android:fillViewport="true"
+        android:scrollbars="none"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tbActionBar">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/ivProductDetailImage"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/container_big"
+                android:background="@color/dark_grey"
+                android:contentDescription="@string/content_description"
+                android:scaleType="fitXY"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <LinearLayout
+                android:id="@+id/llProductDetailsTitlePrice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_bg"
+                android:orientation="vertical"
+                android:padding="@dimen/padding_big"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ivProductDetailImage">
+
+                <com.example.lori.widgets.BoldMontserratTextView
+                    android:id="@+id/tvProductDetailsTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_medium"
+                    tools:text="Product Title" />
+
+                <com.example.lori.widgets.RegularMontserratTextView
+                    android:id="@+id/tvProductDetailsPrice"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_small"
+                    tools:text="10000 VND" />
+            </LinearLayout>
+
+            <com.example.lori.widgets.BoldMontserratTextView
+                android:id="@+id/tvProductDetailsLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/text_medium"
+                android:text="@string/label_product_description"
+                android:textColor="@color/primary_text"
+                android:textSize="@dimen/text_medium"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/llProductDetailsTitlePrice" />
+
+            <com.example.lori.widgets.RegularMontserratTextView
+                android:id="@+id/tvProductDetailsDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/text_medium"
+                android:textColor="@color/primary_text"
+                android:textSize="@dimen/text_small"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvProductDetailsLabel"
+                tools:text="This is product details description." />
+
+            <LinearLayout
+                android:id="@+id/llProductDetailsQuantity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_big"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvProductDetailsDescription">
+
+                <com.example.lori.widgets.BoldMontserratTextView
+                    android:id="@+id/tvProductDetailsQuantity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/padding_big"
+                    android:text="@string/label_product_details_stock_quantity"
+                    android:textColor="@color/primary_text"
+                    android:textSize="@dimen/text_medium" />
+
+                <com.example.lori.widgets.RegularMontserratTextView
+                    android:id="@+id/tvProductDetailsStockQuantity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/ic_item_grey_border_background"
+                    android:paddingStart="@dimen/padding_big"
+                    android:paddingTop="@dimen/padding_medium"
+                    android:paddingEnd="@dimen/padding_big"
+                    android:paddingBottom="@dimen/padding_medium"
+                    android:textColor="@color/primary_text"
+                    android:textSize="@dimen/text_medium"
+                    android:textStyle="bold"
+                    tools:text="5" />
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
