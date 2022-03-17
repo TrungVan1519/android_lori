@@ -4,13 +4,13 @@ import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class Product(
+data class CartItem(
     var id: String = "",
-    val image: String = "",
     val title: String = "",
     val price: Long = 0,
-    val description: String = "",
-    val stock_quantity: Int = 0,
+    val image: String = "",
+    var cart_quantity: Int = 0,
+    var stock_quantity: Int = 0,
     val uid: String = "", // user id
-    val username: String = "",
+    val pid: String = "", // product id
 ) : Parcelable

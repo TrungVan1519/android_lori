@@ -44,7 +44,7 @@ class MyProductsAdapter(
                 holder.itemView.tvItemTitle.text = product.title
                 holder.itemView.tvItemPrice.text = "${product.price} VND"
                 holder.itemView.ibDeleteItem.setOnClickListener { deleteProduct(product.id) }
-                holder.itemView.setOnClickListener { getProduct(product.id) }
+                holder.itemView.setOnClickListener { getProduct(product) }
             }
         }
     }
@@ -67,9 +67,10 @@ class MyProductsAdapter(
         }).attachToRecyclerView(recyclerView)
     }
 
-    private fun getProduct(id: String) {
+    private fun getProduct(product: Product) {
         val intent = Intent(fragment.requireActivity(), ProductDetailsActivity::class.java)
-        intent.putExtra(Constants.EXTRA_PRODUCT_ID, id)
+        intent.putExtra(Constants.EXTRA_PRODUCT_ID, product.id)
+        intent.putExtra(Constants.EXTRA_PRODUCT_OWNER_ID, product.uid)
         fragment.startActivity(intent)
     }
 

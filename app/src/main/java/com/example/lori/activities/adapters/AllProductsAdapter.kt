@@ -34,16 +34,17 @@ class AllProductsAdapter(
                 ImageUtils.loadProductImage(context, product.image, holder.itemView.ivItemImage)
                 holder.itemView.tvItemTitle.text = product.title
                 holder.itemView.tvItemPrice.text = "${product.price} VND"
-                holder.itemView.setOnClickListener { getProduct(product.id) }
+                holder.itemView.setOnClickListener { getProduct(product) }
             }
         }
     }
 
     override fun getItemCount() = products.size
 
-    private fun getProduct(id: String) {
+    private fun getProduct(product: Product) {
         val intent = Intent(context, ProductDetailsActivity::class.java)
-        intent.putExtra(Constants.EXTRA_PRODUCT_ID, id)
+        intent.putExtra(Constants.EXTRA_PRODUCT_ID, product.id)
+        intent.putExtra(Constants.EXTRA_PRODUCT_OWNER_ID, product.uid)
         context.startActivity(intent)
     }
 

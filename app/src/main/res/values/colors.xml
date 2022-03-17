@@ -14,8 +14,8 @@
     <color name="gradient_start">#5D67F4</color>
     <color name="gradient_center">#744BFB</color>
     <color name="gradient_end">#8C24FF</color>
-    <color name="snack_bar_success">#2ECC71</color>
-    <color name="snack_bar_error">#D35400</color>
+    <color name="snack_bar_success">#4CD137</color>
+    <color name="snack_bar_error">#E84118</color>
 
     <color name="primary_text">@color/dark_grey</color>
     <color name="secondary_text">@color/light_grey</color>

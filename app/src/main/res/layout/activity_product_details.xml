@@ -39,7 +39,8 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/padding_massive">
 
             <ImageView
                 android:id="@+id/ivProductDetailImage"
@@ -50,7 +51,8 @@
                 android:scaleType="fitXY"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@tools:sample/backgrounds/scenic" />
 
             <LinearLayout
                 android:id="@+id/llProductDetailsTitlePrice"
@@ -81,22 +83,34 @@
             </LinearLayout>
 
             <com.example.lori.widgets.BoldMontserratTextView
+                android:id="@+id/tvProductOwnerName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_big"
+                android:textColor="@color/primary_text"
+                android:textSize="@dimen/text_medium"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/llProductDetailsTitlePrice"
+                tools:text="By seller username" />
+
+            <com.example.lori.widgets.BoldMontserratTextView
                 android:id="@+id/tvProductDetailsLabel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/text_medium"
+                android:layout_margin="@dimen/margin_big"
                 android:text="@string/label_product_description"
                 android:textColor="@color/primary_text"
                 android:textSize="@dimen/text_medium"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/llProductDetailsTitlePrice" />
+                app:layout_constraintTop_toBottomOf="@id/tvProductOwnerName" />
 
             <com.example.lori.widgets.RegularMontserratTextView
                 android:id="@+id/tvProductDetailsDescription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/text_medium"
+                android:layout_marginHorizontal="@dimen/margin_big"
                 android:textColor="@color/primary_text"
                 android:textSize="@dimen/text_small"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -138,6 +152,44 @@
                     android:textStyle="bold"
                     tools:text="5" />
             </LinearLayout>
+
+            <com.example.lori.widgets.BoldMontserratButton
+                android:id="@+id/btAddToCart"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/margin_big"
+                android:background="@drawable/ic_button_background"
+                android:foreground="?attr/selectableItemBackground"
+                android:gravity="center"
+                android:padding="@dimen/padding_big"
+                android:text="@string/label_btn_add_to_cart"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/text_small"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/llProductDetailsQuantity"
+                tools:visibility="visible" />
+
+            <com.example.lori.widgets.BoldMontserratButton
+                android:id="@+id/btGoToCart"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/margin_big"
+                android:background="@drawable/ic_button_background"
+                android:foreground="?attr/selectableItemBackground"
+                android:gravity="center"
+                android:padding="@dimen/padding_big"
+                android:text="@string/label_btn_go_to_cart"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/text_small"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/btAddToCart"
+                tools:visibility="visible" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
