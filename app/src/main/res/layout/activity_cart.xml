@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.CartActivity">
+
+    <com.example.lori.widgets.ActionBar
+        android:id="@+id/tbActionBar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@drawable/ic_bg"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.example.lori.widgets.BoldMontserratTextView
+            android:id="@+id/tvTitle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:paddingStart="@dimen/padding_actionbar"
+            android:paddingEnd="@dimen/none"
+            android:text="@string/title_my_cart"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_big" />
+    </com.example.lori.widgets.ActionBar>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvCartItems"
+        android:layout_width="@dimen/none"
+        android:layout_height="@dimen/none"
+        android:layout_marginTop="@dimen/margin_big"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@id/llCheckout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tbActionBar" />
+
+    <com.example.lori.widgets.RegularMontserratTextView
+        android:id="@+id/tvNoCartItemsFound"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/label_no_cart_items_found"
+        android:textAlignment="center"
+        android:textColor="@color/primary_text"
+        android:textSize="@dimen/text_big"
+        app:layout_constraintBottom_toTopOf="@id/llCheckout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tbActionBar" />
+
+    <LinearLayout
+        android:id="@+id/llCheckout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:padding="@dimen/padding_big"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:visibility="visible">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <com.example.lori.widgets.RegularMontserratTextView
+                android:layout_width="@dimen/none"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/label_subtotal"
+                android:textColor="@color/primary_text"
+                android:textSize="@dimen/text_big" />
+
+            <com.example.lori.widgets.RegularMontserratTextView
+                android:id="@+id/tvSubtotal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:textColor="@color/primary_text"
+                android:textSize="@dimen/text_big"
+                tools:text="1.010.000 VND" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <com.example.lori.widgets.RegularMontserratTextView
+                android:layout_width="@dimen/none"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/label_shipping_charge"
+                android:textColor="@color/primary_text"
+                android:textSize="@dimen/text_big" />
+
+            <com.example.lori.widgets.RegularMontserratTextView
+                android:id="@+id/tvShippingCharge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:textColor="@color/primary_text"
+                android:textSize="@dimen/text_big"
+                tools:text="10.000 VND" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <com.example.lori.widgets.BoldMontserratTextView
+                android:layout_width="@dimen/none"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/label_total_amount"
+                android:textColor="@color/primary_text"
+                android:textSize="@dimen/text_big" />
+
+            <com.example.lori.widgets.BoldMontserratTextView
+                android:id="@+id/tvTotalAmount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:textColor="@color/primary_text"
+                android:textSize="@dimen/text_big"
+                tools:text="1.010.000 VND" />
+        </LinearLayout>
+
+        <com.example.lori.widgets.BoldMontserratButton
+            android:id="@+id/btCheckout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/margin_big"
+            android:background="@drawable/ic_button_background"
+            android:foreground="?attr/selectableItemBackground"
+            android:gravity="center"
+            android:padding="@dimen/padding_big"
+            android:text="@string/label_btn_checkout"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/text_small"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

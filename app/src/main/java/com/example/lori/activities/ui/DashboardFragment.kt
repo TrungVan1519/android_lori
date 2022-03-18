@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.*
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.lori.R
+import com.example.lori.activities.CartActivity
 import com.example.lori.activities.SettingsActivity
 import com.example.lori.activities.adapters.AllProductsAdapter
 import com.example.lori.models.Product
@@ -44,6 +45,10 @@ class DashboardFragment : BaseFragment() {
         when (item.itemId) {
             R.id.action_settings -> {
                 startActivity(Intent(activity, SettingsActivity::class.java))
+                return true
+            }
+            R.id.action_cart -> {
+                startActivity(Intent(activity, CartActivity::class.java))
                 return true
             }
         }

@@ -25,15 +25,6 @@ class ProductDetailsActivity : BaseActivity(), View.OnClickListener {
 
         getProductDetails(intent.getStringExtra(Constants.EXTRA_PRODUCT_ID) ?: "")
 
-        val visibility =
-            if (FirebaseAuth.getInstance().currentUser!!.uid == intent.getStringExtra(Constants.EXTRA_PRODUCT_OWNER_ID) ?: "") {
-                View.GONE
-            } else {
-                View.VISIBLE
-            }
-        btAddToCart.visibility = visibility
-        btGoToCart.visibility = visibility
-
         btAddToCart.setOnClickListener(this)
         btGoToCart.setOnClickListener(this)
     }
@@ -44,7 +35,7 @@ class ProductDetailsActivity : BaseActivity(), View.OnClickListener {
                 addToCart()
             }
             R.id.btGoToCart -> {
-//                startActivity(Intent(this, CartListActivity::class.java))
+                startActivity(Intent(this, CartActivity::class.java))
             }
         }
     }
@@ -65,56 +56,53 @@ class ProductDetailsActivity : BaseActivity(), View.OnClickListener {
                 tvProductDetailsTitle.text = product!!.title
                 tvProductDetailsPrice.text = "${product!!.price} VND"
                 tvProductDetailsDescription.text = product!!.description
-                tvProductDetailsStockQuantity.text = product!!.stock_quantity.toString()
 
-                when {
-                    product!!.stock_quantity == 0 -> {
-                        hideProgressDialog()
-
-                        btAddToCart.visibility = View.GONE
-                        tvProductDetailsStockQuantity.text =
-                            resources.getString(R.string.lbl_out_of_stock)
-                        tvProductDetailsStockQuantity.setTextColor(
-                            ContextCompat.getColor(
-                                this,
-                                R.color.snack_bar_error
-                            )
+                if (product!!.stock_quantity == 0) {
+                    tvProductDetailsStockQuantity.text =
+                        resources.getString(R.string.label_out_of_stock)
+                    tvProductDetailsStockQuantity.setTextColor(
+                        ContextCompat.getColor(
+                            this,
+                            R.color.snack_bar_error
                         )
-                    }
-                    FirebaseAuth.getInstance().currentUser!!.uid == product!!.uid -> {
-                        hideProgressDialog()
-                    }
-                    else -> {
-                        FirebaseFirestore.getInstance()
-                            .collection(Constants.CART_ITEMS)
-                            .whereEqualTo(
-                                Constants.UID,
-                                FirebaseAuth.getInstance().currentUser?.uid ?: ""
+                    )
+                } else {
+                    tvProductDetailsStockQuantity.text = product!!.stock_quantity.toString()
+                }
+
+                if (FirebaseAuth.getInstance().currentUser!!.uid == product!!.uid || product!!.stock_quantity <= 0) {
+                    hideProgressDialog()
+                } else {
+                    // Get products from cart via cart items
+                    FirebaseFirestore.getInstance()
+                        .collection(Constants.CART_ITEMS)
+                        .whereEqualTo(
+                            Constants.UID,
+                            FirebaseAuth.getInstance().currentUser!!.uid
+                        )
+                        .whereEqualTo(Constants.PID, product!!.id)
+                        .get()
+                        .addOnSuccessListener { snapshot ->
+                            hideProgressDialog()
+
+                            // show btAddToCart if product not exist in cart
+                            if (snapshot.documents.size <= 0) {
+                                btAddToCart.visibility = View.VISIBLE
+                            }
+                        }
+                        .addOnFailureListener { e ->
+                            hideProgressDialog()
+                            showSnackBar(
+                                resources.getString(R.string.fail_to_check_existing_cart_items),
+                                true
                             )
-                            .whereEqualTo(Constants.PID, product?.id ?: "")
-                            .get()
-                            .addOnSuccessListener { snapshot ->
-                                hideProgressDialog()
 
-                                if (snapshot.documents.size > 0) {
-                                    btAddToCart.visibility = View.GONE
-                                    btGoToCart.visibility = View.VISIBLE
-                                }
-                            }
-                            .addOnFailureListener { e ->
-                                hideProgressDialog()
-                                showSnackBar(
-                                    resources.getString(R.string.fail_to_check_existing_cart_items),
-                                    true
-                                )
-
-                                Log.e(
-                                    javaClass.simpleName,
-                                    "Error while checking existing cart items",
-                                    e
-                                )
-                            }
-                    }
+                            Log.e(
+                                javaClass.simpleName,
+                                "Error while checking existing cart items",
+                                e
+                            )
+                        }
                 }
             }
             .addOnFailureListener { e ->
@@ -146,7 +134,6 @@ class ProductDetailsActivity : BaseActivity(), View.OnClickListener {
                 showSnackBar(resources.getString(R.string.success_to_add_products_to_cart), false)
 
                 btAddToCart.visibility = View.GONE
-                btGoToCart.visibility = View.VISIBLE
             }
             .addOnFailureListener { e ->
                 hideProgressDialog()

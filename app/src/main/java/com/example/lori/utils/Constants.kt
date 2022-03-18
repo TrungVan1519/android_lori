@@ -37,6 +37,7 @@ object Constants {
     const val PRODUCT_IMAGE = "Product_Image"
 
     const val PID = "pid"
+    const val CART_QUANTITY = "cart_quantity"
 
     // For "users" collection
     const val MALE = "Male"
@@ -44,4 +45,5 @@ object Constants {
 
     // For "cart_item" collection
     const val DEFAULT_CART_QUANTITY = 1
+    const val SHIPPING_CHARGE = 10_000 // VND
 }

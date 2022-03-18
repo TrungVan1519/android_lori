@@ -59,7 +59,6 @@
                 android:layout_marginTop="@dimen/margin_medium"
                 android:textColor="@color/primary_text"
                 android:textSize="@dimen/text_tiny"
-                android:textStyle="bold"
                 tools:text="10.000 VND" />
         </LinearLayout>
 

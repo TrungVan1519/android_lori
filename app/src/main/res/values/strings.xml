@@ -26,8 +26,14 @@
     <string name="label_no">No</string>
     <string name="label_product_description">Product Description</string>
     <string name="label_product_details_stock_quantity">Stock Quantity</string>
-    <string name="label_btn_add_to_cart">ADD TO CART</string>
-    <string name="label_btn_go_to_cart">GO TO CART</string>
+    <string name="label_btn_add_to_cart">Add to cart</string>
+    <string name="label_btn_go_to_cart">Go to cart</string>
+    <string name="label_no_cart_items_found">No cart items are available!</string>
+    <string name="label_subtotal">Subtotal</string>
+    <string name="label_shipping_charge">Shipping Charge</string>
+    <string name="label_total_amount">Total Amount</string>
+    <string name="label_btn_checkout">Checkout</string>
+    <string name="label_out_of_stock">OUT OF STOCK</string>
 
     <string name="title_login">LOGIN</string>
     <string name="title_forgot_password">FORGOT PASSWORD?</string>
@@ -42,9 +48,11 @@
     <string name="title_add_products">ADD PRODUCTS</string>
     <string name="title_delete_dialog">DELETE</string>
     <string name="title_product_details">PRODUCT DETAILS</string>
+    <string name="title_my_cart">MY CART</string>
 
     <string name="action_settings">Settings</string>
     <string name="action_add_products">Add Products</string>
+    <string name="action_cart">My Cart</string>
 
     <string name="hint_email_id">Email ID</string>
     <string name="hint_password">Password</string>
@@ -79,7 +87,7 @@
     <string name="success_to_upload_image">Upload the image successfully</string>
     <string name="success_to_add_products">Your product is uploaded successfully</string>
     <string name="success_to_delete_products">Your product is deleted successfully</string>
-    <string name="success_to_add_products_to_cart">Product is added to your cart.</string>
+    <string name="success_to_add_products_to_cart">Product is added to your cart</string>
 
     <string name="fail_to_register">Fail to register</string>
     <string name="fail_to_select_image">Fail to select the image</string>
@@ -91,19 +99,11 @@
     <string name="fail_to_delete_products">Fail to delete products</string>
     <string name="fail_to_get_product_details">Fail to get product details</string>
     <string name="fail_to_add_products_to_cart">Fail to add products to cart</string>
-
-
-
-    <string name="title_my_cart">MY CART</string>
-    <string name="no_cart_item_found">No item found in cart!</string>
-    <string name="lbl_subtotal">Subtotal</string>
-    <string name="lbl_shipping_charge">Shipping Charge</string>
-    <string name="lbl_total_amount">Total Amount</string>
-    <string name="btn_lbl_checkout">Checkout</string>
-    <string name="action_cart">My Cart</string>
-
-    <string name="lbl_out_of_stock">OUT OF STOCK</string>
-    <string name="msg_item_removed_successfully">Item removed successfully.</string>
-    <string name="msg_for_available_stock">Available stock is %1$s!. You can not add more than stock quantity.</string>
     <string name="fail_to_check_existing_cart_items">Fail to check existing cart_items</string>
+
+
+    <string name="msg_item_removed_successfully">Item removed successfully</string>
+    <string name="msg_for_available_stock">Available stock is %1$s!. You can not add more than stock quantity</string>
+    <string name="success_to_delete_cart_items">Your cart item is deleted successfully</string>
+    <string name="fail_to_delete_cart_items">Fail to delete cart items</string>
 </resources>
