@@ -61,7 +61,7 @@ class ProductsFragment : BaseFragment() {
         FirebaseFirestore.getInstance()
             .collection(Constants.PRODUCTS)
             .whereEqualTo(Constants.UID, FirebaseAuth.getInstance().currentUser!!.uid)
-            .orderBy(Constants.TITLE, Query.Direction.ASCENDING)
+            .orderBy(Constants.TITLE, Query.Direction.DESCENDING)
             .get()
             .addOnSuccessListener { querySnapshot ->
                 hideProgressDialog()

@@ -5,14 +5,12 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lori.activities.ProductDetailsActivity
 import com.example.lori.models.Product
 import com.example.lori.utils.Constants
+import com.example.lori.utils.FormatUtils
 import com.example.lori.utils.ImageUtils
-import com.example.lori.utils.SwipeToDeleteCallback
-import com.example.lori.utils.SwipeToEditCallback
 import kotlinx.android.synthetic.main.layout_all_products.view.*
 
 class AllProductsAdapter(
@@ -33,7 +31,7 @@ class AllProductsAdapter(
             is ViewHolder -> {
                 ImageUtils.loadProductImage(context, product.image, holder.itemView.ivItemImage)
                 holder.itemView.tvItemTitle.text = product.title
-                holder.itemView.tvItemPrice.text = "${product.price} VND"
+                holder.itemView.tvItemPrice.text = "${FormatUtils.format(num = product.price)} VND"
                 holder.itemView.setOnClickListener { getProduct(product) }
             }
         }

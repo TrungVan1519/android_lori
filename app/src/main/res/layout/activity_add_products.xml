@@ -45,7 +45,7 @@
             <FrameLayout
                 android:id="@+id/flProductImage"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/container_big"
+                android:layout_height="@dimen/container_giant"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -102,6 +102,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="text"
+                    android:maxLength="30"
                     android:padding="@dimen/padding_big"
                     android:textColor="@color/primary_text"
                     android:textSize="@dimen/text_medium" />
@@ -116,7 +117,7 @@
                 android:hint="@string/hint_product_price"
                 android:textColorHint="@color/secondary_text"
                 app:counterEnabled="true"
-                app:counterMaxLength="30"
+                app:counterMaxLength="8"
                 app:endIconMode="clear_text"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -127,11 +128,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="number"
+                    android:maxLength="8"
                     android:padding="@dimen/padding_big"
                     android:textColor="@color/primary_text"
                     android:textSize="@dimen/text_medium" />
             </com.google.android.material.textfield.TextInputLayout>
-
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tilProductDescription"
@@ -142,7 +143,7 @@
                 android:hint="@string/hint_product_description"
                 android:textColorHint="@color/secondary_text"
                 app:counterEnabled="true"
-                app:counterMaxLength="30"
+                app:counterMaxLength="100"
                 app:endIconMode="clear_text"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -153,6 +154,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textMultiLine"
+                    android:maxLength="100"
                     android:minLines="3"
                     android:padding="@dimen/padding_big"
                     android:textColor="@color/primary_text"
@@ -168,7 +170,7 @@
                 android:hint="@string/hint_product_quantity"
                 android:textColorHint="@color/secondary_text"
                 app:counterEnabled="true"
-                app:counterMaxLength="30"
+                app:counterMaxLength="8"
                 app:endIconMode="clear_text"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -179,6 +181,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="number"
+                    android:maxLength="8"
                     android:padding="@dimen/padding_big"
                     android:textColor="@color/primary_text"
                     android:textSize="@dimen/text_medium" />

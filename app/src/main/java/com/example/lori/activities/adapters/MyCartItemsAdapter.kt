@@ -14,6 +14,7 @@ import com.example.lori.R
 import com.example.lori.activities.CartActivity
 import com.example.lori.models.CartItem
 import com.example.lori.utils.Constants
+import com.example.lori.utils.FormatUtils
 import com.example.lori.utils.ImageUtils
 import com.example.lori.utils.SwipeToDeleteCallback
 import com.google.firebase.firestore.FirebaseFirestore
@@ -37,7 +38,7 @@ open class MyCartItemsAdapter(
             is ViewHolder -> {
                 ImageUtils.loadProductImage(context, cartItem.image, holder.itemView.ivItemImage)
                 holder.itemView.tvItemTitle.text = cartItem.title
-                holder.itemView.tvItemPrice.text = "${cartItem.price} VND"
+                holder.itemView.tvItemPrice.text = "${FormatUtils.format(num = cartItem.price)} VND"
                 if (cartItem.cart_quantity == 0) {
                     holder.itemView.tvItemQuantity.text =
                         context.resources.getString(R.string.label_out_of_stock)
@@ -50,7 +51,8 @@ open class MyCartItemsAdapter(
                     holder.itemView.ibDecreaseItemQuantity.visibility = View.GONE
                     holder.itemView.ibIncreaseItemQuantity.visibility = View.GONE
                 } else {
-                    holder.itemView.tvItemQuantity.text = cartItem.cart_quantity.toString()
+                    holder.itemView.tvItemQuantity.text =
+                        FormatUtils.format(num = cartItem.cart_quantity)
                     holder.itemView.tvItemQuantity.setTextColor(
                         ContextCompat.getColor(
                             context,

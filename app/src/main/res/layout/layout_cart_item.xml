@@ -77,7 +77,7 @@
                         android:background="@android:color/transparent"
                         android:contentDescription="@string/content_description"
                         android:foreground="?attr/selectableItemBackgroundBorderless"
-                        android:padding="@dimen/padding_medium"
+                        android:padding="@dimen/padding_big"
                         android:src="@drawable/ic_decrease_24dp" />
 
                     <com.example.lori.widgets.RegularMontserratTextView
@@ -97,7 +97,7 @@
                         android:background="@android:color/transparent"
                         android:contentDescription="@string/content_description"
                         android:foreground="?attr/selectableItemBackgroundBorderless"
-                        android:padding="@dimen/padding_medium"
+                        android:padding="@dimen/padding_big"
                         android:src="@drawable/ic_increase_24dp" />
                 </LinearLayout>
             </LinearLayout>

@@ -13,10 +13,7 @@ import com.example.lori.R
 import com.example.lori.activities.ProductDetailsActivity
 import com.example.lori.activities.ui.ProductsFragment
 import com.example.lori.models.Product
-import com.example.lori.utils.Constants
-import com.example.lori.utils.ImageUtils
-import com.example.lori.utils.SwipeToDeleteCallback
-import com.example.lori.utils.SwipeToEditCallback
+import com.example.lori.utils.*
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.layout_my_products.view.*
 
@@ -42,7 +39,7 @@ class MyProductsAdapter(
                     holder.itemView.ivItemImage
                 )
                 holder.itemView.tvItemTitle.text = product.title
-                holder.itemView.tvItemPrice.text = "${product.price} VND"
+                holder.itemView.tvItemPrice.text = "${FormatUtils.format(num = product.price)} VND"
                 holder.itemView.ibDeleteItem.setOnClickListener { deleteProduct(product.id) }
                 holder.itemView.setOnClickListener { getProduct(product) }
             }

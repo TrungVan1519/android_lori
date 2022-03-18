@@ -36,7 +36,7 @@
         <entry key="app/src/main/res/drawable/item_grey_border_background.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/rv_item_image_background.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/user_image_background.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/activity_add_products.xml" value="0.14722222222222223" />
+        <entry key="app/src/main/res/layout/activity_add_products.xml" value="0.22592592592592592" />
         <entry key="app/src/main/res/layout/activity_base.xml" value="0.2509057971014493" />
         <entry key="app/src/main/res/layout/activity_cart.xml" value="0.15092592592592594" />
         <entry key="app/src/main/res/layout/activity_dashboard.xml" value="0.20925925925925926" />

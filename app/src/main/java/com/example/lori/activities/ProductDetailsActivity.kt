@@ -9,6 +9,7 @@ import com.example.lori.R
 import com.example.lori.models.CartItem
 import com.example.lori.models.Product
 import com.example.lori.utils.Constants
+import com.example.lori.utils.FormatUtils
 import com.example.lori.utils.ImageUtils
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -54,7 +55,7 @@ class ProductDetailsActivity : BaseActivity(), View.OnClickListener {
                 ImageUtils.loadProductImage(this, product!!.image, ivProductDetailImage)
                 tvProductOwnerName.text = "By owner: ${product!!.username}"
                 tvProductDetailsTitle.text = product!!.title
-                tvProductDetailsPrice.text = "${product!!.price} VND"
+                tvProductDetailsPrice.text = "${FormatUtils.format(num = product!!.price)} VND"
                 tvProductDetailsDescription.text = product!!.description
 
                 if (product!!.stock_quantity == 0) {
@@ -67,7 +68,8 @@ class ProductDetailsActivity : BaseActivity(), View.OnClickListener {
                         )
                     )
                 } else {
-                    tvProductDetailsStockQuantity.text = product!!.stock_quantity.toString()
+                    tvProductDetailsStockQuantity.text =
+                        FormatUtils.format(num = product!!.stock_quantity)
                 }
 
                 if (FirebaseAuth.getInstance().currentUser!!.uid == product!!.uid || product!!.stock_quantity <= 0) {

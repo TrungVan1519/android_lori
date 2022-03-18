@@ -9,6 +9,7 @@ import com.example.lori.activities.adapters.MyCartItemsAdapter
 import com.example.lori.models.CartItem
 import com.example.lori.models.Product
 import com.example.lori.utils.Constants
+import com.example.lori.utils.FormatUtils
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
@@ -34,7 +35,7 @@ class CartActivity : BaseActivity() {
 
         FirebaseFirestore.getInstance()
             .collection(Constants.PRODUCTS)
-            .orderBy(Constants.TITLE, Query.Direction.ASCENDING)
+            .orderBy(Constants.TITLE, Query.Direction.DESCENDING)
             .get()
             .addOnSuccessListener { querySnapshot ->
                 products = ArrayList()
@@ -56,7 +57,7 @@ class CartActivity : BaseActivity() {
         FirebaseFirestore.getInstance()
             .collection(Constants.CART_ITEMS)
             .whereEqualTo(Constants.UID, FirebaseAuth.getInstance().currentUser!!.uid)
-            .orderBy(Constants.TITLE, Query.Direction.ASCENDING)
+            .orderBy(Constants.TITLE, Query.Direction.DESCENDING)
             .get()
             .addOnSuccessListener { querySnapshot ->
                 hideProgressDialog()
@@ -84,13 +85,15 @@ class CartActivity : BaseActivity() {
                     var subTotal = 0.0
                     cartItems.forEach { cartItem ->
                         if (cartItem.stock_quantity > 0) {
-                            subTotal += (cartItem.price.toDouble() * cartItem.cart_quantity)
+                            subTotal += cartItem.price.toDouble() * cartItem.cart_quantity
                         }
                     }
 
-                    tvSubtotal.text = "$subTotal VND"
-                    tvShippingCharge.text = "${Constants.SHIPPING_CHARGE} VND"
-                    tvTotalAmount.text = "${subTotal + Constants.SHIPPING_CHARGE} VND"
+                    tvSubtotal.text = "${FormatUtils.format(num = subTotal)} VND"
+                    tvShippingCharge.text =
+                        "${FormatUtils.format(num = Constants.SHIPPING_CHARGE)} VND"
+                    tvTotalAmount.text =
+                        "${FormatUtils.format(num = subTotal + Constants.SHIPPING_CHARGE)} VND"
 
                     rvCartItems.layoutManager = LinearLayoutManager(this)
                     rvCartItems.setHasFixedSize(true)

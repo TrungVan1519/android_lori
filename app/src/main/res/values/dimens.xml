@@ -15,6 +15,7 @@
     <dimen name="container_small">100dp</dimen>
     <dimen name="container_medium">150dp</dimen>
     <dimen name="container_big">200dp</dimen>
+    <dimen name="container_giant">500dp</dimen>
 
     <dimen name="text_tiny">12sp</dimen>
     <dimen name="text_small">14sp</dimen>

@@ -45,7 +45,7 @@
             <ImageView
                 android:id="@+id/ivProductDetailImage"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/container_big"
+                android:layout_height="@dimen/container_giant"
                 android:background="@color/dark_grey"
                 android:contentDescription="@string/content_description"
                 android:scaleType="fitXY"
@@ -143,10 +143,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/ic_item_grey_border_background"
-                    android:paddingStart="@dimen/padding_big"
-                    android:paddingTop="@dimen/padding_medium"
-                    android:paddingEnd="@dimen/padding_big"
-                    android:paddingBottom="@dimen/padding_medium"
+                    android:padding="@dimen/padding_big"
                     android:textColor="@color/primary_text"
                     android:textSize="@dimen/text_medium"
                     tools:text="5" />

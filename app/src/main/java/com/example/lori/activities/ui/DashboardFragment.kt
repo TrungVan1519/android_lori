@@ -65,7 +65,7 @@ class DashboardFragment : BaseFragment() {
 
         FirebaseFirestore.getInstance()
             .collection(Constants.PRODUCTS)
-            .orderBy(Constants.TITLE, Query.Direction.ASCENDING)
+            .orderBy(Constants.TITLE, Query.Direction.DESCENDING)
             .get()
             .addOnSuccessListener { querySnapshot ->
                 hideProgressDialog()
