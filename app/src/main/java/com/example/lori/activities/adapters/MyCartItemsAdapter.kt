@@ -12,12 +12,10 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lori.R
 import com.example.lori.activities.CartActivity
-import com.example.lori.activities.ui.ProductsFragment
 import com.example.lori.models.CartItem
 import com.example.lori.utils.Constants
 import com.example.lori.utils.ImageUtils
 import com.example.lori.utils.SwipeToDeleteCallback
-import com.example.lori.utils.SwipeToEditCallback
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.layout_cart_item.view.*
 
@@ -110,7 +108,7 @@ open class MyCartItemsAdapter(
             if (context is CartActivity) {
                 context.showSnackBar(
                     context.resources.getString(
-                        R.string.msg_for_available_stock,
+                        R.string.err_msg_available_stock,
                         cartItem.stock_quantity
                     ),
                     true

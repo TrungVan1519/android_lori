@@ -79,6 +79,7 @@
     <string name="err_msg_enter_product_price">Please enter product price</string>
     <string name="err_msg_enter_product_description">Please enter product description</string>
     <string name="err_msg_enter_product_quantity">Please enter product quantity</string>
+    <string name="err_msg_available_stock">Available stock is %1$s. You can not add more than stock quantity</string>
 
     <string name="success_to_send_email">Email sent successfully to reset your password!</string>
     <string name="success_to_update_profile">Your profile is updated successfully</string>
@@ -88,6 +89,7 @@
     <string name="success_to_add_products">Your product is uploaded successfully</string>
     <string name="success_to_delete_products">Your product is deleted successfully</string>
     <string name="success_to_add_products_to_cart">Product is added to your cart</string>
+    <string name="success_to_delete_cart_items">Your cart item is deleted successfully</string>
 
     <string name="fail_to_register">Fail to register</string>
     <string name="fail_to_select_image">Fail to select the image</string>
@@ -100,10 +102,5 @@
     <string name="fail_to_get_product_details">Fail to get product details</string>
     <string name="fail_to_add_products_to_cart">Fail to add products to cart</string>
     <string name="fail_to_check_existing_cart_items">Fail to check existing cart_items</string>
-
-
-    <string name="msg_item_removed_successfully">Item removed successfully</string>
-    <string name="msg_for_available_stock">Available stock is %1$s!. You can not add more than stock quantity</string>
-    <string name="success_to_delete_cart_items">Your cart item is deleted successfully</string>
     <string name="fail_to_delete_cart_items">Fail to delete cart items</string>
 </resources>
