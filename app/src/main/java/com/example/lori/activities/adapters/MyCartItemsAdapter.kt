@@ -39,6 +39,7 @@ open class MyCartItemsAdapter(
                 ImageUtils.loadProductImage(context, cartItem.image, holder.itemView.ivItemImage)
                 holder.itemView.tvItemTitle.text = cartItem.title
                 holder.itemView.tvItemPrice.text = "${FormatUtils.format(num = cartItem.price)} VND"
+
                 if (cartItem.cart_quantity == 0) {
                     holder.itemView.tvItemQuantity.text =
                         context.resources.getString(R.string.label_out_of_stock)

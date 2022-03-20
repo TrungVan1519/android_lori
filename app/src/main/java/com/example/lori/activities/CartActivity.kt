@@ -53,6 +53,11 @@ class CartActivity : BaseActivity() {
             }
     }
 
+    /**
+     * Be careful of using hideProgressDialog() because we don't use showProgressDialog(),
+     * so we must call this fun inside of another fun using showProgressDialog() instead
+     * such as getProducts(), adapter.updateCartItem(), adapter.deleteCartItem(), etc
+     */
     fun getMyCartItems() {
         FirebaseFirestore.getInstance()
             .collection(Constants.CART_ITEMS)
@@ -82,6 +87,7 @@ class CartActivity : BaseActivity() {
                 }
 
                 if (cartItems.size > 0) {
+                    // Calculate product costs and shopping fee
                     var subTotal = 0.0
                     cartItems.forEach { cartItem ->
                         if (cartItem.stock_quantity > 0) {
