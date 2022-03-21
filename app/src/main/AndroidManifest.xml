@@ -12,6 +12,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Lori">
         <activity
+            android:name=".activities.AddEditAddressesActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Lori.NoActionBar" />
+        <activity
+            android:name=".activities.AddressesActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Lori.NoActionBar" />
+        <activity
             android:name=".activities.CartActivity"
             android:exported="false"
             android:screenOrientation="portrait"

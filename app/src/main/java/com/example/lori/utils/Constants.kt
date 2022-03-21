@@ -13,6 +13,7 @@ object Constants {
     const val EXTRA_USER_DETAILS = "extra_user_details"
     const val EXTRA_PRODUCT_ID = "extra_product_id"
     const val EXTRA_PRODUCT_OWNER_ID = "extra_product_owner_id"
+    const val EXTRA_ADDRESS_DETAILS = "AddressDetails"
 
     // Permission codes
     const val PICK_IMAGE_REQUEST_CODE = 1
@@ -22,6 +23,7 @@ object Constants {
     const val USERS = "users"
     const val PRODUCTS = "products"
     const val CART_ITEMS = "cart_items"
+    const val ADDRESSES = "addresses"
 
     // Firebase DB field names
     const val FIRST_NAME = "firstName"
@@ -39,11 +41,18 @@ object Constants {
     const val PID = "pid"
     const val CART_QUANTITY = "cart_quantity"
 
+    const val ADDRESS = "address"
+
     // For "users" collection
     const val MALE = "Male"
     const val FEMALE = "Female"
 
-    // For "cart_item" collection
+    // For "cart_items" collection
     const val DEFAULT_CART_QUANTITY = 1
     const val SHIPPING_CHARGE = 10_000 // VND
+
+    // For "addresses" collection
+    const val HOME = "Home"
+    const val OFFICE = "Office"
+    const val OTHER = "Other"
 }

@@ -57,7 +57,7 @@
                         android:paddingEnd="@dimen/none"
                         android:text="@string/title_settings"
                         android:textColor="@color/white"
-                        android:textSize="@dimen/text_big" />
+                        android:textSize="@dimen/text_medium" />
                 </com.example.lori.widgets.ActionBar>
             </FrameLayout>
 

@@ -36,7 +36,10 @@
         <entry key="app/src/main/res/drawable/item_grey_border_background.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/rv_item_image_background.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/user_image_background.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_add_address.xml" value="0.2578125" />
+        <entry key="app/src/main/res/layout/activity_add_edit_address.xml" value="0.17962962962962964" />
         <entry key="app/src/main/res/layout/activity_add_products.xml" value="0.22592592592592592" />
+        <entry key="app/src/main/res/layout/activity_addresses.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_base.xml" value="0.2509057971014493" />
         <entry key="app/src/main/res/layout/activity_cart.xml" value="0.15092592592592594" />
         <entry key="app/src/main/res/layout/activity_dashboard.xml" value="0.20925925925925926" />
@@ -54,6 +57,7 @@
         <entry key="app/src/main/res/layout/fragment_products.xml" value="0.1" />
         <entry key="app/src/main/res/layout/item_dashboard_layout.xml" value="0.165" />
         <entry key="app/src/main/res/layout/item_list_layout.xml" value="0.12916666666666668" />
+        <entry key="app/src/main/res/layout/layout_address_item.xml" value="0.20885416666666667" />
         <entry key="app/src/main/res/layout/layout_all_products.xml" value="0.25" />
         <entry key="app/src/main/res/layout/layout_cart_item.xml" value="0.25" />
         <entry key="app/src/main/res/layout/layout_dialog_progress.xml" value="0.2578125" />

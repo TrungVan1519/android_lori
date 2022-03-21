@@ -23,6 +23,7 @@ class SettingsActivity : BaseActivity(), View.OnClickListener {
         getUserDetails()
 
         tvEdit.setOnClickListener(this)
+        llAddress.setOnClickListener(this)
         btLogout.setOnClickListener(this)
     }
 
@@ -32,6 +33,9 @@ class SettingsActivity : BaseActivity(), View.OnClickListener {
                 val intent = Intent(this, UserProfileActivity::class.java)
                 intent.putExtra(Constants.EXTRA_USER_DETAILS, user)
                 startActivity(intent)
+            }
+            R.id.llAddress -> {
+                startActivity(Intent(this, AddressesActivity::class.java))
             }
             R.id.btLogout -> {
                 if (FirebaseAuth.getInstance().currentUser != null) {
