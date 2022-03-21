@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lori.R
@@ -15,9 +16,11 @@ import com.example.lori.activities.AddEditAddressesActivity
 import com.example.lori.activities.AddressesActivity
 import com.example.lori.models.Address
 import com.example.lori.utils.Constants
+import com.example.lori.utils.DiffUtilCallBack
 import com.example.lori.utils.SwipeToDeleteCallback
 import com.example.lori.utils.SwipeToEditCallback
 import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.android.synthetic.main.activity_addresses.*
 import kotlinx.android.synthetic.main.layout_address_item.view.*
 
 class AddressesAdapter(
@@ -68,6 +71,15 @@ class AddressesAdapter(
                 deleteAddress(viewHolder.adapterPosition)
             }
         }).attachToRecyclerView(recyclerView)
+    }
+
+    /**
+     * Update RecyclerView UI by DiffUtil instead of notifyDataSetChanged()
+     */
+    fun updateUI(addresses: ArrayList<Address>) {
+        val diffResult = DiffUtil.calculateDiff(DiffUtilCallBack(this.addresses, addresses))
+        this.addresses = addresses
+        diffResult.dispatchUpdatesTo(this)
     }
 
     private fun updateAddress(position: Int) {

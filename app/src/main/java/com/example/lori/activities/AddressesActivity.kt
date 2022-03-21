@@ -4,24 +4,25 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.lori.R
 import com.example.lori.activities.adapters.AddressesAdapter
 import com.example.lori.models.Address
 import com.example.lori.utils.Constants
-import com.example.lori.utils.SwipeToDeleteCallback
-import com.example.lori.utils.SwipeToEditCallback
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import kotlinx.android.synthetic.main.activity_addresses.*
 
 class AddressesActivity : BaseActivity(), View.OnClickListener {
+
+    private lateinit var adapter: AddressesAdapter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_addresses)
+
+        adapter = AddressesAdapter(this, arrayListOf(), R.layout.layout_address_item)
 
         btAddAddresses.setOnClickListener(this)
     }
@@ -66,8 +67,8 @@ class AddressesActivity : BaseActivity(), View.OnClickListener {
 
                     rvAddresses.layoutManager = LinearLayoutManager(this)
                     rvAddresses.setHasFixedSize(true)
-                    rvAddresses.adapter =
-                        AddressesAdapter(this, addresses, R.layout.layout_address_item)
+                    rvAddresses.adapter = adapter
+                    adapter.updateUI(addresses)
                 } else {
                     rvAddresses.visibility = View.GONE
                     tvNoAddressesFound.visibility = View.VISIBLE
