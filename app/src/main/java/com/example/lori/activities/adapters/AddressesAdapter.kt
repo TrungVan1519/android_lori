@@ -24,7 +24,8 @@ import kotlinx.android.synthetic.main.layout_address_item.view.*
 class AddressesAdapter(
     private val context: Context,
     private var addresses: ArrayList<Address>,
-    private val layout: Int
+    private val layout: Int,
+    private val selectedAddress: Boolean = false
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -42,11 +43,19 @@ class AddressesAdapter(
                 holder.itemView.tvAddressDetails.text = "${address.address} - ${address.zipCode}"
                 holder.itemView.tvAddressMobileNumber.text = address.mobile.toString()
                 holder.itemView.setOnClickListener {
-                    Toast.makeText(
-                        context,
-                        "Swipe right to update the address \nSwipe left to delete the address",
-                        Toast.LENGTH_LONG
-                    ).show()
+                    if (!selectedAddress) {
+                        Toast.makeText(
+                            context,
+                            "Swipe right to update the address \nSwipe left to delete the address",
+                            Toast.LENGTH_LONG
+                        ).show()
+                    } else {
+                        Toast.makeText(
+                            context,
+                            "Selected address : ${address.address}, ${address.zipCode}",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
                 }
             }
         }
@@ -57,17 +66,19 @@ class AddressesAdapter(
     override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
         super.onAttachedToRecyclerView(recyclerView)
 
-        ItemTouchHelper(object : SwipeToEditCallback(context) {
-            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                updateAddress(viewHolder.adapterPosition)
-            }
-        }).attachToRecyclerView(recyclerView)
+        if (!selectedAddress) {
+            ItemTouchHelper(object : SwipeToEditCallback(context) {
+                override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                    updateAddress(viewHolder.adapterPosition)
+                }
+            }).attachToRecyclerView(recyclerView)
 
-        ItemTouchHelper(object : SwipeToDeleteCallback(context) {
-            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                deleteAddress(viewHolder.adapterPosition)
-            }
-        }).attachToRecyclerView(recyclerView)
+            ItemTouchHelper(object : SwipeToDeleteCallback(context) {
+                override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                    deleteAddress(viewHolder.adapterPosition)
+                }
+            }).attachToRecyclerView(recyclerView)
+        }
     }
 
     /**

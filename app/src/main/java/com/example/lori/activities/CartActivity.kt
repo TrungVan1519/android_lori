@@ -1,5 +1,6 @@
 package com.example.lori.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -15,7 +16,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import kotlinx.android.synthetic.main.activity_cart.*
 
-class CartActivity : BaseActivity() {
+class CartActivity : BaseActivity(), View.OnClickListener {
 
     private lateinit var products: ArrayList<Product>
     private lateinit var adapter: MyCartItemsAdapter
@@ -25,11 +26,23 @@ class CartActivity : BaseActivity() {
         setContentView(R.layout.activity_cart)
 
         adapter = MyCartItemsAdapter(this, arrayListOf(), R.layout.layout_cart_item)
+
+        btCheckout.setOnClickListener(this)
     }
 
     override fun onResume() {
         super.onResume()
         getProducts()
+    }
+
+    override fun onClick(v: View?) {
+        when (v?.id) {
+            R.id.btCheckout -> {
+                val intent = Intent(this, AddressesActivity::class.java)
+                intent.putExtra(Constants.EXTRA_SELECT_ADDRESS, true)
+                startActivity(intent)
+            }
+        }
     }
 
     private fun getProducts() {

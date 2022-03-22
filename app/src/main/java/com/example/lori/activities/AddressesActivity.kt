@@ -1,5 +1,6 @@
 package com.example.lori.activities
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -16,13 +17,19 @@ import kotlinx.android.synthetic.main.activity_addresses.*
 
 class AddressesActivity : BaseActivity(), View.OnClickListener {
 
+    private var selectedAddress = false
     private lateinit var adapter: AddressesAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_addresses)
 
-        adapter = AddressesAdapter(this, arrayListOf(), R.layout.layout_address_item)
+        selectedAddress = intent.getBooleanExtra(Constants.EXTRA_SELECT_ADDRESS, false)
+        if (selectedAddress) {
+            tvTitle.text = resources.getString(R.string.title_select_address)
+        }
+
+        adapter = AddressesAdapter(this, arrayListOf(), R.layout.layout_address_item, selectedAddress)
 
         btAddAddresses.setOnClickListener(this)
     }
@@ -34,12 +41,9 @@ class AddressesActivity : BaseActivity(), View.OnClickListener {
 
     override fun onClick(v: View?) {
         when (v?.id) {
-            R.id.btAddAddresses -> startActivity(
-                Intent(
-                    this,
-                    AddEditAddressesActivity::class.java
-                )
-            )
+            R.id.btAddAddresses -> {
+                startActivity(Intent(this, AddEditAddressesActivity::class.java))
+            }
         }
     }
 
