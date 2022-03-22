@@ -56,8 +56,8 @@ class AddressesActivity : BaseActivity(), View.OnClickListener {
 
                 val addresses = ArrayList<Address>()
                 querySnapshot.documents.forEach { documentSnapshot ->
-                    val address = documentSnapshot.toObject(Address::class.java)
-                    address!!.id = documentSnapshot.id
+                    val address = documentSnapshot.toObject(Address::class.java)!!
+                    address.id = documentSnapshot.id
                     addresses.add(address)
                 }
 
@@ -67,8 +67,8 @@ class AddressesActivity : BaseActivity(), View.OnClickListener {
 
                     rvAddresses.layoutManager = LinearLayoutManager(this)
                     rvAddresses.setHasFixedSize(true)
-                    rvAddresses.adapter = adapter
-                    adapter.updateUI(addresses)
+                    rvAddresses.adapter = adapter // force redraw RecyclerView items
+                    adapter.notifyItemChanged(addresses)
                 } else {
                     rvAddresses.visibility = View.GONE
                     tvNoAddressesFound.visibility = View.VISIBLE

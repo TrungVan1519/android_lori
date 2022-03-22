@@ -46,6 +46,7 @@
     <string name="label_home">Home</string>
     <string name="label_office">Office</string>
     <string name="label_other">Other</string>
+    <string name="label_delete_addresses_dialog">Are you sure you want to delete the address?</string>
 
     <string name="title_login">LOGIN</string>
     <string name="title_forgot_password">FORGOT PASSWORD?</string>

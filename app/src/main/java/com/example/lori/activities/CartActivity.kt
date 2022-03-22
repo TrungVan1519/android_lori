@@ -18,11 +18,13 @@ import kotlinx.android.synthetic.main.activity_cart.*
 class CartActivity : BaseActivity() {
 
     private lateinit var products: ArrayList<Product>
-    private lateinit var cartItems: ArrayList<CartItem>
+    private lateinit var adapter: MyCartItemsAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cart)
+
+        adapter = MyCartItemsAdapter(this, arrayListOf(), R.layout.layout_cart_item)
     }
 
     override fun onResume() {
@@ -67,7 +69,7 @@ class CartActivity : BaseActivity() {
             .addOnSuccessListener { querySnapshot ->
                 hideProgressDialog()
 
-                cartItems = ArrayList()
+                val cartItems = ArrayList<CartItem>()
                 querySnapshot.documents.forEach { documentSnapshot ->
                     val cartItem = documentSnapshot.toObject(CartItem::class.java)!!
                     cartItem.id = documentSnapshot.id
@@ -103,8 +105,8 @@ class CartActivity : BaseActivity() {
 
                     rvCartItems.layoutManager = LinearLayoutManager(this)
                     rvCartItems.setHasFixedSize(true)
-                    rvCartItems.adapter =
-                        MyCartItemsAdapter(this, cartItems, R.layout.layout_cart_item)
+                    rvCartItems.adapter = adapter // force redraw RecyclerView items
+                    adapter.notifyItemChanged(cartItems)
 
                     rvCartItems.visibility = View.VISIBLE
                     llCheckout.visibility = if (subTotal > 0) View.VISIBLE else View.GONE

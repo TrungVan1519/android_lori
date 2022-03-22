@@ -18,6 +18,7 @@ import kotlinx.android.synthetic.main.fragment_products.*
 class ProductsFragment : BaseFragment() {
 
     private lateinit var rootView: View
+    private lateinit var adapter: MyProductsAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,6 +33,7 @@ class ProductsFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View {
         rootView = inflater.inflate(R.layout.fragment_products, container, false)
+        adapter = MyProductsAdapter(this, arrayListOf(), R.layout.layout_my_products)
         return rootView
     }
 
@@ -79,8 +81,8 @@ class ProductsFragment : BaseFragment() {
 
                     rvMyProducts.layoutManager = LinearLayoutManager(activity)
                     rvMyProducts.setHasFixedSize(true)
-                    rvMyProducts.adapter =
-                        MyProductsAdapter(this, products, R.layout.layout_my_products)
+                    rvMyProducts.adapter = adapter
+                    adapter.notifyItemChanged(products)
                 } else {
                     rvMyProducts.visibility = View.GONE
                     tvNoProductsFound.visibility = View.VISIBLE

@@ -16,11 +16,9 @@ import com.example.lori.activities.AddEditAddressesActivity
 import com.example.lori.activities.AddressesActivity
 import com.example.lori.models.Address
 import com.example.lori.utils.Constants
-import com.example.lori.utils.DiffUtilCallBack
 import com.example.lori.utils.SwipeToDeleteCallback
 import com.example.lori.utils.SwipeToEditCallback
 import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.android.synthetic.main.activity_addresses.*
 import kotlinx.android.synthetic.main.layout_address_item.view.*
 
 class AddressesAdapter(
@@ -30,14 +28,13 @@ class AddressesAdapter(
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return ViewHolder(
-            LayoutInflater.from(parent.context).inflate(layout, parent, false)
-        )
+        return ViewHolder(LayoutInflater.from(parent.context).inflate(layout, parent, false))
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val address = addresses[position]
 
+        // Prepare for multiple ViewHolder situations
         when (holder) {
             is ViewHolder -> {
                 holder.itemView.tvAddressFullname.text = address.name
@@ -76,7 +73,7 @@ class AddressesAdapter(
     /**
      * Update RecyclerView UI by DiffUtil instead of notifyDataSetChanged()
      */
-    fun updateUI(addresses: ArrayList<Address>) {
+    fun notifyItemChanged(addresses: ArrayList<Address>) {
         val diffResult = DiffUtil.calculateDiff(DiffUtilCallBack(this.addresses, addresses))
         this.addresses = addresses
         diffResult.dispatchUpdatesTo(this)
@@ -97,7 +94,7 @@ class AddressesAdapter(
             is AddressesActivity -> {
                 AlertDialog.Builder(context)
                     .setTitle(R.string.title_delete_dialog)
-                    .setMessage(R.string.label_delete_dialog)
+                    .setMessage(R.string.label_delete_addresses_dialog)
                     .setIcon(R.drawable.ic_delete_red_24dp)
                     .setPositiveButton(context.resources.getString(R.string.label_yes)) { dialogInterface, _ ->
                         context.showProgressDialog(context.resources.getString(R.string.label_please_wait))
@@ -122,6 +119,7 @@ class AddressesAdapter(
                                     true
                                 )
 
+                                context.getAddresses()
                                 Log.e(javaClass.simpleName, "Errors while deleting addresses", e)
                             }
                         dialogInterface.dismiss()
@@ -138,4 +136,20 @@ class AddressesAdapter(
     }
 
     private class ViewHolder(view: View) : RecyclerView.ViewHolder(view)
+
+    class DiffUtilCallBack(
+        private val oldList: ArrayList<Address>,
+        private val newList: ArrayList<Address>,
+    ) : DiffUtil.Callback() {
+
+        override fun getOldListSize() = oldList.size
+
+        override fun getNewListSize() = newList.size
+
+        override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int) =
+            oldList[oldItemPosition].id == newList[newItemPosition].id
+
+        override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int) =
+            oldList[oldItemPosition] == newList[newItemPosition]
+    }
 }

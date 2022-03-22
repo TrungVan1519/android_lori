@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lori.R
@@ -77,6 +78,8 @@ open class MyCartItemsAdapter(
         }
     }
 
+    override fun getItemCount() = cartItems.size
+
     override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
         super.onAttachedToRecyclerView(recyclerView)
 
@@ -87,7 +90,14 @@ open class MyCartItemsAdapter(
         }).attachToRecyclerView(recyclerView)
     }
 
-    override fun getItemCount() = cartItems.size
+    /**
+     * Update RecyclerView UI by DiffUtil instead of notifyDataSetChanged()
+     */
+    fun notifyItemChanged(cartItems: ArrayList<CartItem>) {
+        val diffResult = DiffUtil.calculateDiff(DiffUtilCallBack(this.cartItems, cartItems))
+        this.cartItems = cartItems
+        diffResult.dispatchUpdatesTo(this)
+    }
 
     private fun decreaseCartItemQuantity(cartItem: CartItem) {
         if (cartItem.cart_quantity == 1) {
@@ -170,6 +180,7 @@ open class MyCartItemsAdapter(
                                     context.resources.getString(R.string.success_to_delete_cart_items),
                                     false
                                 )
+
                                 context.getMyCartItems()
                             }
                             .addOnFailureListener { e ->
@@ -179,6 +190,7 @@ open class MyCartItemsAdapter(
                                     true
                                 )
 
+                                context.getMyCartItems()
                                 Log.e(javaClass.simpleName, "Errors while deleting cart items", e)
                             }
                         dialogInterface.dismiss()
@@ -195,4 +207,20 @@ open class MyCartItemsAdapter(
     }
 
     private class ViewHolder(view: View) : RecyclerView.ViewHolder(view)
+
+    class DiffUtilCallBack(
+        private val oldList: ArrayList<CartItem>,
+        private val newList: ArrayList<CartItem>,
+    ) : DiffUtil.Callback() {
+
+        override fun getOldListSize() = oldList.size
+
+        override fun getNewListSize() = newList.size
+
+        override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int) =
+            oldList[oldItemPosition].id == newList[newItemPosition].id
+
+        override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int) =
+            oldList[oldItemPosition] == newList[newItemPosition]
+    }
 }

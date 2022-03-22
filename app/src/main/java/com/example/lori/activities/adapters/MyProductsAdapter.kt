@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lori.R
@@ -19,7 +20,7 @@ import kotlinx.android.synthetic.main.layout_my_products.view.*
 
 class MyProductsAdapter(
     private val fragment: Fragment,
-    private val products: ArrayList<Product>,
+    private var products: ArrayList<Product>,
     private val layout: Int
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -64,6 +65,15 @@ class MyProductsAdapter(
         }).attachToRecyclerView(recyclerView)
     }
 
+    /**
+     * Update RecyclerView UI by DiffUtil instead of notifyDataSetChanged()
+     */
+    fun notifyItemChanged(products: ArrayList<Product>) {
+        val diffResult = DiffUtil.calculateDiff(DiffUtilCallBack(this.products, products))
+        this.products = products
+        diffResult.dispatchUpdatesTo(this)
+    }
+
     private fun getProduct(product: Product) {
         val intent = Intent(fragment.requireActivity(), ProductDetailsActivity::class.java)
         intent.putExtra(Constants.EXTRA_PRODUCT_ID, product.id)
@@ -76,13 +86,13 @@ class MyProductsAdapter(
     }
 
     private fun deleteProduct(id: String) {
-        AlertDialog.Builder(fragment.requireActivity())
-            .setTitle(R.string.title_delete_dialog)
-            .setMessage(R.string.label_delete_dialog)
-            .setIcon(R.drawable.ic_delete_red_24dp)
-            .setPositiveButton(fragment.resources.getString(R.string.label_yes)) { dialogInterface, _ ->
-                when (fragment) {
-                    is ProductsFragment -> {
+        when (fragment) {
+            is ProductsFragment -> {
+                AlertDialog.Builder(fragment.requireActivity())
+                    .setTitle(R.string.title_delete_dialog)
+                    .setMessage(R.string.label_delete_dialog)
+                    .setIcon(R.drawable.ic_delete_red_24dp)
+                    .setPositiveButton(fragment.resources.getString(R.string.label_yes)) { dialogInterface, _ ->
                         fragment.showProgressDialog(fragment.resources.getString(R.string.label_please_wait))
 
                         FirebaseFirestore.getInstance()
@@ -95,6 +105,7 @@ class MyProductsAdapter(
                                     fragment.resources.getString(R.string.success_to_delete_products),
                                     false
                                 )
+
                                 fragment.getMyProducts()
                             }
                             .addOnFailureListener { e ->
@@ -104,26 +115,41 @@ class MyProductsAdapter(
                                     true
                                 )
 
+                                fragment.getMyProducts()
                                 Log.e(
                                     fragment.requireActivity().javaClass.simpleName,
                                     "Error while deleting the product.",
                                     e
                                 )
                             }
+                        dialogInterface.dismiss()
                     }
-                }
-                dialogInterface.dismiss()
+                    .setNegativeButton(fragment.resources.getString(R.string.label_no)) { dialogInterface, _ ->
+                        fragment.getMyProducts()
+                        dialogInterface.dismiss()
+                    }
+                    .setCancelable(false)
+                    .create()
+                    .show()
             }
-            .setNegativeButton(fragment.resources.getString(R.string.label_no)) { dialogInterface, _ ->
-                when (fragment) {
-                    is ProductsFragment -> fragment.getMyProducts()
-                }
-                dialogInterface.dismiss()
-            }
-            .setCancelable(false)
-            .create()
-            .show()
+        }
     }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view)
+
+    class DiffUtilCallBack(
+        private val oldList: ArrayList<Product>,
+        private val newList: ArrayList<Product>,
+    ) : DiffUtil.Callback() {
+
+        override fun getOldListSize() = oldList.size
+
+        override fun getNewListSize() = newList.size
+
+        override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int) =
+            oldList[oldItemPosition].id == newList[newItemPosition].id
+
+        override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int) =
+            oldList[oldItemPosition] == newList[newItemPosition]
+    }
 }
