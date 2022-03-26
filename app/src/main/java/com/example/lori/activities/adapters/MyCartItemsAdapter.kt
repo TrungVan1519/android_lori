@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lori.R
 import com.example.lori.activities.CartActivity
+import com.example.lori.activities.CheckoutActivity
 import com.example.lori.models.CartItem
 import com.example.lori.utils.Constants
 import com.example.lori.utils.FormatUtils
@@ -65,14 +66,23 @@ open class MyCartItemsAdapter(
                     holder.itemView.ibIncreaseItemQuantity.visibility = View.VISIBLE
                 }
 
-                holder.itemView.ibDecreaseItemQuantity.setOnClickListener {
-                    decreaseCartItemQuantity(cartItem)
-                }
-                holder.itemView.ibIncreaseItemQuantity.setOnClickListener {
-                    increaseCartItemQuantity(cartItem)
-                }
-                holder.itemView.ibDeleteItem.setOnClickListener {
-                    deleteCartItem(cartItem.id)
+                when (context) {
+                    is CartActivity -> {
+                        holder.itemView.ibDecreaseItemQuantity.setOnClickListener {
+                            decreaseCartItemQuantity(cartItem)
+                        }
+                        holder.itemView.ibIncreaseItemQuantity.setOnClickListener {
+                            increaseCartItemQuantity(cartItem)
+                        }
+                        holder.itemView.ibDeleteItem.setOnClickListener {
+                            deleteCartItem(cartItem.id)
+                        }
+                    }
+                    is CheckoutActivity -> {
+                        holder.itemView.ibDeleteItem.visibility = View.GONE
+                        holder.itemView.ibIncreaseItemQuantity.visibility = View.GONE
+                        holder.itemView.ibDecreaseItemQuantity.visibility = View.GONE
+                    }
                 }
             }
         }
@@ -83,11 +93,15 @@ open class MyCartItemsAdapter(
     override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
         super.onAttachedToRecyclerView(recyclerView)
 
-        ItemTouchHelper(object : SwipeToDeleteCallback(context) {
-            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                deleteCartItem(cartItems[viewHolder.adapterPosition].id)
+        when (context) {
+            is CartActivity -> {
+                ItemTouchHelper(object : SwipeToDeleteCallback(context) {
+                    override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                        deleteCartItem(cartItems[viewHolder.adapterPosition].id)
+                    }
+                }).attachToRecyclerView(recyclerView)
             }
-        }).attachToRecyclerView(recyclerView)
+        }
     }
 
     /**
@@ -100,32 +114,38 @@ open class MyCartItemsAdapter(
     }
 
     private fun decreaseCartItemQuantity(cartItem: CartItem) {
-        if (cartItem.cart_quantity == 1) {
-            deleteCartItem(cartItem.id)
-        } else {
-            updateCartItem(
-                cartItem.id,
-                hashMapOf(Constants.CART_QUANTITY to cartItem.cart_quantity - 1)
-            )
+        when (context) {
+            is CartActivity -> {
+                if (cartItem.cart_quantity == 1) {
+                    deleteCartItem(cartItem.id)
+                } else {
+                    updateCartItem(
+                        cartItem.id,
+                        hashMapOf(Constants.CART_QUANTITY to cartItem.cart_quantity - 1)
+                    )
+                }
+            }
         }
     }
 
     @SuppressLint("StringFormatMatches")
     private fun increaseCartItemQuantity(cartItem: CartItem) {
-        if (cartItem.cart_quantity < cartItem.stock_quantity) {
-            updateCartItem(
-                cartItem.id,
-                hashMapOf(Constants.CART_QUANTITY to cartItem.cart_quantity + 1)
-            )
-        } else {
-            if (context is CartActivity) {
-                context.showSnackBar(
-                    context.resources.getString(
-                        R.string.err_msg_available_stock,
-                        cartItem.stock_quantity
-                    ),
-                    true
-                )
+        when (context) {
+            is CartActivity -> {
+                if (cartItem.cart_quantity < cartItem.stock_quantity) {
+                    updateCartItem(
+                        cartItem.id,
+                        hashMapOf(Constants.CART_QUANTITY to cartItem.cart_quantity + 1)
+                    )
+                } else {
+                    context.showSnackBar(
+                        context.resources.getString(
+                            R.string.err_msg_available_stock,
+                            cartItem.stock_quantity
+                        ),
+                        true
+                    )
+                }
             }
         }
     }

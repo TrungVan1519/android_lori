@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.lori.R
 import com.example.lori.activities.AddEditAddressesActivity
 import com.example.lori.activities.AddressesActivity
+import com.example.lori.activities.CheckoutActivity
 import com.example.lori.models.Address
 import com.example.lori.utils.Constants
 import com.example.lori.utils.SwipeToDeleteCallback
@@ -50,11 +51,9 @@ class AddressesAdapter(
                             Toast.LENGTH_LONG
                         ).show()
                     } else {
-                        Toast.makeText(
-                            context,
-                            "Selected address : ${address.address}, ${address.zipCode}",
-                            Toast.LENGTH_SHORT
-                        ).show()
+                        val intent = Intent(context, CheckoutActivity::class.java)
+                        intent.putExtra(Constants.EXTRA_SELECTED_ADDRESS, address)
+                        context.startActivity(intent)
                     }
                 }
             }

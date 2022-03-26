@@ -15,6 +15,7 @@ object Constants {
     const val EXTRA_PRODUCT_OWNER_ID = "extra_product_owner_id"
     const val EXTRA_ADDRESS_DETAILS = "AddressDetails"
     const val EXTRA_SELECT_ADDRESS = "extra_select_address"
+    const val EXTRA_SELECTED_ADDRESS = "extra_selected_address"
 
     // Permission codes
     const val PICK_IMAGE_REQUEST_CODE = 1
@@ -25,6 +26,7 @@ object Constants {
     const val PRODUCTS = "products"
     const val CART_ITEMS = "cart_items"
     const val ADDRESSES = "addresses"
+    const val ORDERS = "orders"
 
     // Firebase DB field names
     const val FIRST_NAME = "firstName"

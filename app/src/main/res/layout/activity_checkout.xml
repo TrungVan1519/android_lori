@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.CheckoutActivity">
+
+    <com.example.lori.widgets.ActionBar
+        android:id="@+id/tbActionBar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@drawable/ic_bg"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.example.lori.widgets.BoldMontserratTextView
+            android:id="@+id/tvTitle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:paddingStart="@dimen/padding_actionbar"
+            android:paddingEnd="@dimen/none"
+            android:text="@string/title_checkout"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_medium" />
+    </com.example.lori.widgets.ActionBar>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/none"
+        android:layout_above="@id/llCheckoutPlaceOrder"
+        android:layout_below="@id/tbActionBar"
+        android:fillViewport="true"
+        android:scrollbars="none">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/padding_massive">
+
+            <com.example.lori.widgets.BoldMontserratTextView
+                android:id="@+id/tvProductItems"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_medium"
+                android:layout_marginTop="@dimen/margin_medium"
+                android:layout_marginEnd="@dimen/margin_medium"
+                android:layout_marginBottom="@dimen/margin_medium"
+                android:padding="@dimen/padding_medium"
+                android:text="@string/label_checkout_product_items"
+                android:textColor="@color/primary_text"
+                android:textSize="@dimen/text_big" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvCartItems"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvProductItems" />
+
+            <com.example.lori.widgets.BoldMontserratTextView
+                android:id="@+id/tvSelectedAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rvCartItems"
+                android:layout_marginStart="@dimen/margin_medium"
+                android:layout_marginTop="@dimen/margin_medium"
+                android:layout_marginEnd="@dimen/margin_medium"
+                android:layout_marginBottom="@dimen/margin_medium"
+                android:padding="@dimen/padding_medium"
+                android:text="@string/label_checkout_selected_address"
+                android:textColor="@color/primary_text"
+                android:textSize="@dimen/text_big" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/llCheckoutAddressDetails"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvSelectedAddress"
+                android:layout_margin="@dimen/margin_medium"
+                app:cardCornerRadius="@dimen/radius_medium"
+                app:cardElevation="@dimen/radius_medium"
+                app:contentPadding="@dimen/padding_medium">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:orientation="vertical">
+
+                    <com.example.lori.widgets.BoldMontserratTextView
+                        android:id="@+id/tvCheckoutAddressType"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/ic_bg"
+                        android:padding="@dimen/padding_big"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_medium"
+                        android:textStyle="bold"
+                        tools:text="Home" />
+
+                    <com.example.lori.widgets.BoldMontserratTextView
+                        android:id="@+id/tvCheckoutFullName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/secondary_text"
+                        android:textSize="@dimen/text_medium"
+                        tools:text="Trung Van" />
+
+                    <com.example.lori.widgets.BoldMontserratTextView
+                        android:id="@+id/tvCheckoutAddress"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_small"
+                        android:textColor="@color/secondary_text"
+                        android:textSize="@dimen/text_medium"
+                        tools:text="Ha Noi, Viet Nam" />
+
+                    <com.example.lori.widgets.BoldMontserratTextView
+                        android:id="@+id/tvCheckoutAdditionalNote"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_small"
+                        android:textColor="@color/secondary_text"
+                        android:textSize="@dimen/text_medium"
+                        tools:text="Additional note" />
+
+                    <com.example.lori.widgets.BoldMontserratTextView
+                        android:id="@+id/tvCheckoutOtherDetails"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_small"
+                        android:textColor="@color/secondary_text"
+                        android:textSize="@dimen/text_medium"
+                        tools:text="Other details" />
+
+                    <com.example.lori.widgets.BoldMontserratTextView
+                        android:id="@+id/tvCheckoutMobileNumber"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_small"
+                        android:textColor="@color/secondary_text"
+                        android:textSize="@dimen/text_medium"
+                        tools:text="0123456789" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <com.example.lori.widgets.BoldMontserratTextView
+                android:id="@+id/tvItemsReceipt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/llCheckoutAddressDetails"
+                android:layout_marginStart="@dimen/margin_medium"
+                android:layout_marginTop="@dimen/margin_medium"
+                android:layout_marginEnd="@dimen/margin_medium"
+                android:layout_marginBottom="@dimen/margin_medium"
+                android:padding="@dimen/padding_medium"
+                android:text="@string/label_checkout_items_receipt"
+                android:textColor="@color/primary_text"
+                android:textSize="@dimen/text_big" />
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvItemsReceipt"
+                android:layout_margin="@dimen/margin_medium"
+                app:cardCornerRadius="@dimen/radius_medium"
+                app:cardElevation="@dimen/radius_medium"
+                app:contentPadding="@dimen/padding_medium">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <com.example.lori.widgets.RegularMontserratTextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/label_subtotal"
+                            android:textColor="@color/primary_text"
+                            android:textSize="@dimen/text_medium" />
+
+                        <com.example.lori.widgets.RegularMontserratTextView
+                            android:id="@+id/tvCheckoutSubtotal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="center"
+                            android:textColor="@color/primary_text"
+                            android:textSize="@dimen/text_medium"
+                            tools:text="10,000 VND" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <com.example.lori.widgets.RegularMontserratTextView
+                            android:layout_width="298dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/label_shipping_charge"
+                            android:textColor="@color/primary_text"
+                            android:textSize="@dimen/text_medium" />
+
+                        <com.example.lori.widgets.RegularMontserratTextView
+                            android:id="@+id/tvCheckoutShippingCharge"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="center"
+                            android:textColor="@color/primary_text"
+                            android:textSize="@dimen/text_medium"
+                            tools:text="10,000 VND" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <com.example.lori.widgets.BoldMontserratTextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/label_total_amount"
+                            android:textColor="@color/primary_text"
+                            android:textSize="@dimen/text_medium" />
+
+                        <com.example.lori.widgets.BoldMontserratTextView
+                            android:id="@+id/tvCheckoutTotalAmount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="center"
+                            android:textColor="@color/primary_text"
+                            android:textSize="@dimen/text_medium"
+                            tools:text="20,000 VND" />
+                    </LinearLayout>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+        </RelativeLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/llCheckoutPlaceOrder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:padding="@dimen/padding_big"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <com.example.lori.widgets.BoldMontserratTextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/label_payment_mode"
+                android:textColor="@color/primary_text"
+                android:textSize="@dimen/text_medium" />
+
+            <com.example.lori.widgets.BoldMontserratTextView
+                android:id="@+id/tvPaymentMode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/label_cash_on_delivery"
+                android:textAlignment="center"
+                android:textColor="@color/primary_text"
+                android:textSize="@dimen/text_medium" />
+        </LinearLayout>
+
+        <com.example.lori.widgets.BoldMontserratButton
+            android:id="@+id/btPlaceOrder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/margin_big"
+            android:background="@drawable/ic_button_background"
+            android:foreground="?attr/selectableItemBackground"
+            android:gravity="center"
+            android:padding="@dimen/padding_medium"
+            android:text="@string/label_btn_place_order"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/text_medium" />
+    </LinearLayout>
+</RelativeLayout>
