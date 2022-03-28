@@ -2,6 +2,7 @@ package com.example.lori.activities
 
 import android.os.Bundle
 import android.os.Handler
+import android.os.Looper
 import android.text.TextUtils
 import android.util.Log
 import android.view.View
@@ -85,7 +86,7 @@ class AddEditAddressesActivity : BaseActivity(), View.OnClickListener {
                         hideProgressDialog()
                         showSnackBar(resources.getString(R.string.success_to_add_address), false)
 
-                        Handler().postDelayed({
+                        Handler(Looper.myLooper()!!).postDelayed({
                             finish()
                         }, Constants.DELAYED_MILLIS)
                     }
@@ -107,7 +108,7 @@ class AddEditAddressesActivity : BaseActivity(), View.OnClickListener {
                         hideProgressDialog()
                         showSnackBar(resources.getString(R.string.success_to_update_address), false)
 
-                        Handler().postDelayed({
+                        Handler(Looper.myLooper()!!).postDelayed({
                             finish()
                         }, Constants.DELAYED_MILLIS)
                     }

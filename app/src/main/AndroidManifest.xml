@@ -37,7 +37,7 @@
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Lori.NoActionBar" />
         <activity
-            android:name=".activities.AddProductsActivity"
+            android:name=".activities.AddEditProductsActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Lori.NoActionBar" />

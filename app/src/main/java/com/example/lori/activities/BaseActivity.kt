@@ -2,6 +2,7 @@ package com.example.lori.activities
 
 import android.app.Dialog
 import android.os.Handler
+import android.os.Looper
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -49,7 +50,7 @@ open class BaseActivity : AppCompatActivity() {
         }
 
         doubleBackToExitPressedOnce = true
-        Handler().postDelayed({ doubleBackToExitPressedOnce = false }, Constants.DELAYED_MILLIS)
+        Handler(Looper.myLooper()!!).postDelayed({ doubleBackToExitPressedOnce = false }, Constants.DELAYED_MILLIS)
         Toast.makeText(
             this,
             resources.getString(R.string.label_please_click_back_again_to_exit),

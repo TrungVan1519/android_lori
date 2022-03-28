@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lori.R
+import com.example.lori.activities.AddEditProductsActivity
 import com.example.lori.activities.ProductDetailsActivity
 import com.example.lori.activities.ui.ProductsFragment
 import com.example.lori.models.Product
@@ -82,7 +83,13 @@ class MyProductsAdapter(
     }
 
     private fun updateProduct(position: Int) {
-
+        when (fragment) {
+            is ProductsFragment -> {
+                val intent = Intent(fragment.requireActivity(), AddEditProductsActivity::class.java)
+                intent.putExtra(Constants.EXTRA_PRODUCT_DETAILS, products[position])
+                fragment.startActivity(intent)
+            }
+        }
     }
 
     private fun deleteProduct(id: String) {

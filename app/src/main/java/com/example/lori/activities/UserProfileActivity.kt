@@ -8,6 +8,7 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
+import android.os.Looper
 import android.text.TextUtils
 import android.util.Log
 import android.view.View
@@ -161,7 +162,7 @@ class UserProfileActivity : BaseActivity(), View.OnClickListener {
                     false
                 )
 
-                Handler().postDelayed({
+                Handler(Looper.myLooper()!!).postDelayed({
                     startActivity(Intent(this, DashboardActivity::class.java))
                     finish()
                 }, Constants.DELAYED_MILLIS)

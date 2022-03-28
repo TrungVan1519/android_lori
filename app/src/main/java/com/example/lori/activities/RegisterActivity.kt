@@ -2,6 +2,7 @@ package com.example.lori.activities
 
 import android.os.Bundle
 import android.os.Handler
+import android.os.Looper
 import android.text.TextUtils
 import android.util.Log
 import android.view.View
@@ -66,7 +67,7 @@ class RegisterActivity : BaseActivity(), View.OnClickListener {
                                     false
                                 )
 
-                                Handler().postDelayed({
+                                Handler(Looper.myLooper()!!).postDelayed({
                                     // todo sign out new user because this user is logged in automatically after registering
                                     FirebaseAuth.getInstance().signOut()
                                     finish()

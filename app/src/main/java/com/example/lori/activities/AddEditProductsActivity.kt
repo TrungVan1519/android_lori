@@ -9,6 +9,7 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
+import android.os.Looper
 import android.text.TextUtils
 import android.util.Log
 import android.view.View
@@ -22,24 +23,39 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.storage.FirebaseStorage
-import kotlinx.android.synthetic.main.activity_add_products.*
+import kotlinx.android.synthetic.main.activity_add_edit_products.*
 import java.io.IOException
 
-class AddProductsActivity : BaseActivity(), View.OnClickListener {
+class AddEditProductsActivity : BaseActivity(), View.OnClickListener {
 
     private var selectedImageFileUri: Uri? = null
+    private var mProduct: Product? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_add_products)
+        setContentView(R.layout.activity_add_edit_products)
 
-        ivAddUpdateProducts.setOnClickListener(this)
+        mProduct = intent.getParcelableExtra(Constants.EXTRA_PRODUCT_DETAILS)
+        if (mProduct != null && mProduct!!.id.isNotEmpty()) {
+            tvTitle.text = resources.getString(R.string.title_edit_product)
+            btSubmit.text = resources.getString(R.string.label_btn_update)
+
+            ImageUtils.loadProductImage(this, mProduct!!.image, ivProductImage)
+            ivUploadProductImage.visibility = View.GONE
+
+            etProductTitle.setText(mProduct?.title)
+            etProductPrice.setText(mProduct?.price.toString())
+            etProductDescription.setText(mProduct?.description)
+            etProductQuantity.setText(mProduct?.stock_quantity.toString())
+        }
+
+        ivUploadProductImage.setOnClickListener(this)
         btSubmit.setOnClickListener(this)
     }
 
     override fun onClick(v: View?) {
         when (v?.id) {
-            R.id.ivAddUpdateProducts -> {
+            R.id.ivUploadProductImage -> {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M
                     && ContextCompat.checkSelfPermission(
                         this,
@@ -59,89 +75,127 @@ class AddProductsActivity : BaseActivity(), View.OnClickListener {
             }
             R.id.btSubmit -> {
                 if (validateProductDetails()) {
-                    createProduct()
+                    createOrUpdateProduct()
                 }
             }
         }
     }
 
-    private fun createProduct() {
+    private fun createOrUpdateProduct() {
         showProgressDialog(resources.getString(R.string.label_please_wait))
 
-        // Upload product image.
-        FirebaseStorage.getInstance().reference
-            .child(
-                "${Constants.PRODUCT_IMAGE}${System.currentTimeMillis()}.${
-                    ImageUtils.getFileExtension(
-                        this,
-                        selectedImageFileUri!!
-                    )
-                }"
-            )
-            .putFile(selectedImageFileUri!!)
-            .addOnSuccessListener { taskSnapshot ->
-                // Get the downloadable url from the task snapshot
-                taskSnapshot.metadata!!.reference!!.downloadUrl
-                    .addOnSuccessListener { url ->
-                        showSnackBar(
-                            resources.getString(R.string.success_to_upload_image),
-                            false
+        val product = Product(
+            title = etProductTitle.text.toString().trim { it <= ' ' },
+            price = etProductPrice.text.toString().trim { it <= ' ' }.toLong(),
+            description = etProductDescription.text.toString().trim { it <= ' ' },
+            stock_quantity = etProductQuantity.text.toString().trim { it <= ' ' }
+                .toInt(),
+            uid = FirebaseAuth.getInstance().currentUser!!.uid,
+            username = getSharedPreferences(
+                Constants.LORI_PREFERENCES,
+                Context.MODE_PRIVATE
+            ).getString(Constants.LOGGED_IN_USERNAME, "")!!,
+        )
+
+        // Save new address
+        if (mProduct == null || mProduct!!.id.isEmpty()) {
+            // Upload product image.
+            FirebaseStorage.getInstance().reference
+                .child(
+                    "${Constants.PRODUCT_IMAGE}${System.currentTimeMillis()}.${
+                        ImageUtils.getFileExtension(
+                            this,
+                            selectedImageFileUri!!
                         )
-
-                        val product = Product(
-                            image = url.toString(),
-                            title = etProductTitle.text.toString().trim { it <= ' ' },
-                            price = etProductPrice.text.toString().trim { it <= ' ' }.toLong(),
-                            description = etProductDescription.text.toString().trim { it <= ' ' },
-                            stock_quantity = etProductQuantity.text.toString().trim { it <= ' ' }
-                                .toInt(),
-                            uid = FirebaseAuth.getInstance().currentUser!!.uid,
-                            username = getSharedPreferences(
-                                Constants.LORI_PREFERENCES,
-                                Context.MODE_PRIVATE
-                            ).getString(Constants.LOGGED_IN_USERNAME, "")!!,
-                        )
-
-                        // Save to "products" table in FireStore DB
-                        FirebaseFirestore.getInstance()
-                            .collection(Constants.PRODUCTS)
-                            .document()
-                            .set(product, SetOptions.merge())
-                            .addOnSuccessListener {
-                                hideProgressDialog()
-                                showSnackBar(
-                                    resources.getString(R.string.success_to_add_products),
-                                    false
-                                )
-
-                                Handler().postDelayed({
-                                    finish()
-                                }, Constants.DELAYED_MILLIS)
-                            }
-                            .addOnFailureListener { e ->
-                                hideProgressDialog()
-                                showSnackBar(
-                                    resources.getString(R.string.fail_to_add_products),
-                                    true
-                                )
-
-                                Log.e(
-                                    javaClass.simpleName,
-                                    "Errors while saving product.",
-                                    e
-                                )
-                            }
-                    }
-            }
-            .addOnFailureListener { e ->
-                hideProgressDialog()
-                showSnackBar(
-                    resources.getString(R.string.fail_to_upload_image),
-                    true
+                    }"
                 )
+                .putFile(selectedImageFileUri!!)
+                .addOnSuccessListener { taskSnapshot ->
+                    // Get the downloadable url from the task snapshot
+                    taskSnapshot.metadata!!.reference!!.downloadUrl
+                        .addOnSuccessListener { url ->
+                            showSnackBar(
+                                resources.getString(R.string.success_to_upload_image),
+                                false
+                            )
 
-                Log.e(javaClass.simpleName, "Errors while uploading image.", e)
-            }
+                            product.image = url.toString()
+
+                            // Save to "products" table in FireStore DB
+                            FirebaseFirestore.getInstance()
+                                .collection(Constants.PRODUCTS)
+                                .document()
+                                .set(product, SetOptions.merge())
+                                .addOnSuccessListener {
+                                    hideProgressDialog()
+                                    showSnackBar(
+                                        resources.getString(R.string.success_to_add_products),
+                                        false
+                                    )
+
+                                    Handler(Looper.myLooper()!!).postDelayed({
+                                        finish()
+                                    }, Constants.DELAYED_MILLIS)
+                                }
+                                .addOnFailureListener { e ->
+                                    hideProgressDialog()
+                                    showSnackBar(
+                                        resources.getString(R.string.fail_to_add_products),
+                                        true
+                                    )
+
+                                    Log.e(
+                                        javaClass.simpleName,
+                                        "Errors while saving product.",
+                                        e
+                                    )
+                                }
+                        }
+                }
+                .addOnFailureListener { e ->
+                    hideProgressDialog()
+                    showSnackBar(
+                        resources.getString(R.string.fail_to_upload_image),
+                        true
+                    )
+
+                    Log.e(javaClass.simpleName, "Errors while uploading image.", e)
+                }
+        }
+        // Update existing product by using tricks via SetOptions.merge()
+        // Beside, we can update via "update()" manually
+        else {
+            product.image = mProduct!!.image
+
+            FirebaseFirestore.getInstance()
+                .collection(Constants.PRODUCTS)
+                .document(mProduct!!.id)
+                .set(product, SetOptions.merge())
+                .addOnSuccessListener {
+                    hideProgressDialog()
+                    showSnackBar(
+                        resources.getString(R.string.success_to_update_products),
+                        false
+                    )
+
+                    Handler(Looper.myLooper()!!).postDelayed({
+                        finish()
+                    }, Constants.DELAYED_MILLIS)
+                }
+                .addOnFailureListener { e ->
+                    hideProgressDialog()
+                    showSnackBar(
+                        resources.getString(R.string.fail_to_update_products),
+                        true
+                    )
+
+                    Log.e(
+                        javaClass.simpleName,
+                        "Errors while saving product.",
+                        e
+                    )
+                }
+        }
     }
 
     /**
@@ -213,7 +267,7 @@ class AddProductsActivity : BaseActivity(), View.OnClickListener {
 
     private fun validateProductDetails(): Boolean {
         return when {
-            selectedImageFileUri == null -> {
+            selectedImageFileUri == null && (mProduct == null || mProduct!!.id.isEmpty()) -> {
                 showSnackBar(resources.getString(R.string.err_msg_select_product_image), true)
                 false
             }

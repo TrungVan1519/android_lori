@@ -2,6 +2,7 @@ package com.example.lori.activities
 
 import android.os.Bundle
 import android.os.Handler
+import android.os.Looper
 import com.example.lori.R
 import com.example.lori.utils.Constants
 import com.google.firebase.auth.FirebaseAuth
@@ -31,7 +32,7 @@ class ForgotPasswordActivity : BaseActivity() {
                                 false
                             )
 
-                            Handler().postDelayed({
+                            Handler(Looper.myLooper()!!).postDelayed({
                                 // todo sign out logged in user
                                 if (FirebaseAuth.getInstance().currentUser != null) {
                                     FirebaseAuth.getInstance().signOut()

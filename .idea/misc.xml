@@ -38,6 +38,7 @@
         <entry key="app/src/main/res/drawable/user_image_background.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_add_address.xml" value="0.2578125" />
         <entry key="app/src/main/res/layout/activity_add_edit_address.xml" value="0.17962962962962964" />
+        <entry key="app/src/main/res/layout/activity_add_edit_products.xml" value="0.16018518518518518" />
         <entry key="app/src/main/res/layout/activity_add_products.xml" value="0.22592592592592592" />
         <entry key="app/src/main/res/layout/activity_addresses.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_base.xml" value="0.2509057971014493" />

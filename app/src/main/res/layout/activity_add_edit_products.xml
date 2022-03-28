@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.AddProductsActivity">
+    tools:context=".activities.AddEditProductsActivity">
 
     <com.example.lori.widgets.ActionBar
         android:id="@+id/tbActionBar"
@@ -65,7 +65,7 @@
                     app:riv_tile_mode="clamp" />
 
                 <com.makeramen.roundedimageview.RoundedImageView
-                    android:id="@+id/ivAddUpdateProducts"
+                    android:id="@+id/ivUploadProductImage"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end|bottom"

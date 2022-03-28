@@ -12,6 +12,7 @@ object Constants {
     // Intent extras
     const val EXTRA_USER_DETAILS = "extra_user_details"
     const val EXTRA_PRODUCT_ID = "extra_product_id"
+    const val EXTRA_PRODUCT_DETAILS = "ProductDetails"
     const val EXTRA_PRODUCT_OWNER_ID = "extra_product_owner_id"
     const val EXTRA_ADDRESS_DETAILS = "AddressDetails"
     const val EXTRA_SELECT_ADDRESS = "extra_select_address"

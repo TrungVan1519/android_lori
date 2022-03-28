@@ -140,4 +140,7 @@
     <string name="fail_to_delete_addresses">Fail to delete addresses</string>
     <string name="success_to_place_orders">Your order placed successfully</string>
     <string name="fail_to_place_orders">Fail to place orders</string>
+    <string name="title_edit_product">EDIT PRODUCT</string>
+    <string name="success_to_update_products">Your product is updated successfully</string>
+    <string name="fail_to_update_products">Fail to uodate products</string>
 </resources>
