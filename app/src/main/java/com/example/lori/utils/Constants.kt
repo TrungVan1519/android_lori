@@ -44,6 +44,7 @@ object Constants {
 
     const val PID = "pid"
     const val CART_QUANTITY = "cart_quantity"
+    const val STOCK_QUANTITY = "stock_quantity"
 
     const val ADDRESS = "address"
 

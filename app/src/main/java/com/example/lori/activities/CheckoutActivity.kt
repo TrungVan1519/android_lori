@@ -164,15 +164,41 @@ class CheckoutActivity : BaseActivity(), View.OnClickListener {
             .document()
             .set(order, SetOptions.merge())
             .addOnSuccessListener {
-                hideProgressDialog()
-                showSnackBar(resources.getString(R.string.success_to_place_orders), false)
+                val writeBatch = FirebaseFirestore.getInstance().batch()
 
-                Handler(Looper.myLooper()!!).postDelayed({
-                    val intent = Intent(this@CheckoutActivity, DashboardActivity::class.java)
-                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                    startActivity(intent)
-                    finish()
-                }, Constants.DELAYED_MILLIS)
+                cartItems.forEach { cartItem ->
+                    // Update stock quantity of products based on cart quantity
+                    writeBatch.update(
+                        FirebaseFirestore.getInstance().collection(Constants.PRODUCTS).document(cartItem.pid),
+                        mapOf(Constants.STOCK_QUANTITY to cartItem.stock_quantity - cartItem.cart_quantity)
+                    )
+
+                    // Delete cartItems
+                    writeBatch.delete(
+                        FirebaseFirestore.getInstance()
+                            .collection(Constants.CART_ITEMS)
+                            .document(cartItem.id)
+                    )
+                }
+
+                writeBatch.commit()
+                    .addOnSuccessListener {
+                        hideProgressDialog()
+                        showSnackBar(resources.getString(R.string.success_to_place_orders), false)
+
+                        Handler(Looper.myLooper()!!).postDelayed({
+                            val intent = Intent(this, DashboardActivity::class.java)
+                            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                            startActivity(intent)
+                            finish()
+                        }, Constants.DELAYED_MILLIS)
+                    }
+                    .addOnFailureListener { e ->
+                        hideProgressDialog()
+                        showSnackBar(resources.getString(R.string.fail_to_place_orders), true)
+
+                        Log.e(javaClass.simpleName, "Error while ", e)
+                    }
             }
             .addOnFailureListener { e ->
                 hideProgressDialog()
