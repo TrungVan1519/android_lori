@@ -53,6 +53,15 @@
     <string name="label_payment_mode">Payment Mode</string>
     <string name="label_cash_on_delivery">Cash On Delivery</string>
     <string name="label_btn_place_order">Place Order</string>
+    <string name="label_no_orders_placed_yet">No orders placed yet!</string>
+    <string name="label_order_details">Order Details</string>
+    <string name="label_order_details_id">Order ID</string>
+    <string name="label_order_details_date">Order Date</string>
+    <string name="label_order_details_status">Order Status</string>
+    <string name="label_order_details_shipping_address">Shipping Address</string>
+    <string name="label_order_status_pending">Pending</string>
+    <string name="label_order_status_in_process">In Process</string>
+    <string name="label_order_status_delivered">Delivered</string>
 
     <string name="title_login">LOGIN</string>
     <string name="title_forgot_password">FORGOT PASSWORD?</string>
@@ -73,6 +82,8 @@
     <string name="title_edit_address">EDIT ADDRESSES</string>
     <string name="title_select_address">SELECT ADDRESS</string>
     <string name="title_checkout">CHECKOUT</string>
+    <string name="title_edit_product">EDIT PRODUCT</string>
+    <string name="title_my_order_details">MY ORDER DETAILS</string>
 
     <string name="action_settings">Settings</string>
     <string name="action_add_products">Add Products</string>
@@ -122,6 +133,8 @@
     <string name="success_to_add_address">Your address is added successfully</string>
     <string name="success_to_update_address">Your address is updated successfully</string>
     <string name="success_to_delete_address">Your address is deleted successfully</string>
+    <string name="success_to_update_products">Your product is updated successfully</string>
+    <string name="success_to_delete_orders">Your order is deleted successfully</string>
 
     <string name="fail_to_register">Fail to register</string>
     <string name="fail_to_select_image">Fail to select the image</string>
@@ -140,7 +153,6 @@
     <string name="fail_to_delete_addresses">Fail to delete addresses</string>
     <string name="success_to_place_orders">Your order placed successfully</string>
     <string name="fail_to_place_orders">Fail to place orders</string>
-    <string name="title_edit_product">EDIT PRODUCT</string>
-    <string name="success_to_update_products">Your product is updated successfully</string>
-    <string name="fail_to_update_products">Fail to uodate products</string>
+    <string name="fail_to_update_products">Fail to update products</string>
+    <string name="fail_to_delete_orders">Fail to delete orders</string>
 </resources>

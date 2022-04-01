@@ -16,6 +16,8 @@
     <color name="gradient_end">#8C24FF</color>
     <color name="snack_bar_success">#4CD137</color>
     <color name="snack_bar_error">#E84118</color>
+    <color name="order_status_in_process">#FF9800</color>
+    <color name="order_status_delivered">#8BC34A</color>
 
     <color name="primary_text">@color/dark_grey</color>
     <color name="secondary_text">@color/light_grey</color>

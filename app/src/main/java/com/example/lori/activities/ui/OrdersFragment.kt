@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.lori.R
-import com.example.lori.activities.adapters.MyOrderItemsAdapter
+import com.example.lori.activities.adapters.MyOrdersAdapter
 import com.example.lori.models.Order
 import com.example.lori.utils.Constants
 import com.google.firebase.auth.FirebaseAuth
@@ -16,14 +16,14 @@ import kotlinx.android.synthetic.main.fragment_orders.*
 
 class OrdersFragment : BaseFragment() {
 
-    private lateinit var adapter: MyOrderItemsAdapter
+    private lateinit var adapter: MyOrdersAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        adapter = MyOrderItemsAdapter(this, arrayListOf(), R.layout.layout_order_item)
+        adapter = MyOrdersAdapter(this, arrayListOf(), R.layout.layout_order)
         return inflater.inflate(R.layout.fragment_orders, container, false)
     }
 
@@ -32,7 +32,7 @@ class OrdersFragment : BaseFragment() {
         getMyOrders()
     }
 
-     fun getMyOrders() {
+     private fun getMyOrders() {
         showProgressDialog(resources.getString(R.string.label_please_wait))
 
         FirebaseFirestore.getInstance()
@@ -42,23 +42,23 @@ class OrdersFragment : BaseFragment() {
             .addOnSuccessListener { querySnapshot ->
                 hideProgressDialog()
 
-                val orderItems = ArrayList<Order>()
+                val orders = ArrayList<Order>()
                 querySnapshot.documents.forEach { documentSnapshot ->
-                    val orderItem = documentSnapshot.toObject(Order::class.java)!!
-                    orderItem.id = documentSnapshot.id
-                    orderItems.add(orderItem)
+                    val order = documentSnapshot.toObject(Order::class.java)!!
+                    order.id = documentSnapshot.id
+                    orders.add(order)
                 }
 
-                if (orderItems.size > 0) {
-                    rvMyOrderItems.visibility = View.VISIBLE
+                if (orders.size > 0) {
+                    rvMyOrders.visibility = View.VISIBLE
                     tvNoOrdersFound.visibility = View.GONE
 
-                    rvMyOrderItems.layoutManager = LinearLayoutManager(activity)
-                    rvMyOrderItems.setHasFixedSize(true)
-                    rvMyOrderItems.adapter = adapter
-                    adapter.notifyItemChanged(orderItems)
+                    rvMyOrders.layoutManager = LinearLayoutManager(activity)
+                    rvMyOrders.setHasFixedSize(true)
+                    rvMyOrders.adapter = adapter
+                    adapter.notifyItemChanged(orders)
                 }else {
-                    rvMyOrderItems.visibility = View.GONE
+                    rvMyOrders.visibility = View.GONE
                     tvNoOrdersFound.visibility = View.VISIBLE
                 }
             }

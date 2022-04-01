@@ -15,5 +15,6 @@ data class Order(
     val subTotalAmount: Double = 0.0,
     val shippingCharge: Double = 0.0,
     val totalAmount: Double = 0.0,
+    val order_datetime: Long = 0,
     val uid: String = "",
 ) : Parcelable

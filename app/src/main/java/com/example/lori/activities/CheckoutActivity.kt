@@ -9,10 +9,7 @@ import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.lori.R
 import com.example.lori.activities.adapters.MyCartItemsAdapter
-import com.example.lori.models.Address
-import com.example.lori.models.CartItem
-import com.example.lori.models.Order
-import com.example.lori.models.Product
+import com.example.lori.models.*
 import com.example.lori.utils.Constants
 import com.example.lori.utils.FormatUtils
 import com.google.firebase.auth.FirebaseAuth
@@ -148,6 +145,7 @@ class CheckoutActivity : BaseActivity(), View.OnClickListener {
     private fun placeAnOrder() {
         showProgressDialog(resources.getString(R.string.label_please_wait))
 
+        totalAmount = subTotal + Constants.SHIPPING_CHARGE
         val order = Order(
             items = cartItems,
             address = address!!,
@@ -156,6 +154,7 @@ class CheckoutActivity : BaseActivity(), View.OnClickListener {
             subTotalAmount = subTotal,
             shippingCharge = Constants.SHIPPING_CHARGE.toDouble(),
             totalAmount = totalAmount,
+            order_datetime = System.currentTimeMillis(),
             uid = FirebaseAuth.getInstance().currentUser!!.uid,
         )
 
@@ -169,7 +168,9 @@ class CheckoutActivity : BaseActivity(), View.OnClickListener {
                 cartItems.forEach { cartItem ->
                     // Update stock quantity of products based on cart quantity
                     writeBatch.update(
-                        FirebaseFirestore.getInstance().collection(Constants.PRODUCTS).document(cartItem.pid),
+                        FirebaseFirestore.getInstance()
+                            .collection(Constants.PRODUCTS)
+                            .document(cartItem.pid),
                         mapOf(Constants.STOCK_QUANTITY to cartItem.stock_quantity - cartItem.cart_quantity)
                     )
 
@@ -188,7 +189,8 @@ class CheckoutActivity : BaseActivity(), View.OnClickListener {
 
                         Handler(Looper.myLooper()!!).postDelayed({
                             val intent = Intent(this, DashboardActivity::class.java)
-                            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                            intent.flags =
+                                Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                             startActivity(intent)
                             finish()
                         }, Constants.DELAYED_MILLIS)
