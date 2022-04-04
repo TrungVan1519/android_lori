@@ -17,6 +17,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import kotlinx.android.synthetic.main.activity_my_fav_products.*
+import kotlinx.android.synthetic.main.activity_product_details.*
 
 class MyFavProductsActivity : BaseActivity() {
 
@@ -32,7 +33,7 @@ class MyFavProductsActivity : BaseActivity() {
         adapter.listener = object : FavProductAdapter.Listener {
             override fun onClick(position: Int) {
                 val intent = Intent(this@MyFavProductsActivity, ProductDetailsActivity::class.java)
-                intent.putExtra(Constants.EXTRA_PRODUCT_ID, list[position].id)
+                intent.putExtra(Constants.EXTRA_PRODUCT_ID, adapter.currentList[position].pid)
                 startActivity(intent)
             }
 
@@ -73,6 +74,7 @@ class MyFavProductsActivity : BaseActivity() {
                         dialogInterface.dismiss()
                     }
                     .setNegativeButton(resources.getString(R.string.label_no)) { dialogInterface, _ ->
+                        rvFavProducts.adapter = adapter
                         dialogInterface.dismiss()
                     }
                     .setCancelable(false)

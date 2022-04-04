@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.lori.R
 import com.example.lori.models.FavProduct
+import com.example.lori.utils.FormatUtils
 import kotlinx.android.synthetic.main.layout_my_fav_products.view.*
 
 class FavProductAdapter : ListAdapter<FavProduct, FavProductAdapter.ViewHolder>(DiffCallback()) {
@@ -41,9 +42,13 @@ class FavProductAdapter : ListAdapter<FavProduct, FavProductAdapter.ViewHolder>(
         }
 
         fun displayData(favProduct: FavProduct) {
-            Glide.with(itemView.context).load(favProduct.image).centerCrop().into(itemView.ivItemImage)
+            Glide
+                .with(itemView.context)
+                .load(favProduct.image)
+                .centerCrop()
+                .into(itemView.ivItemImage)
             itemView.tvItemTitle.text = favProduct.title
-            itemView.tvItemPrice.text = favProduct.price.toString()
+            itemView.tvItemPrice.text = "${FormatUtils.format(num = favProduct.price)} VND"
         }
     }
 
