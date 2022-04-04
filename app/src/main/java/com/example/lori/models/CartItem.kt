@@ -13,4 +13,6 @@ data class CartItem(
     var stock_quantity: Int = 0,
     val uid: String = "", // user id
     val pid: String = "", // product id
+    var createdAt: Long = 0,
+    var updatedAt: Long = 0,
 ) : Parcelable

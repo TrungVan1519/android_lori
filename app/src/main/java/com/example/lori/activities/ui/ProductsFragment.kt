@@ -7,6 +7,7 @@ import android.view.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.lori.R
 import com.example.lori.activities.AddEditProductsActivity
+import com.example.lori.activities.MyFavProductsActivity
 import com.example.lori.activities.adapters.MyProductsAdapter
 import com.example.lori.models.Product
 import com.example.lori.utils.Constants
@@ -44,6 +45,10 @@ class ProductsFragment : BaseFragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
+            R.id.action_list_fav_products -> {
+                startActivity(Intent(activity, MyFavProductsActivity::class.java))
+                return true
+            }
             R.id.action_add_products -> {
                 startActivity(Intent(activity, AddEditProductsActivity::class.java))
                 return true

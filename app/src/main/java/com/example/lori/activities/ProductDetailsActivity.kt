@@ -7,6 +7,7 @@ import android.view.View
 import androidx.core.content.ContextCompat
 import com.example.lori.R
 import com.example.lori.models.CartItem
+import com.example.lori.models.FavProduct
 import com.example.lori.models.Product
 import com.example.lori.utils.Constants
 import com.example.lori.utils.FormatUtils
@@ -25,13 +26,18 @@ class ProductDetailsActivity : BaseActivity(), View.OnClickListener {
         setContentView(R.layout.activity_product_details)
 
         getProductDetails(intent.getStringExtra(Constants.EXTRA_PRODUCT_ID) ?: "")
+        getFavProductDetails()
 
+        ivAddToFav.setOnClickListener(this)
         btAddToCart.setOnClickListener(this)
         btGoToCart.setOnClickListener(this)
     }
 
     override fun onClick(v: View?) {
         when (v?.id) {
+            R.id.ivAddToFav -> {
+                addToFav()
+            }
             R.id.btAddToCart -> {
                 addToCart()
             }
@@ -112,6 +118,42 @@ class ProductDetailsActivity : BaseActivity(), View.OnClickListener {
                 showSnackBar(resources.getString(R.string.fail_to_get_product_details), true)
 
                 Log.e(javaClass.simpleName, "Errors while getting product details", e)
+            }
+    }
+
+    private fun getFavProductDetails() {
+        FirebaseFirestore.getInstance()
+            .collection(Constants.FAV_PRODUCTS)
+            .whereEqualTo(Constants.UID, FirebaseAuth.getInstance().currentUser!!.uid)
+            .whereEqualTo(Constants.PID, product!!.id)
+            .get()
+            .addOnSuccessListener {
+                ivAddToFav.setImageResource(R.drawable.ic_favorite_24dp)
+            }
+            .addOnFailureListener {
+                ivAddToFav.setImageResource(R.drawable.ic_favorite_border_24dp)
+            }
+    }
+
+    private fun addToFav() {
+        val favProduct = FavProduct(
+            image = product!!.image,
+            title = product!!.title,
+            price = product!!.price,
+            uid = FirebaseAuth.getInstance().currentUser!!.uid,
+            pid = product!!.id,
+            createdAt = System.currentTimeMillis()
+        )
+
+        FirebaseFirestore.getInstance()
+            .collection(Constants.FAV_PRODUCTS)
+            .document()
+            .set(favProduct, SetOptions.merge())
+            .addOnSuccessListener {
+                ivAddToFav.setImageResource(R.drawable.ic_favorite_24dp)
+            }
+            .addOnFailureListener {
+                ivAddToFav.setImageResource(R.drawable.ic_favorite_border_24dp)
             }
     }
 

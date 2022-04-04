@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/margin_medium"
+    app:cardCornerRadius="@dimen/radius_medium"
+    app:cardElevation="@dimen/radius_medium"
+    app:contentPadding="@dimen/padding_medium">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/ivItemImage"
+            android:layout_width="@dimen/container_small"
+            android:layout_height="@dimen/container_small"
+            android:layout_margin="@dimen/margin_small"
+            android:contentDescription="@string/content_description"
+            android:minHeight="@dimen/container_medium"
+            android:scaleType="fitXY"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:riv_border_color="@color/rounded_image_border"
+            app:riv_border_width="@dimen/radius_tiny"
+            app:riv_corner_radius="@dimen/radius_medium"
+            app:riv_mutate_background="false"
+            app:riv_oval="false"
+            app:riv_tile_mode="clamp"
+            tools:src="@tools:sample/avatars" />
+
+        <LinearLayout
+            android:id="@+id/llItemDetails"
+            android:layout_width="@dimen/none"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/margin_medium"
+            android:gravity="center"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/ibDeleteFromFav"
+            app:layout_constraintStart_toEndOf="@id/ivItemImage"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.example.lori.widgets.BoldMontserratTextView
+                android:id="@+id/tvItemTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/primary_text"
+                android:textSize="@dimen/text_small"
+                tools:text="Name" />
+
+            <com.example.lori.widgets.RegularMontserratTextView
+                android:id="@+id/tvItemPrice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_medium"
+                android:textColor="@color/primary_text"
+                android:textSize="@dimen/text_tiny"
+                tools:text="10.000 VND" />
+        </LinearLayout>
+
+        <ImageButton
+            android:id="@+id/ibDeleteFromFav"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:contentDescription="@string/content_description"
+            android:foreground="?attr/selectableItemBackgroundBorderless"
+            android:padding="@dimen/padding_medium"
+            android:src="@drawable/ic_favorite_24dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/llItemDetails"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/colorAccent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

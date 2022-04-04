@@ -26,6 +26,7 @@ object Constants {
     // Firebase DB collection names
     const val USERS = "users"
     const val PRODUCTS = "products"
+    const val FAV_PRODUCTS = "fav_products"
     const val CART_ITEMS = "cart_items"
     const val ADDRESSES = "addresses"
     const val ORDERS = "orders"

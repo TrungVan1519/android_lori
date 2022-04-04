@@ -14,4 +14,6 @@ data class Address(
     val type: String = "",
     val otherDetails: String = "",
     val uid: String = "",
+    var createdAt: Long = 0,
+    var updatedAt: Long = 0,
 ) : Parcelable

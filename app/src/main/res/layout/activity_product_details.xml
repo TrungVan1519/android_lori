@@ -59,27 +59,42 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/ic_bg"
-                android:orientation="vertical"
+                android:orientation="horizontal"
                 android:padding="@dimen/padding_big"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/ivProductDetailImage">
 
-                <com.example.lori.widgets.BoldMontserratTextView
-                    android:id="@+id/tvProductDetailsTitle"
-                    android:layout_width="match_parent"
+                <LinearLayout
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/text_medium"
-                    tools:text="Product Title" />
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
-                <com.example.lori.widgets.RegularMontserratTextView
-                    android:id="@+id/tvProductDetailsPrice"
-                    android:layout_width="match_parent"
+                    <com.example.lori.widgets.BoldMontserratTextView
+                        android:id="@+id/tvProductDetailsTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_medium"
+                        tools:text="Product Title" />
+
+                    <com.example.lori.widgets.RegularMontserratTextView
+                        android:id="@+id/tvProductDetailsPrice"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_small"
+                        tools:text="10,000 VND" />
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/ivAddToFav"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/text_small"
-                    tools:text="10000 VND" />
+                    android:layout_gravity="end"
+                    android:contentDescription="@string/content_description"
+                    android:src="@drawable/ic_favorite_border_24dp" />
             </LinearLayout>
 
             <com.example.lori.widgets.BoldMontserratTextView

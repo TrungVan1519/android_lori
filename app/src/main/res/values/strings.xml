@@ -21,7 +21,7 @@
     <string name="label_addresses">Addresses</string>
     <string name="label_btn_logout">Logout</string>
     <string name="label_no_products_found">No products are available!</string>
-    <string name="label_delete_dialog">Are you sure you want to delete the product?</string>
+    <string name="label_delete_dialog">Are you sure you want to delete this?</string>
     <string name="label_yes">Yes</string>
     <string name="label_no">No</string>
     <string name="label_product_description">Product Description</string>
@@ -62,6 +62,7 @@
     <string name="label_order_status_pending">Pending</string>
     <string name="label_order_status_in_process">In Process</string>
     <string name="label_order_status_delivered">Delivered</string>
+    <string name="label_no_favorite_products_found">No favorite products are available</string>
 
     <string name="title_login">LOGIN</string>
     <string name="title_forgot_password">FORGOT PASSWORD?</string>
@@ -84,10 +85,12 @@
     <string name="title_checkout">CHECKOUT</string>
     <string name="title_edit_product">EDIT PRODUCT</string>
     <string name="title_my_order_details">MY ORDER DETAILS</string>
+    <string name="title_my_fav_products">MY FAVORITE</string>
 
     <string name="action_settings">Settings</string>
     <string name="action_add_products">Add Products</string>
     <string name="action_cart">My Cart</string>
+    <string name="action_fav_products">Favorite products</string>
 
     <string name="hint_email_id">Email ID</string>
     <string name="hint_password">Password</string>
@@ -148,6 +151,7 @@
     <string name="fail_to_add_products_to_cart">Fail to add products to cart</string>
     <string name="fail_to_check_existing_cart_items">Fail to check existing cart_items</string>
     <string name="fail_to_delete_cart_items">Fail to delete cart items</string>
+    <string name="fail_to_delete_fav_products">Fail to delete favorite products</string>
     <string name="fail_to_add_addresses">Fail to add addresses</string>
     <string name="fail_to_update_addresses">Fail to update addresses</string>
     <string name="fail_to_delete_addresses">Fail to delete addresses</string>
