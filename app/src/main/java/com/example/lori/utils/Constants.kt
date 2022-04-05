@@ -27,6 +27,7 @@ object Constants {
     const val USERS = "users"
     const val PRODUCTS = "products"
     const val FAV_PRODUCTS = "fav_products"
+    const val COMMENTS = "comments"
     const val CART_ITEMS = "cart_items"
     const val ADDRESSES = "addresses"
     const val ORDERS = "orders"
@@ -49,6 +50,9 @@ object Constants {
     const val STOCK_QUANTITY = "stock_quantity"
 
     const val ADDRESS = "address"
+
+    const val CREATED_AT = "createdAt"
+    const val UPDATED_AT = "updatedAt"
 
     // For "users" collection
     const val MALE = "Male"

@@ -21,7 +21,6 @@ import kotlinx.android.synthetic.main.activity_product_details.*
 
 class MyFavProductsActivity : BaseActivity() {
 
-    lateinit var list: MutableList<FavProduct>
     val adapter = FavProductAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -59,7 +58,7 @@ class MyFavProductsActivity : BaseActivity() {
                                 hideProgressDialog()
 
                                 // Delete from RecyclerView
-                                list = adapter.currentList.toMutableList()
+                                val list = adapter.currentList.toMutableList()
                                 list.removeAt(viewHolder.adapterPosition)
                                 adapter.submitList(list)
                             }
