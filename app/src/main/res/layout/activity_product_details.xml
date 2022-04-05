@@ -201,6 +201,46 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/btAddToCart"
                 tools:visibility="visible" />
+
+            <LinearLayout
+                android:id="@+id/llComment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/btGoToCart">
+
+                <com.example.lori.widgets.BoldMontserratButton
+                    android:id="@+id/btListComment"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="@dimen/margin_big"
+                    android:layout_weight="1"
+                    android:background="@drawable/ic_button_background"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:gravity="center"
+                    android:padding="@dimen/padding_big"
+                    android:text="@string/label_btn_list_comments"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/text_small" />
+
+                <com.example.lori.widgets.BoldMontserratButton
+                    android:id="@+id/btAddComment"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="@dimen/margin_big"
+                    android:layout_weight="1"
+                    android:background="@drawable/ic_button_background"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:gravity="center"
+                    android:padding="@dimen/padding_big"
+                    android:text="@string/label_btn_add_comments"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/text_small" />
+            </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

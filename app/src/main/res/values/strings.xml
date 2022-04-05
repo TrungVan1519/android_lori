@@ -64,6 +64,8 @@
     <string name="label_order_status_delivered">Delivered</string>
     <string name="label_no_favorite_products_found">No favorite products are available!</string>
     <string name="label_btn_add_comments">Add comments</string>
+    <string name="label_btn_list_comments">List comments</string>
+    <string name="label_no_comments_found">No comments are available!</string>
 
     <string name="title_login">LOGIN</string>
     <string name="title_forgot_password">FORGOT PASSWORD?</string>
@@ -89,6 +91,7 @@
     <string name="title_my_fav_products">MY FAVORITE</string>
     <string name="title_add_comments">ADD COMMENTS</string>
     <string name="title_update_comments">UPDATE COMMENTS</string>
+    <string name="title_list_comments">ALL COMMENTS</string>
 
     <string name="action_settings">Settings</string>
     <string name="action_add_products">Add Products</string>
@@ -139,6 +142,7 @@
     <string name="success_to_delete_cart_items">Your cart item is deleted successfully</string>
     <string name="success_to_add_address">Your address is added successfully</string>
     <string name="success_to_add_comment">Your comment is added successfully</string>
+    <string name="success_to_update_comment">Your comment is updated successfully</string>
     <string name="success_to_update_address">Your address is updated successfully</string>
     <string name="success_to_delete_address">Your address is deleted successfully</string>
     <string name="success_to_update_products">Your product is updated successfully</string>
@@ -160,10 +164,12 @@
     <string name="fail_to_delete_fav_products">Fail to delete favorite products</string>
     <string name="fail_to_add_addresses">Fail to add addresses</string>
     <string name="fail_to_add_comment">Fail to add comments</string>
+    <string name="fail_to_update_comment">Fail to update comments</string>
     <string name="fail_to_update_addresses">Fail to update addresses</string>
     <string name="fail_to_delete_addresses">Fail to delete addresses</string>
     <string name="success_to_place_orders">Your order placed successfully</string>
     <string name="fail_to_place_orders">Fail to place orders</string>
     <string name="fail_to_update_products">Fail to update products</string>
     <string name="fail_to_delete_orders">Fail to delete orders</string>
+    <string name="fail_to_list_all_comments">Fail to list all comments</string>
 </resources>

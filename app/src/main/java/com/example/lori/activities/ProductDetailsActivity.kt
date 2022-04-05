@@ -4,8 +4,6 @@ import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.util.Log
 import android.view.View
 import android.view.WindowManager
@@ -13,6 +11,7 @@ import android.widget.ArrayAdapter
 import android.widget.Spinner
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.lori.R
 import com.example.lori.activities.adapters.CommentsAdapter
 import com.example.lori.models.*
@@ -22,6 +21,7 @@ import com.example.lori.utils.ImageUtils
 import com.example.lori.widgets.BoldMontserratButton
 import com.example.lori.widgets.BoldMontserratEditText
 import com.example.lori.widgets.BoldMontserratTextView
+import com.example.lori.widgets.RegularMontserratTextView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
@@ -32,7 +32,7 @@ class ProductDetailsActivity : BaseActivity(), View.OnClickListener {
 
     private var product: Product? = null
 
-    lateinit var list: MutableList<Comment>
+    private lateinit var rvComments: RecyclerView
     val adapter = CommentsAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,56 +44,8 @@ class ProductDetailsActivity : BaseActivity(), View.OnClickListener {
         ivAddToFav.setOnClickListener(this)
         btAddToCart.setOnClickListener(this)
         btGoToCart.setOnClickListener(this)
+        btListComment.setOnClickListener(this)
         btAddComment.setOnClickListener(this)
-
-        adapter.listener = object : CommentsAdapter.Listener {
-            // todo update comments
-            override fun onClick(position: Int) {
-                addOrUpdateComment(false)
-            }
-
-            override fun onLongClick(position: Int) {
-                // Delete from Firebase
-                AlertDialog.Builder(this@ProductDetailsActivity)
-                    .setTitle(R.string.title_delete_dialog)
-                    .setMessage(R.string.label_delete_dialog)
-                    .setIcon(R.drawable.ic_delete_red_24dp)
-                    .setPositiveButton(resources.getString(R.string.label_yes)) { dialogInterface, _ ->
-                        showProgressDialog(resources.getString(R.string.label_please_wait))
-
-                        FirebaseFirestore.getInstance()
-                            .collection(Constants.COMMENTS)
-                            .document(adapter.currentList[position].id)
-                            .delete()
-                            .addOnSuccessListener {
-                                hideProgressDialog()
-
-                                // Delete from RecyclerView
-                                list = adapter.currentList.toMutableList()
-                                list.removeAt(position)
-                                adapter.submitList(list)
-                            }
-                            .addOnFailureListener { e ->
-                                hideProgressDialog()
-                                showSnackBar(
-                                    resources.getString(R.string.fail_to_delete_comment),
-                                    true
-                                )
-                                Log.e(javaClass.simpleName, "Errors while deleting comments", e)
-                            }
-                        dialogInterface.dismiss()
-                    }
-                    .setNegativeButton(resources.getString(R.string.label_no)) { dialogInterface, _ ->
-                        dialogInterface.dismiss()
-                    }
-                    .setCancelable(false)
-                    .create()
-                    .show()
-            }
-        }
-        rvComments.adapter = adapter
-        rvComments.setHasFixedSize(true)
-        rvComments.layoutManager = LinearLayoutManager(this)
     }
 
     override fun onClick(v: View?) {
@@ -106,6 +58,9 @@ class ProductDetailsActivity : BaseActivity(), View.OnClickListener {
             }
             R.id.btGoToCart -> {
                 startActivity(Intent(this, CartActivity::class.java))
+            }
+            R.id.btListComment -> {
+                getAllComments()
             }
             R.id.btAddComment -> {
                 addOrUpdateComment(true)
@@ -180,7 +135,6 @@ class ProductDetailsActivity : BaseActivity(), View.OnClickListener {
                 }
 
                 getFavProductDetails()
-                getAllComments()
             }
             .addOnFailureListener { e ->
                 hideProgressDialog()
@@ -246,36 +200,115 @@ class ProductDetailsActivity : BaseActivity(), View.OnClickListener {
     }
 
     private fun getAllComments() {
+        showProgressDialog(resources.getString(R.string.label_please_wait))
+
         FirebaseFirestore.getInstance()
             .collection(Constants.COMMENTS)
             .whereEqualTo(Constants.PID, product!!.id)
             .orderBy(Constants.CREATED_AT, Query.Direction.DESCENDING)
             .get()
             .addOnSuccessListener { querySnapshot ->
+                hideProgressDialog()
+
                 val comments = ArrayList<Comment>()
                 querySnapshot.documents.forEach { documentSnapshot ->
                     val comment = documentSnapshot.toObject(Comment::class.java)!!
                     comment.id = documentSnapshot.id
                     comments.add(comment)
                 }
-                Log.e("TAG", "getAllComments: ${comments.size}\n\n${adapter.currentList.size}")
+
+                val lp = WindowManager.LayoutParams()
+                val dialog = Dialog(this@ProductDetailsActivity)
+                dialog.setContentView(R.layout.layout_dialog_list_comments)
+                lp.copyFrom(dialog.window!!.attributes)
+                lp.width = WindowManager.LayoutParams.MATCH_PARENT
+                lp.height = WindowManager.LayoutParams.WRAP_CONTENT
+                dialog.show()
+                dialog.window!!.attributes = lp
+
+                val btCancelDialog = dialog.findViewById<BoldMontserratButton>(R.id.btCancel)
+                val tvNoCommentsFound =
+                    dialog.findViewById<RegularMontserratTextView>(R.id.tvNoCommentsFound)
+                rvComments = dialog.findViewById(R.id.rvComments)
+
+                btCancelDialog.setOnClickListener { dialog.dismiss() }
+
+                adapter.listener = object : CommentsAdapter.Listener {
+                    // todo update comments
+                    override fun onClick(position: Int) {
+                        if (comments[position].uid == FirebaseAuth.getInstance().currentUser!!.uid) {
+                            addOrUpdateComment(false, adapter.currentList[position])
+                        }
+                    }
+
+                    override fun onLongClick(position: Int) {
+                        if (comments[position].uid == FirebaseAuth.getInstance().currentUser!!.uid) {
+                            // Delete from Firebase
+                            AlertDialog.Builder(this@ProductDetailsActivity)
+                                .setTitle(R.string.title_delete_dialog)
+                                .setMessage(R.string.label_delete_dialog)
+                                .setIcon(R.drawable.ic_delete_red_24dp)
+                                .setPositiveButton(resources.getString(R.string.label_yes)) { dialogInterface, _ ->
+                                    showProgressDialog(resources.getString(R.string.label_please_wait))
+
+                                    FirebaseFirestore.getInstance()
+                                        .collection(Constants.COMMENTS)
+                                        .document(adapter.currentList[position].id)
+                                        .delete()
+                                        .addOnSuccessListener {
+                                            hideProgressDialog()
+
+                                            // Delete from RecyclerView
+                                            val list = adapter.currentList.toMutableList()
+                                            list.removeAt(position)
+                                            adapter.submitList(list)
+                                        }
+                                        .addOnFailureListener { e ->
+                                            hideProgressDialog()
+                                            showSnackBar(
+                                                resources.getString(R.string.fail_to_delete_comment),
+                                                true
+                                            )
+                                            Log.e(
+                                                javaClass.simpleName,
+                                                "Errors while deleting comments",
+                                                e
+                                            )
+                                        }
+                                    dialogInterface.dismiss()
+                                }
+                                .setNegativeButton(resources.getString(R.string.label_no)) { dialogInterface, _ ->
+                                    dialogInterface.dismiss()
+                                }
+                                .setCancelable(false)
+                                .create()
+                                .show()
+                        }
+                    }
+                }
+                rvComments.adapter = adapter
+                rvComments.setHasFixedSize(true)
+                rvComments.layoutManager = LinearLayoutManager(this)
 
                 if (comments.size > 0) {
                     rvComments.visibility = View.VISIBLE
+                    tvNoCommentsFound.visibility = View.GONE
                     adapter.submitList(comments)
                 } else {
                     rvComments.visibility = View.GONE
+                    tvNoCommentsFound.visibility = View.VISIBLE
                 }
             }
             .addOnFailureListener { e ->
-                Log.e(javaClass.simpleName, "Errors while getting comments", e)
+                showSnackBar(resources.getString(R.string.fail_to_list_all_comments), true)
+                Log.e(javaClass.simpleName, "Errors while listing all comments", e)
             }
     }
 
-    private fun addOrUpdateComment(addNew: Boolean = true) {
+    private fun addOrUpdateComment(addNew: Boolean = true, comment: Comment? = null) {
         val lp = WindowManager.LayoutParams()
         val dialog = Dialog(this@ProductDetailsActivity)
-        dialog.setContentView(R.layout.layout_dialog_comments)
+        dialog.setContentView(R.layout.layout_dialog_add_comments)
         lp.copyFrom(dialog.window!!.attributes)
         lp.width = WindowManager.LayoutParams.MATCH_PARENT
         lp.height = WindowManager.LayoutParams.WRAP_CONTENT
@@ -287,58 +320,96 @@ class ProductDetailsActivity : BaseActivity(), View.OnClickListener {
         val etCommentContentDialog =
             dialog.findViewById<BoldMontserratEditText>(R.id.etCommentContent)
         val btSubmitDialog = dialog.findViewById<BoldMontserratButton>(R.id.btSubmit)
+        val btCancelDialog = dialog.findViewById<BoldMontserratButton>(R.id.btCancel)
 
-        tvTitleDialog.setText(if (addNew) R.string.title_add_comments else R.string.title_update_comments)
         spCommentStarDialog.adapter = ArrayAdapter(
             this@ProductDetailsActivity,
-            android.R.layout.simple_spinner_item,
-            mutableListOf(1, 2, 3, 4, 5)
+            android.R.layout.simple_list_item_1,
+            mutableListOf(5, 4, 3, 2, 1)
         )
+
+        if (addNew) {
+            tvTitleDialog.setText(R.string.title_add_comments)
+        } else if (!addNew && comment != null) {
+            tvTitleDialog.setText(R.string.title_update_comments)
+            etCommentContentDialog.setText(comment.content)
+        }
+
+        btCancelDialog.setOnClickListener { dialog.dismiss() }
         btSubmitDialog.setOnClickListener {
-            FirebaseFirestore.getInstance()
-                .collection(Constants.USERS)
-                .get()
-                .addOnSuccessListener { querySnapshot ->
-                    val user = querySnapshot.documents[0].toObject(User::class.java)!!
-                    val comment = Comment(
-                        content = etCommentContentDialog.text.toString(),
-                        start = spCommentStarDialog.selectedItem as Int,
-                        userEmail = FirebaseAuth.getInstance().currentUser!!.email.toString(),
-                        userImage = user.image,
-                        uid = FirebaseAuth.getInstance().currentUser!!.uid,
-                        pid = product!!.id,
-                        createdAt = System.currentTimeMillis(),
-                        updatedAt = System.currentTimeMillis(),
-                    )
+            showProgressDialog(resources.getString(R.string.label_please_wait))
 
-                    FirebaseFirestore.getInstance()
-                        .collection(Constants.COMMENTS)
-                        .document()
-                        .set(comment, SetOptions.merge())
-                        .addOnSuccessListener {
-                            hideProgressDialog()
-                            showSnackBar(
-                                resources.getString(R.string.success_to_add_comment),
-                                false
-                            )
+            if (addNew) {
+                FirebaseFirestore.getInstance()
+                    .collection(Constants.USERS)
+                    .get()
+                    .addOnSuccessListener { querySnapshot ->
+                        val user = querySnapshot.documents[0].toObject(User::class.java)!!
+                        val newComment = Comment(
+                            content = etCommentContentDialog.text.toString(),
+                            start = spCommentStarDialog.selectedItem as Int,
+                            userEmail = FirebaseAuth.getInstance().currentUser!!.email.toString(),
+                            userImage = user.image,
+                            uid = FirebaseAuth.getInstance().currentUser!!.uid,
+                            pid = product!!.id,
+                            createdAt = System.currentTimeMillis(),
+                            updatedAt = System.currentTimeMillis(),
+                        )
 
-                            Handler(Looper.myLooper()!!).postDelayed({
+                        FirebaseFirestore.getInstance()
+                            .collection(Constants.COMMENTS)
+                            .document()
+                            .set(newComment, SetOptions.merge())
+                            .addOnSuccessListener {
+                                hideProgressDialog()
+                                showSnackBar(
+                                    resources.getString(R.string.success_to_add_comment),
+                                    false
+                                )
                                 dialog.dismiss()
-                            }, Constants.DELAYED_MILLIS)
-                        }
-                        .addOnFailureListener { e ->
-                            hideProgressDialog()
-                            showSnackBar(
-                                resources.getString(R.string.fail_to_add_comment),
-                                true
-                            )
-                            dialog.dismiss()
-                            Log.e(javaClass.simpleName, "Errors while adding comments", e)
-                        }
-                }
-                .addOnFailureListener { e ->
-                    dialog.dismiss()
-                }
+                            }
+                            .addOnFailureListener { e ->
+                                hideProgressDialog()
+                                showSnackBar(
+                                    resources.getString(R.string.fail_to_add_comment),
+                                    true
+                                )
+                                dialog.dismiss()
+                                Log.e(javaClass.simpleName, "Errors while adding comments", e)
+                            }
+                    }
+                    .addOnFailureListener { e ->
+                        dialog.dismiss()
+                        Log.e(javaClass.simpleName, "Errors while getting user details", e)
+                    }
+            } else if (!addNew && comment != null) {
+                comment.content = etCommentContentDialog.text.toString()
+                comment.start = spCommentStarDialog.selectedItem as Int
+                comment.updatedAt = System.currentTimeMillis()
+
+                FirebaseFirestore.getInstance()
+                    .collection(Constants.COMMENTS)
+                    .document(comment.id)
+                    .set(comment, SetOptions.merge())
+                    .addOnSuccessListener {
+                        hideProgressDialog()
+                        showSnackBar(
+                            resources.getString(R.string.success_to_update_comment),
+                            false
+                        )
+                        dialog.dismiss()
+                        rvComments.adapter = adapter
+                    }
+                    .addOnFailureListener { e ->
+                        hideProgressDialog()
+                        showSnackBar(
+                            resources.getString(R.string.fail_to_update_comment),
+                            true
+                        )
+                        dialog.dismiss()
+                        Log.e(javaClass.simpleName, "Errors while updating comments", e)
+                    }
+            }
         }
     }
 
