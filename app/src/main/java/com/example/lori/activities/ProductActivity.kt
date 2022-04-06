@@ -175,8 +175,6 @@ class ProductActivity : BaseActivity(), View.OnClickListener {
             .whereEqualTo(Constants.PID, favProduct.pid)
             .get()
             .addOnSuccessListener { query ->
-                showSnackBar(resources.getString(R.string.success_to_add_fav_product), false)
-
                 query.documents.forEach { doc ->
                     if (doc.toObject(FavProduct::class.java) != null) {
                         return@addOnSuccessListener
@@ -188,9 +186,11 @@ class ProductActivity : BaseActivity(), View.OnClickListener {
                     .document()
                     .set(favProduct, SetOptions.merge())
                     .addOnSuccessListener {
+                        showSnackBar(resources.getString(R.string.success_to_add_fav_product), false)
                         ivAddToFav.setImageResource(R.drawable.ic_favorite_24dp)
                     }
                     .addOnFailureListener {
+                        showSnackBar(resources.getString(R.string.fail_to_add_fav_product), true)
                         ivAddToFav.setImageResource(R.drawable.ic_favorite_border_24dp)
                     }
             }

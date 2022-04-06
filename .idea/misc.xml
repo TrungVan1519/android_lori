@@ -44,6 +44,7 @@
         <entry key="app/src/main/res/layout/activity_addresses.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_base.xml" value="0.2509057971014493" />
         <entry key="app/src/main/res/layout/activity_cart.xml" value="0.15092592592592594" />
+        <entry key="app/src/main/res/layout/activity_cart_item.xml" value="0.13697916666666668" />
         <entry key="app/src/main/res/layout/activity_checkout.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_dashboard.xml" value="0.20925925925925926" />
         <entry key="app/src/main/res/layout/activity_forgot_password.xml" value="0.1" />
@@ -66,8 +67,9 @@
         <entry key="app/src/main/res/layout/layout_all_products.xml" value="0.25" />
         <entry key="app/src/main/res/layout/layout_cart_item.xml" value="0.25" />
         <entry key="app/src/main/res/layout/layout_comments.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/layout_dialog_add_comments.xml" value="0.1" />
         <entry key="app/src/main/res/layout/layout_dialog_comments.xml" value="0.1453125" />
-        <entry key="app/src/main/res/layout/layout_dialog_list_comments.xml" value="0.223731884057971" />
+        <entry key="app/src/main/res/layout/layout_dialog_list_comments.xml" value="0.1" />
         <entry key="app/src/main/res/layout/layout_dialog_progress.xml" value="0.2578125" />
         <entry key="app/src/main/res/layout/layout_item_list.xml" value="0.1" />
         <entry key="app/src/main/res/layout/layout_my_fav_products.xml" value="0.19722222222222222" />

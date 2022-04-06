@@ -57,10 +57,10 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
                             .collection(Constants.USERS)
                             .document(FirebaseAuth.getInstance().currentUser?.uid ?: "")
                             .get()
-                            .addOnSuccessListener { document ->
+                            .addOnSuccessListener { doc ->
                                 hideProgressDialog()
 
-                                val user = document.toObject(User::class.java)!!
+                                val user = doc.toObject(User::class.java)!!
                                 getSharedPreferences(
                                     Constants.LORI_PREFERENCES,
                                     Context.MODE_PRIVATE

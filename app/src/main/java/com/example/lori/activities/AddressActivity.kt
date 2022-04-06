@@ -69,7 +69,7 @@ class AddressActivity : BaseActivity(), View.OnClickListener {
 
                     rvAddresses.layoutManager = LinearLayoutManager(this)
                     rvAddresses.setHasFixedSize(true)
-                    rvAddresses.adapter = adapter // force redraw RecyclerView items
+                    rvAddresses.adapter = adapter // todo force redraw RecyclerView items
                     adapter.notifyItemChanged(addresses)
                 } else {
                     rvAddresses.visibility = View.GONE

@@ -17,7 +17,7 @@ object ImageUtils {
      * Select an image from phone storage.
      */
     fun showImageChooser(activity: Activity) {
-        // todo aunch the image selection of phone storage using the constant code.
+        // todo launch the image selection of phone storage using the constant code.
         activity.startActivityForResult(
             Intent(
                 Intent.ACTION_PICK,

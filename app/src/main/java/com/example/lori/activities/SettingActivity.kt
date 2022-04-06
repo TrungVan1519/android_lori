@@ -13,7 +13,6 @@ import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_setting.*
 
 class SettingActivity : BaseActivity(), View.OnClickListener {
-
     private var user: User? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
