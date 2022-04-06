@@ -27,7 +27,6 @@ import kotlinx.android.synthetic.main.activity_add_edit_products.*
 import java.io.IOException
 
 class AddEditProductsActivity : BaseActivity(), View.OnClickListener {
-
     private var selectedImageFileUri: Uri? = null
     private var mProduct: Product? = null
 
@@ -74,7 +73,7 @@ class AddEditProductsActivity : BaseActivity(), View.OnClickListener {
                 ImageUtils.showImageChooser(this)
             }
             R.id.btSubmit -> {
-                if (validateProductDetails()) {
+                if (validateData()) {
                     createOrUpdateProduct()
                 }
             }
@@ -88,8 +87,7 @@ class AddEditProductsActivity : BaseActivity(), View.OnClickListener {
             title = etProductTitle.text.toString().trim { it <= ' ' },
             price = etProductPrice.text.toString().trim { it <= ' ' }.toLong(),
             description = etProductDescription.text.toString().trim { it <= ' ' },
-            stock_quantity = etProductQuantity.text.toString().trim { it <= ' ' }
-                .toInt(),
+            stock_quantity = etProductQuantity.text.toString().trim { it <= ' ' }.toInt(),
             uid = FirebaseAuth.getInstance().currentUser!!.uid,
             username = getSharedPreferences(
                 Constants.LORI_PREFERENCES,
@@ -97,9 +95,9 @@ class AddEditProductsActivity : BaseActivity(), View.OnClickListener {
             ).getString(Constants.LOGGED_IN_USERNAME, "")!!,
         )
 
-        // Save new address
+        // todo create new address
         if (mProduct == null || mProduct!!.id.isEmpty()) {
-            // Upload product image.
+            // todo upload product image
             FirebaseStorage.getInstance().reference
                 .child(
                     "${Constants.PRODUCT_IMAGE}${System.currentTimeMillis()}.${
@@ -110,9 +108,9 @@ class AddEditProductsActivity : BaseActivity(), View.OnClickListener {
                     }"
                 )
                 .putFile(selectedImageFileUri!!)
-                .addOnSuccessListener { taskSnapshot ->
-                    // Get the downloadable url from the task snapshot
-                    taskSnapshot.metadata!!.reference!!.downloadUrl
+                .addOnSuccessListener { task ->
+                    // todo get the downloadable url from the task
+                    task.metadata!!.reference!!.downloadUrl
                         .addOnSuccessListener { url ->
                             showSnackBar(
                                 resources.getString(R.string.success_to_upload_image),
@@ -120,8 +118,6 @@ class AddEditProductsActivity : BaseActivity(), View.OnClickListener {
                             )
 
                             product.image = url.toString()
-
-                            // Save to "products" table in FireStore DB
                             FirebaseFirestore.getInstance()
                                 .collection(Constants.PRODUCTS)
                                 .document()
@@ -146,7 +142,7 @@ class AddEditProductsActivity : BaseActivity(), View.OnClickListener {
 
                                     Log.e(
                                         javaClass.simpleName,
-                                        "Errors while saving product.",
+                                        "Errors while creating product",
                                         e
                                     )
                                 }
@@ -159,14 +155,12 @@ class AddEditProductsActivity : BaseActivity(), View.OnClickListener {
                         true
                     )
 
-                    Log.e(javaClass.simpleName, "Errors while uploading image.", e)
+                    Log.e(javaClass.simpleName, "Errors while uploading image", e)
                 }
         }
-        // Update existing product by using tricks via SetOptions.merge()
-        // Beside, we can update via "update()" manually
+        // todo update existing product by using tricks via SetOptions.merge(). Beside, we can use "update()" manually
         else {
             product.image = mProduct!!.image
-
             FirebaseFirestore.getInstance()
                 .collection(Constants.PRODUCTS)
                 .document(mProduct!!.id)
@@ -191,7 +185,7 @@ class AddEditProductsActivity : BaseActivity(), View.OnClickListener {
 
                     Log.e(
                         javaClass.simpleName,
-                        "Errors while saving product.",
+                        "Errors while updating product",
                         e
                     )
                 }
@@ -245,7 +239,6 @@ class AddEditProductsActivity : BaseActivity(), View.OnClickListener {
             Activity.RESULT_OK -> {
                 if (requestCode == Constants.PICK_IMAGE_REQUEST_CODE && data != null) {
                     try {
-                        // Load the user image in the ImageView.
                         selectedImageFileUri = data.data
                         ImageUtils.loadUserImage(
                             this,
@@ -254,7 +247,7 @@ class AddEditProductsActivity : BaseActivity(), View.OnClickListener {
                         )
                     } catch (e: IOException) {
                         showSnackBar(resources.getString(R.string.fail_to_select_image), true)
-                        Log.e(javaClass.simpleName, "Errors while uploading image.", e)
+                        Log.e(javaClass.simpleName, "Errors while uploading image", e)
                     }
                 }
             }
@@ -265,7 +258,7 @@ class AddEditProductsActivity : BaseActivity(), View.OnClickListener {
         }
     }
 
-    private fun validateProductDetails(): Boolean {
+    private fun validateData(): Boolean {
         return when {
             selectedImageFileUri == null && (mProduct == null || mProduct!!.id.isEmpty()) -> {
                 showSnackBar(resources.getString(R.string.err_msg_select_product_image), true)
@@ -293,9 +286,7 @@ class AddEditProductsActivity : BaseActivity(), View.OnClickListener {
                 )
                 false
             }
-            else -> {
-                true
-            }
+            else -> true
         }
     }
 }

@@ -8,7 +8,6 @@ import android.util.Log
 import android.view.View
 import android.view.WindowManager
 import android.widget.ArrayAdapter
-import android.widget.Spinner
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -19,17 +18,16 @@ import com.example.lori.utils.Constants
 import com.example.lori.utils.FormatUtils
 import com.example.lori.utils.ImageUtils
 import com.example.lori.widgets.BoldMontserratButton
-import com.example.lori.widgets.BoldMontserratEditText
 import com.example.lori.widgets.BoldMontserratTextView
-import com.example.lori.widgets.RegularMontserratTextView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.SetOptions
 import kotlinx.android.synthetic.main.activity_product_details.*
+import kotlinx.android.synthetic.main.layout_dialog_add_comments.*
+import kotlinx.android.synthetic.main.layout_dialog_list_comments.*
 
 class ProductDetailsActivity : BaseActivity(), View.OnClickListener {
-
     private var product: Product? = null
 
     private lateinit var rvComments: RecyclerView
@@ -39,7 +37,7 @@ class ProductDetailsActivity : BaseActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_product_details)
 
-        getProductDetails(intent.getStringExtra(Constants.EXTRA_PRODUCT_ID) ?: "")
+        getProduct(intent.getStringExtra(Constants.EXTRA_PRODUCT_ID) ?: "")
 
         ivAddToFav.setOnClickListener(this)
         btAddToCart.setOnClickListener(this)
@@ -63,20 +61,20 @@ class ProductDetailsActivity : BaseActivity(), View.OnClickListener {
                 getAllComments()
             }
             R.id.btAddComment -> {
-                addOrUpdateComment(true)
+                createOrUpdateComment(true)
             }
         }
     }
 
-    private fun getProductDetails(id: String) {
+    private fun getProduct(id: String) {
         showProgressDialog(resources.getString(R.string.label_please_wait))
 
         FirebaseFirestore.getInstance()
             .collection(Constants.PRODUCTS)
             .document(id)
             .get()
-            .addOnSuccessListener { documentSnapshot ->
-                product = documentSnapshot.toObject(Product::class.java)!!
+            .addOnSuccessListener { doc ->
+                product = doc.toObject(Product::class.java)!!
                 product!!.id = id
 
                 ImageUtils.loadProductImage(this, product!!.image, ivProductDetailImage)
@@ -102,7 +100,7 @@ class ProductDetailsActivity : BaseActivity(), View.OnClickListener {
                 if (FirebaseAuth.getInstance().currentUser!!.uid == product!!.uid || product!!.stock_quantity <= 0) {
                     hideProgressDialog()
                 } else {
-                    // Get products from cart via cart items
+                    // todo get products from cart via cart items
                     FirebaseFirestore.getInstance()
                         .collection(Constants.CART_ITEMS)
                         .whereEqualTo(
@@ -114,7 +112,7 @@ class ProductDetailsActivity : BaseActivity(), View.OnClickListener {
                         .addOnSuccessListener { snapshot ->
                             hideProgressDialog()
 
-                            // show btAddToCart if product not exist in cart
+                            // todo show btAddToCart if product not exist in cart
                             if (snapshot.documents.size <= 0) {
                                 btAddToCart.visibility = View.VISIBLE
                             }
@@ -134,25 +132,25 @@ class ProductDetailsActivity : BaseActivity(), View.OnClickListener {
                         }
                 }
 
-                getFavProductDetails()
+                getFavProduct()
             }
             .addOnFailureListener { e ->
                 hideProgressDialog()
                 showSnackBar(resources.getString(R.string.fail_to_get_product_details), true)
 
-                Log.e(javaClass.simpleName, "Errors while getting product details", e)
+                Log.e(javaClass.simpleName, "Errors while getting product", e)
             }
     }
 
-    private fun getFavProductDetails() {
+    private fun getFavProduct() {
         FirebaseFirestore.getInstance()
             .collection(Constants.FAV_PRODUCTS)
             .whereEqualTo(Constants.UID, FirebaseAuth.getInstance().currentUser!!.uid)
             .whereEqualTo(Constants.PID, product!!.id)
             .get()
-            .addOnSuccessListener { querySnapshot ->
+            .addOnSuccessListener { query ->
                 ivAddToFav.setImageResource(
-                    if (querySnapshot.documents.isNotEmpty()) R.drawable.ic_favorite_24dp
+                    if (query.documents.isNotEmpty()) R.drawable.ic_favorite_24dp
                     else R.drawable.ic_favorite_border_24dp
                 )
             }
@@ -176,10 +174,12 @@ class ProductDetailsActivity : BaseActivity(), View.OnClickListener {
             .whereEqualTo(Constants.UID, FirebaseAuth.getInstance().currentUser!!.uid)
             .whereEqualTo(Constants.PID, favProduct.pid)
             .get()
-            .addOnSuccessListener { querySnapshot ->
-                querySnapshot.documents.forEach { documentSnapshot ->
-                    if (documentSnapshot.toObject(FavProduct::class.java) != null) {
-                        return@addOnSuccessListener;
+            .addOnSuccessListener { query ->
+                showSnackBar(resources.getString(R.string.success_to_add_fav_product), false)
+
+                query.documents.forEach { doc ->
+                    if (doc.toObject(FavProduct::class.java) != null) {
+                        return@addOnSuccessListener
                     }
                 }
 
@@ -195,7 +195,8 @@ class ProductDetailsActivity : BaseActivity(), View.OnClickListener {
                     }
             }
             .addOnFailureListener { e ->
-                Log.e(javaClass.simpleName, "Errors while getting favorite products", e)
+                showSnackBar(resources.getString(R.string.fail_to_add_fav_product), false)
+                Log.e(javaClass.simpleName, "Errors while getting fav products", e)
             }
     }
 
@@ -207,13 +208,13 @@ class ProductDetailsActivity : BaseActivity(), View.OnClickListener {
             .whereEqualTo(Constants.PID, product!!.id)
             .orderBy(Constants.CREATED_AT, Query.Direction.DESCENDING)
             .get()
-            .addOnSuccessListener { querySnapshot ->
+            .addOnSuccessListener { query ->
                 hideProgressDialog()
 
                 val comments = ArrayList<Comment>()
-                querySnapshot.documents.forEach { documentSnapshot ->
-                    val comment = documentSnapshot.toObject(Comment::class.java)!!
-                    comment.id = documentSnapshot.id
+                query.documents.forEach { doc ->
+                    val comment = doc.toObject(Comment::class.java)!!
+                    comment.id = doc.id
                     comments.add(comment)
                 }
 
@@ -226,24 +227,19 @@ class ProductDetailsActivity : BaseActivity(), View.OnClickListener {
                 dialog.show()
                 dialog.window!!.attributes = lp
 
-                val btCancelDialog = dialog.findViewById<BoldMontserratButton>(R.id.btCancel)
-                val tvNoCommentsFound =
-                    dialog.findViewById<RegularMontserratTextView>(R.id.tvNoCommentsFound)
-                rvComments = dialog.findViewById(R.id.rvComments)
-
-                btCancelDialog.setOnClickListener { dialog.dismiss() }
+                dialog.findViewById<BoldMontserratButton>(R.id.btCancel).setOnClickListener { dialog.dismiss() }
 
                 adapter.listener = object : CommentsAdapter.Listener {
                     // todo update comments
                     override fun onClick(position: Int) {
                         if (comments[position].uid == FirebaseAuth.getInstance().currentUser!!.uid) {
-                            addOrUpdateComment(false, adapter.currentList[position])
+                            createOrUpdateComment(false, adapter.currentList[position])
                         }
                     }
 
                     override fun onLongClick(position: Int) {
                         if (comments[position].uid == FirebaseAuth.getInstance().currentUser!!.uid) {
-                            // Delete from Firebase
+                            // todo delete product from Firebase
                             AlertDialog.Builder(this@ProductDetailsActivity)
                                 .setTitle(R.string.title_delete_dialog)
                                 .setMessage(R.string.label_delete_dialog)
@@ -258,7 +254,7 @@ class ProductDetailsActivity : BaseActivity(), View.OnClickListener {
                                         .addOnSuccessListener {
                                             hideProgressDialog()
 
-                                            // Delete from RecyclerView
+                                            // todo delete product from RecyclerView
                                             val list = adapter.currentList.toMutableList()
                                             list.removeAt(position)
                                             adapter.submitList(list)
@@ -286,26 +282,27 @@ class ProductDetailsActivity : BaseActivity(), View.OnClickListener {
                         }
                     }
                 }
+                rvComments = dialog.rvComments
                 rvComments.adapter = adapter
                 rvComments.setHasFixedSize(true)
                 rvComments.layoutManager = LinearLayoutManager(this)
 
                 if (comments.size > 0) {
                     rvComments.visibility = View.VISIBLE
-                    tvNoCommentsFound.visibility = View.GONE
+                    dialog.tvNoCommentsFound.visibility = View.GONE
                     adapter.submitList(comments)
                 } else {
                     rvComments.visibility = View.GONE
-                    tvNoCommentsFound.visibility = View.VISIBLE
+                    dialog.tvNoCommentsFound.visibility = View.VISIBLE
                 }
             }
             .addOnFailureListener { e ->
                 showSnackBar(resources.getString(R.string.fail_to_list_all_comments), true)
-                Log.e(javaClass.simpleName, "Errors while listing all comments", e)
+                Log.e(javaClass.simpleName, "Errors while getting all comments", e)
             }
     }
 
-    private fun addOrUpdateComment(addNew: Boolean = true, comment: Comment? = null) {
+    private fun createOrUpdateComment(addNew: Boolean = true, comment: Comment? = null) {
         val lp = WindowManager.LayoutParams()
         val dialog = Dialog(this@ProductDetailsActivity)
         dialog.setContentView(R.layout.layout_dialog_add_comments)
@@ -316,13 +313,8 @@ class ProductDetailsActivity : BaseActivity(), View.OnClickListener {
         dialog.window!!.attributes = lp
 
         val tvTitleDialog = dialog.findViewById<BoldMontserratTextView>(R.id.tvTitle)
-        val spCommentStarDialog = dialog.findViewById<Spinner>(R.id.spCommentStar)
-        val etCommentContentDialog =
-            dialog.findViewById<BoldMontserratEditText>(R.id.etCommentContent)
-        val btSubmitDialog = dialog.findViewById<BoldMontserratButton>(R.id.btSubmit)
-        val btCancelDialog = dialog.findViewById<BoldMontserratButton>(R.id.btCancel)
 
-        spCommentStarDialog.adapter = ArrayAdapter(
+        dialog.spCommentStar.adapter = ArrayAdapter(
             this@ProductDetailsActivity,
             android.R.layout.simple_list_item_1,
             mutableListOf(5, 4, 3, 2, 1)
@@ -332,22 +324,22 @@ class ProductDetailsActivity : BaseActivity(), View.OnClickListener {
             tvTitleDialog.setText(R.string.title_add_comments)
         } else if (!addNew && comment != null) {
             tvTitleDialog.setText(R.string.title_update_comments)
-            etCommentContentDialog.setText(comment.content)
+            dialog.etCommentContent.setText(comment.content)
         }
 
-        btCancelDialog.setOnClickListener { dialog.dismiss() }
-        btSubmitDialog.setOnClickListener {
+        dialog.findViewById<BoldMontserratButton>(R.id.btCancel).setOnClickListener { dialog.dismiss() }
+        dialog.btSubmit.setOnClickListener {
             showProgressDialog(resources.getString(R.string.label_please_wait))
 
             if (addNew) {
                 FirebaseFirestore.getInstance()
                     .collection(Constants.USERS)
                     .get()
-                    .addOnSuccessListener { querySnapshot ->
-                        val user = querySnapshot.documents[0].toObject(User::class.java)!!
+                    .addOnSuccessListener { query ->
+                        val user = query.documents[0].toObject(User::class.java)!!
                         val newComment = Comment(
-                            content = etCommentContentDialog.text.toString(),
-                            start = spCommentStarDialog.selectedItem as Int,
+                            content = dialog.etCommentContent.text.toString(),
+                            start = dialog.spCommentStar.selectedItem as Int,
                             userEmail = FirebaseAuth.getInstance().currentUser!!.email.toString(),
                             userImage = user.image,
                             uid = FirebaseAuth.getInstance().currentUser!!.uid,
@@ -375,7 +367,7 @@ class ProductDetailsActivity : BaseActivity(), View.OnClickListener {
                                     true
                                 )
                                 dialog.dismiss()
-                                Log.e(javaClass.simpleName, "Errors while adding comments", e)
+                                Log.e(javaClass.simpleName, "Errors while creating comments", e)
                             }
                     }
                     .addOnFailureListener { e ->
@@ -383,8 +375,8 @@ class ProductDetailsActivity : BaseActivity(), View.OnClickListener {
                         Log.e(javaClass.simpleName, "Errors while getting user details", e)
                     }
             } else if (!addNew && comment != null) {
-                comment.content = etCommentContentDialog.text.toString()
-                comment.start = spCommentStarDialog.selectedItem as Int
+                comment.content = dialog.etCommentContent.text.toString()
+                comment.start = dialog.spCommentStar.selectedItem as Int
                 comment.updatedAt = System.currentTimeMillis()
 
                 FirebaseFirestore.getInstance()
@@ -439,7 +431,7 @@ class ProductDetailsActivity : BaseActivity(), View.OnClickListener {
                 hideProgressDialog()
                 showSnackBar(resources.getString(R.string.fail_to_add_products_to_cart), true)
 
-                Log.e(javaClass.simpleName, "Errors while saving cart items", e)
+                Log.e(javaClass.simpleName, "Errors while creating cart items", e)
             }
     }
 }

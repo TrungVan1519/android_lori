@@ -17,14 +17,12 @@ import com.google.firebase.firestore.Query
 import kotlinx.android.synthetic.main.fragment_products.*
 
 class ProductsFragment : BaseFragment() {
-
-    private lateinit var rootView: View
     private lateinit var adapter: MyProductsAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // For using the option menu in fragment we need to add it
+        // todo use the option menu in fragment
         setHasOptionsMenu(true)
     }
 
@@ -33,9 +31,8 @@ class ProductsFragment : BaseFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        rootView = inflater.inflate(R.layout.fragment_products, container, false)
         adapter = MyProductsAdapter(this, arrayListOf(), R.layout.layout_my_products)
-        return rootView
+        return inflater.inflate(R.layout.fragment_products, container, false)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -59,10 +56,10 @@ class ProductsFragment : BaseFragment() {
 
     override fun onResume() {
         super.onResume()
-        getMyProducts()
+        getMyAllProducts()
     }
 
-    fun getMyProducts() {
+    fun getMyAllProducts() {
         showProgressDialog(resources.getString(R.string.label_please_wait))
 
         FirebaseFirestore.getInstance()
@@ -70,32 +67,32 @@ class ProductsFragment : BaseFragment() {
             .whereEqualTo(Constants.UID, FirebaseAuth.getInstance().currentUser!!.uid)
             .orderBy(Constants.TITLE, Query.Direction.DESCENDING)
             .get()
-            .addOnSuccessListener { querySnapshot ->
+            .addOnSuccessListener { query ->
                 hideProgressDialog()
 
                 val products = ArrayList<Product>()
-                querySnapshot.documents.forEach { documentSnapshot ->
-                    val product = documentSnapshot.toObject(Product::class.java)!!
-                    product.id = documentSnapshot.id
+                query.documents.forEach { doc ->
+                    val product = doc.toObject(Product::class.java)!!
+                    product.id = doc.id
                     products.add(product)
                 }
 
                 if (products.size > 0) {
-                    rvMyProducts.visibility = View.VISIBLE
+                    rvMyAllProducts.visibility = View.VISIBLE
                     tvNoProductsFound.visibility = View.GONE
 
-                    rvMyProducts.layoutManager = LinearLayoutManager(activity)
-                    rvMyProducts.setHasFixedSize(true)
-                    rvMyProducts.adapter = adapter
+                    rvMyAllProducts.layoutManager = LinearLayoutManager(activity)
+                    rvMyAllProducts.setHasFixedSize(true)
+                    rvMyAllProducts.adapter = adapter
                     adapter.notifyItemChanged(products)
                 } else {
-                    rvMyProducts.visibility = View.GONE
+                    rvMyAllProducts.visibility = View.GONE
                     tvNoProductsFound.visibility = View.VISIBLE
                 }
             }
             .addOnFailureListener { e ->
                 hideProgressDialog()
-                Log.e(javaClass.simpleName, "Errors while getting products", e)
+                Log.e(javaClass.simpleName, "Errors while getting my all products", e)
             }
     }
 }

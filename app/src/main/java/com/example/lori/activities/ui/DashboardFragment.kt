@@ -14,16 +14,12 @@ import com.example.lori.utils.Constants
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import kotlinx.android.synthetic.main.fragment_dashboard.*
-import kotlinx.android.synthetic.main.fragment_products.tvNoProductsFound
 
 class DashboardFragment : BaseFragment() {
-
-    private lateinit var rootView: View
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // For using the option menu in fragment we need to add it
+        // todo use the option menu in fragment
         setHasOptionsMenu(true)
     }
 
@@ -32,8 +28,7 @@ class DashboardFragment : BaseFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        rootView = inflater.inflate(R.layout.fragment_dashboard, container, false)
-        return rootView
+        return inflater.inflate(R.layout.fragment_dashboard, container, false)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -67,13 +62,13 @@ class DashboardFragment : BaseFragment() {
             .collection(Constants.PRODUCTS)
             .orderBy(Constants.TITLE, Query.Direction.DESCENDING)
             .get()
-            .addOnSuccessListener { querySnapshot ->
+            .addOnSuccessListener { query ->
                 hideProgressDialog()
 
                 val products = ArrayList<Product>()
-                querySnapshot.documents.forEach { documentSnapshot ->
-                    val product = documentSnapshot.toObject(Product::class.java)!!
-                    product.id = documentSnapshot.id
+                query.documents.forEach { doc ->
+                    val product = doc.toObject(Product::class.java)!!
+                    product.id = doc.id
                     products.add(product)
                 }
 
@@ -92,7 +87,7 @@ class DashboardFragment : BaseFragment() {
             }
             .addOnFailureListener { e ->
                 hideProgressDialog()
-                Log.e(javaClass.simpleName, "Errors while getting products", e)
+                Log.e(javaClass.simpleName, "Errors while getting all products", e)
             }
     }
 }

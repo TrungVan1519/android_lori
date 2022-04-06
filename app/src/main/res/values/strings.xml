@@ -172,4 +172,6 @@
     <string name="fail_to_update_products">Fail to update products</string>
     <string name="fail_to_delete_orders">Fail to delete orders</string>
     <string name="fail_to_list_all_comments">Fail to list all comments</string>
+    <string name="success_to_add_fav_product">Add to favorite successfully</string>
+    <string name="fail_to_add_fav_product">Fail to add favorite products</string>
 </resources>

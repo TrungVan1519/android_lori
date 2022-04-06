@@ -8,7 +8,7 @@ import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.lori.R
-import com.example.lori.activities.adapters.MyCartItemsAdapter
+import com.example.lori.activities.adapters.CartItemsAdapter
 import com.example.lori.models.*
 import com.example.lori.utils.Constants
 import com.example.lori.utils.FormatUtils
@@ -19,14 +19,13 @@ import com.google.firebase.firestore.SetOptions
 import kotlinx.android.synthetic.main.activity_checkout.*
 
 class CheckoutActivity : BaseActivity(), View.OnClickListener {
-
     private var address: Address? = null
     private var subTotal: Double = 0.0
     private var totalAmount: Double = 0.0
 
     private lateinit var products: ArrayList<Product>
     private lateinit var cartItems: ArrayList<CartItem>
-    private lateinit var adapter: MyCartItemsAdapter
+    private lateinit var adapter: CartItemsAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,7 +41,7 @@ class CheckoutActivity : BaseActivity(), View.OnClickListener {
             tvCheckoutMobileNumber.text = address?.mobile.toString()
         }
 
-        adapter = MyCartItemsAdapter(this, arrayListOf(), R.layout.layout_cart_item)
+        adapter = CartItemsAdapter(this, arrayListOf(), R.layout.layout_cart_item)
 
         btPlaceOrder.setOnClickListener(this)
     }
@@ -67,15 +66,15 @@ class CheckoutActivity : BaseActivity(), View.OnClickListener {
             .collection(Constants.PRODUCTS)
             .orderBy(Constants.TITLE, Query.Direction.DESCENDING)
             .get()
-            .addOnSuccessListener { querySnapshot ->
+            .addOnSuccessListener { query ->
                 products = ArrayList()
-                querySnapshot.documents.forEach { documentSnapshot ->
-                    val product = documentSnapshot.toObject(Product::class.java)!!
-                    product.id = documentSnapshot.id
+                query.documents.forEach { doc ->
+                    val product = doc.toObject(Product::class.java)!!
+                    product.id = doc.id
                     products.add(product)
                 }
 
-                getMyCartItems()
+                getCartItems()
             }
             .addOnFailureListener { e ->
                 hideProgressDialog()
@@ -88,19 +87,19 @@ class CheckoutActivity : BaseActivity(), View.OnClickListener {
      * so we must call this fun inside of another fun using showProgressDialog() instead
      * such as getProducts(), adapter.updateCartItem(), adapter.deleteCartItem(), etc
      */
-    private fun getMyCartItems() {
+    private fun getCartItems() {
         FirebaseFirestore.getInstance()
             .collection(Constants.CART_ITEMS)
             .whereEqualTo(Constants.UID, FirebaseAuth.getInstance().currentUser!!.uid)
             .orderBy(Constants.TITLE, Query.Direction.DESCENDING)
             .get()
-            .addOnSuccessListener { querySnapshot ->
+            .addOnSuccessListener { query ->
                 hideProgressDialog()
 
                 cartItems = ArrayList()
-                querySnapshot.documents.forEach { documentSnapshot ->
-                    val cartItem = documentSnapshot.toObject(CartItem::class.java)!!
-                    cartItem.id = documentSnapshot.id
+                query.documents.forEach { doc ->
+                    val cartItem = doc.toObject(CartItem::class.java)!!
+                    cartItem.id = doc.id
                     cartItems.add(cartItem)
                 }
 
@@ -112,7 +111,7 @@ class CheckoutActivity : BaseActivity(), View.OnClickListener {
                     }
                 }
 
-                // Calculate product costs and shopping fee
+                // todo calculate product costs and shipping fee
                 cartItems.forEach { cartItem ->
                     if (cartItem.stock_quantity > 0) {
                         subTotal += cartItem.price.toDouble() * cartItem.cart_quantity
@@ -127,7 +126,7 @@ class CheckoutActivity : BaseActivity(), View.OnClickListener {
 
                 rvCartItems.layoutManager = LinearLayoutManager(this)
                 rvCartItems.setHasFixedSize(true)
-                rvCartItems.adapter = adapter // force redraw RecyclerView items
+                rvCartItems.adapter = adapter // todo force redraw RecyclerView items
                 adapter.notifyItemChanged(cartItems)
 
                 llCheckoutPlaceOrder.visibility = if (subTotal > 0) View.VISIBLE else View.GONE
@@ -136,7 +135,7 @@ class CheckoutActivity : BaseActivity(), View.OnClickListener {
                 hideProgressDialog()
                 Log.e(
                     javaClass.simpleName,
-                    "Errors while getting cart items and calculating cart item costs",
+                    "Errors while getting cart items and calculating costs",
                     e
                 )
             }
@@ -166,7 +165,7 @@ class CheckoutActivity : BaseActivity(), View.OnClickListener {
                 val writeBatch = FirebaseFirestore.getInstance().batch()
 
                 cartItems.forEach { cartItem ->
-                    // Update stock quantity of products based on cart quantity
+                    // todo update stock quantity of products based on cart quantity
                     writeBatch.update(
                         FirebaseFirestore.getInstance()
                             .collection(Constants.PRODUCTS)
@@ -174,7 +173,7 @@ class CheckoutActivity : BaseActivity(), View.OnClickListener {
                         mapOf(Constants.STOCK_QUANTITY to cartItem.stock_quantity - cartItem.cart_quantity)
                     )
 
-                    // Delete cartItems
+                    // todo delete cartItems
                     writeBatch.delete(
                         FirebaseFirestore.getInstance()
                             .collection(Constants.CART_ITEMS)
@@ -199,7 +198,7 @@ class CheckoutActivity : BaseActivity(), View.OnClickListener {
                         hideProgressDialog()
                         showSnackBar(resources.getString(R.string.fail_to_place_orders), true)
 
-                        Log.e(javaClass.simpleName, "Error while ", e)
+                        Log.e(javaClass.simpleName, "Error while placing orders", e)
                     }
             }
             .addOnFailureListener { e ->
@@ -208,7 +207,7 @@ class CheckoutActivity : BaseActivity(), View.OnClickListener {
 
                 Log.e(
                     javaClass.simpleName,
-                    "Error while placing an order.",
+                    "Error while placing orders",
                     e
                 )
             }

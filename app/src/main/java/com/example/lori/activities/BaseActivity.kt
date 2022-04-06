@@ -12,7 +12,6 @@ import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.layout_dialog_progress.*
 
 open class BaseActivity : AppCompatActivity() {
-
     private lateinit var pbProgress: Dialog
     private var doubleBackToExitPressedOnce = false
 
@@ -50,7 +49,9 @@ open class BaseActivity : AppCompatActivity() {
         }
 
         doubleBackToExitPressedOnce = true
-        Handler(Looper.myLooper()!!).postDelayed({ doubleBackToExitPressedOnce = false }, Constants.DELAYED_MILLIS)
+        Handler(Looper.myLooper()!!).postDelayed({
+            doubleBackToExitPressedOnce = false
+        }, Constants.DELAYED_MILLIS)
         Toast.makeText(
             this,
             resources.getString(R.string.label_please_click_back_again_to_exit),

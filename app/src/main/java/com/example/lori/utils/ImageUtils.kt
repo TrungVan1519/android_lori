@@ -17,7 +17,7 @@ object ImageUtils {
      * Select an image from phone storage.
      */
     fun showImageChooser(activity: Activity) {
-        // Launch the image selection of phone storage using the constant code.
+        // todo aunch the image selection of phone storage using the constant code.
         activity.startActivityForResult(
             Intent(
                 Intent.ACTION_PICK,
@@ -32,10 +32,10 @@ object ImageUtils {
     fun loadUserImage(context: Context, image: Any, imageView: ImageView) {
         Glide
             .with(context)
-            .load(image) // Uri or URL of the image
-            .centerCrop() // Scale type of the image.
-            .placeholder(R.drawable.im_user_placeholder) // A default place holder if image is failed to load.
-            .into(imageView) // the view in which the image will be loaded.
+            .load(image) // uri or URL of the image
+            .centerCrop() // scale type of the image.
+            .placeholder(R.drawable.im_user_placeholder) // a default place holder if image is failed to load.
+            .into(imageView) // the view in which the image will be loaded
     }
 
     /**
@@ -44,8 +44,8 @@ object ImageUtils {
     fun loadProductImage(context: Context, image: Any, imageView: ImageView) {
         Glide
             .with(context)
-            .load(image) // Uri or URL of the image
-            .centerCrop() // Scale type of the image.
+            .load(image) // uri or URL of the image
+            .centerCrop() // scale type of the image.
             .into(imageView) // the view in which the image will be loaded.
     }
 

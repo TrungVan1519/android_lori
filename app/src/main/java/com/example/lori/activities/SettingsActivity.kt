@@ -20,7 +20,7 @@ class SettingsActivity : BaseActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
 
-        getUserDetails()
+        getUser()
 
         tvEdit.setOnClickListener(this)
         llAddress.setOnClickListener(this)
@@ -50,18 +50,16 @@ class SettingsActivity : BaseActivity(), View.OnClickListener {
         }
     }
 
-    private fun getUserDetails() {
+    private fun getUser() {
         showProgressDialog(resources.getString(R.string.label_please_wait))
 
-        // Get the logged user details from FireStore DB
         FirebaseFirestore.getInstance()
             .collection(Constants.USERS)
-            .document(FirebaseAuth.getInstance().currentUser?.uid ?: "")
+            .document(FirebaseAuth.getInstance().currentUser!!.uid)
             .get()
             .addOnSuccessListener { document ->
                 hideProgressDialog()
 
-                // Convert to User Data model object
                 user = document.toObject(User::class.java)!!
 
                 ImageUtils.loadUserImage(this, user!!.image, ivUserPhoto)
@@ -76,7 +74,7 @@ class SettingsActivity : BaseActivity(), View.OnClickListener {
 
                 Log.e(
                     javaClass.simpleName,
-                    "Errors while getting user.",
+                    "Errors while getting user",
                     e
                 )
             }

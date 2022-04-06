@@ -12,9 +12,9 @@ import com.example.lori.models.Order
 import com.example.lori.utils.Constants
 import com.example.lori.utils.FormatUtils
 import com.example.lori.utils.ImageUtils
-import kotlinx.android.synthetic.main.layout_order.view.*
+import kotlinx.android.synthetic.main.layout_orders.view.*
 
-class MyOrdersAdapter(
+class OrdersAdapter(
     private val fragment: Fragment,
     private var orders: ArrayList<Order>,
     private var layout: Int
@@ -26,7 +26,7 @@ class MyOrdersAdapter(
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val order = orders[position]
 
-        // Prepare for multiple ViewHolder situations
+        // todo prepare for multiple ViewHolder situations
         when (holder) {
             is ViewHolder -> {
                 ImageUtils.loadProductImage(
@@ -64,7 +64,6 @@ class MyOrdersAdapter(
         private val oldList: ArrayList<Order>,
         private val newList: ArrayList<Order>,
     ) : DiffUtil.Callback() {
-
         override fun getOldListSize() = oldList.size
 
         override fun getNewListSize() = newList.size

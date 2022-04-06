@@ -18,7 +18,6 @@ class AllProductsAdapter(
     private val products: ArrayList<Product>,
     private val layout: Int
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return ViewHolder(LayoutInflater.from(parent.context).inflate(layout, parent, false))
     }
@@ -26,7 +25,7 @@ class AllProductsAdapter(
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val product = products[position]
 
-        // Prepare for multiple ViewHolder situations
+        // todo prepare for multiple ViewHolder situations
         when (holder) {
             is ViewHolder -> {
                 ImageUtils.loadProductImage(context, product.image, holder.itemView.ivItemImage)

@@ -1,6 +1,5 @@
 package com.example.lori.activities
 
-import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -16,7 +15,6 @@ import com.google.firebase.firestore.Query
 import kotlinx.android.synthetic.main.activity_addresses.*
 
 class AddressesActivity : BaseActivity(), View.OnClickListener {
-
     private var selectedAddress = false
     private lateinit var adapter: AddressesAdapter
 
@@ -36,7 +34,7 @@ class AddressesActivity : BaseActivity(), View.OnClickListener {
 
     override fun onResume() {
         super.onResume()
-        getAddresses()
+        getAllAddresses()
     }
 
     override fun onClick(v: View?) {
@@ -47,7 +45,7 @@ class AddressesActivity : BaseActivity(), View.OnClickListener {
         }
     }
 
-    fun getAddresses() {
+    fun getAllAddresses() {
         showProgressDialog(resources.getString(R.string.label_please_wait))
 
         FirebaseFirestore.getInstance()
@@ -55,13 +53,13 @@ class AddressesActivity : BaseActivity(), View.OnClickListener {
             .whereEqualTo(Constants.UID, FirebaseAuth.getInstance().currentUser!!.uid)
             .orderBy(Constants.ADDRESS, Query.Direction.DESCENDING)
             .get()
-            .addOnSuccessListener { querySnapshot ->
+            .addOnSuccessListener { query ->
                 hideProgressDialog()
 
                 val addresses = ArrayList<Address>()
-                querySnapshot.documents.forEach { documentSnapshot ->
-                    val address = documentSnapshot.toObject(Address::class.java)!!
-                    address.id = documentSnapshot.id
+                query.documents.forEach { doc ->
+                    val address = doc.toObject(Address::class.java)!!
+                    address.id = doc.id
                     addresses.add(address)
                 }
 
@@ -80,7 +78,7 @@ class AddressesActivity : BaseActivity(), View.OnClickListener {
             }
             .addOnFailureListener { e ->
                 hideProgressDialog()
-                Log.e(javaClass.simpleName, "Errors while getting addresses", e)
+                Log.e(javaClass.simpleName, "Errors while getting all addresses", e)
             }
     }
 }

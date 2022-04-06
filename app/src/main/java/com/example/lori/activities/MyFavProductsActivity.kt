@@ -17,17 +17,15 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import kotlinx.android.synthetic.main.activity_my_fav_products.*
-import kotlinx.android.synthetic.main.activity_product_details.*
 
 class MyFavProductsActivity : BaseActivity() {
-
     val adapter = FavProductAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_my_fav_products)
 
-        getMyFavProducts()
+        getAllFavProducts()
 
         adapter.listener = object : FavProductAdapter.Listener {
             override fun onClick(position: Int) {
@@ -42,7 +40,7 @@ class MyFavProductsActivity : BaseActivity() {
 
         ItemTouchHelper(object : SwipeToDeleteCallback(this) {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                // Delete from Firebase
+                // todo delete fav products from Firebase
                 AlertDialog.Builder(this@MyFavProductsActivity)
                     .setTitle(R.string.title_delete_dialog)
                     .setMessage(R.string.label_delete_dialog)
@@ -57,7 +55,7 @@ class MyFavProductsActivity : BaseActivity() {
                             .addOnSuccessListener {
                                 hideProgressDialog()
 
-                                // Delete from RecyclerView
+                                // todo delete fav products from RecyclerView
                                 val list = adapter.currentList.toMutableList()
                                 list.removeAt(viewHolder.adapterPosition)
                                 adapter.submitList(list)
@@ -87,7 +85,7 @@ class MyFavProductsActivity : BaseActivity() {
         rvFavProducts.layoutManager = LinearLayoutManager(this)
     }
 
-    private fun getMyFavProducts() {
+    private fun getAllFavProducts() {
         showProgressDialog(resources.getString(R.string.label_please_wait))
 
         FirebaseFirestore.getInstance()
@@ -95,13 +93,13 @@ class MyFavProductsActivity : BaseActivity() {
             .whereEqualTo(Constants.UID, FirebaseAuth.getInstance().currentUser!!.uid)
             .orderBy(Constants.TITLE, Query.Direction.DESCENDING)
             .get()
-            .addOnSuccessListener { querySnapshot ->
+            .addOnSuccessListener { query ->
                 hideProgressDialog()
 
                 val favProducts = ArrayList<FavProduct>()
-                querySnapshot.documents.forEach { documentSnapshot ->
-                    val favProduct = documentSnapshot.toObject(FavProduct::class.java)!!
-                    favProduct.id = documentSnapshot.id
+                query.documents.forEach { doc ->
+                    val favProduct = doc.toObject(FavProduct::class.java)!!
+                    favProduct.id = doc.id
                     favProducts.add(favProduct)
                 }
 
@@ -116,7 +114,7 @@ class MyFavProductsActivity : BaseActivity() {
             }
             .addOnFailureListener { e ->
                 hideProgressDialog()
-                Log.e(javaClass.simpleName, "Errors while getting fav products", e)
+                Log.e(javaClass.simpleName, "Errors while getting all fav products", e)
             }
     }
 }

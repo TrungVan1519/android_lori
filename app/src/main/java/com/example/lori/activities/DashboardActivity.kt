@@ -10,7 +10,6 @@ import com.example.lori.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class DashboardActivity : BaseActivity() {
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dashboard)

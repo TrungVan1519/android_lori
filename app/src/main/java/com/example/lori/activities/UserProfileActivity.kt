@@ -25,7 +25,6 @@ import kotlinx.android.synthetic.main.activity_user_profile.*
 import java.io.IOException
 
 class UserProfileActivity : BaseActivity(), View.OnClickListener {
-
     private lateinit var user: User
     private var selectedImageFileUri: Uri? = null
 
@@ -33,17 +32,15 @@ class UserProfileActivity : BaseActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_profile)
 
-        if (intent.hasExtra(Constants.EXTRA_USER_DETAILS)) {
-            user = intent.getParcelableExtra(Constants.EXTRA_USER_DETAILS)!!
-            etFirstName.setText(user.firstName)
-            etLastName.setText(user.lastName)
-            etEmail.setText(user.email)
-            etMobileNumber.setText(if (user.mobile != 0L) user.mobile.toString() else "")
-            if (user.gender == Constants.FEMALE) {
-                rbFemale.isChecked = true
-            } else {
-                rbMale.isChecked = true
-            }
+        user = intent.getParcelableExtra(Constants.EXTRA_USER_DETAILS)!!
+        etFirstName.setText(user.firstName)
+        etLastName.setText(user.lastName)
+        etEmail.setText(user.email)
+        etMobileNumber.setText(if (user.mobile != 0L) user.mobile.toString() else "")
+        if (user.gender == Constants.FEMALE) {
+            rbFemale.isChecked = true
+        } else {
+            rbMale.isChecked = true
         }
 
         if (user.profileCompleted == 0) {
@@ -81,7 +78,7 @@ class UserProfileActivity : BaseActivity(), View.OnClickListener {
                 ImageUtils.showImageChooser(this)
             }
             R.id.btSave -> {
-                if (validateUserProfileDetails()) {
+                if (validateData()) {
                     val userHashMap = HashMap<String, Any>()
                     userHashMap[Constants.FIRST_NAME] =
                         etFirstName.text.toString().trim { it <= ' ' }
@@ -95,7 +92,7 @@ class UserProfileActivity : BaseActivity(), View.OnClickListener {
 
                     showProgressDialog(resources.getString(R.string.label_please_wait))
 
-                    // Upload user image.
+                    // todo upload user image
                     if (selectedImageFileUri != null) {
                         FirebaseStorage.getInstance().reference
                             .child(
@@ -107,9 +104,9 @@ class UserProfileActivity : BaseActivity(), View.OnClickListener {
                                 }"
                             )
                             .putFile(selectedImageFileUri!!)
-                            .addOnSuccessListener { taskSnapshot ->
-                                // Get the downloadable url from the task snapshot
-                                taskSnapshot.metadata!!.reference!!.downloadUrl
+                            .addOnSuccessListener { task ->
+                                // todo get the downloadable url from the task snapshot
+                                task.metadata!!.reference!!.downloadUrl
                                     .addOnSuccessListener { url ->
                                         showSnackBar(
                                             resources.getString(R.string.success_to_upload_image),
@@ -117,7 +114,7 @@ class UserProfileActivity : BaseActivity(), View.OnClickListener {
                                         )
 
                                         userHashMap[Constants.IMAGE] = url.toString()
-                                        updateUserDetails(userHashMap)
+                                        updateUser(userHashMap)
                                     }
                             }
                             .addOnFailureListener { e ->
@@ -134,7 +131,7 @@ class UserProfileActivity : BaseActivity(), View.OnClickListener {
                                 )
                             }
                     } else {
-                        updateUserDetails(userHashMap)
+                        updateUser(userHashMap)
                     }
                 }
             }
@@ -149,8 +146,7 @@ class UserProfileActivity : BaseActivity(), View.OnClickListener {
         }
     }
 
-    private fun updateUserDetails(userHashMap: HashMap<String, Any>) {
-        // Update user details.
+    private fun updateUser(userHashMap: HashMap<String, Any>) {
         FirebaseFirestore.getInstance()
             .collection(Constants.USERS)
             .document(FirebaseAuth.getInstance().currentUser?.uid ?: "")
@@ -176,7 +172,7 @@ class UserProfileActivity : BaseActivity(), View.OnClickListener {
 
                 Log.e(
                     javaClass.simpleName,
-                    "Errors while updating user.",
+                    "Errors while updating user",
                     e
                 )
             }
@@ -229,7 +225,6 @@ class UserProfileActivity : BaseActivity(), View.OnClickListener {
             Activity.RESULT_OK -> {
                 if (requestCode == Constants.PICK_IMAGE_REQUEST_CODE && data != null) {
                     try {
-                        // Load the user image in the ImageView.
                         selectedImageFileUri = data.data
                         ImageUtils.loadUserImage(
                             this,
@@ -238,7 +233,7 @@ class UserProfileActivity : BaseActivity(), View.OnClickListener {
                         )
                     } catch (e: IOException) {
                         showSnackBar(resources.getString(R.string.fail_to_select_image), true)
-                        Log.e(javaClass.simpleName, "Errors while uploading image.", e)
+                        Log.e(javaClass.simpleName, "Errors while uploading image", e)
                     }
                 }
             }
@@ -249,7 +244,7 @@ class UserProfileActivity : BaseActivity(), View.OnClickListener {
         }
     }
 
-    private fun validateUserProfileDetails(): Boolean {
+    private fun validateData(): Boolean {
         return when {
             TextUtils.isEmpty(etFirstName.text.toString().trim { it <= ' ' }) -> {
                 showSnackBar(resources.getString(R.string.err_msg_enter_first_name), true)

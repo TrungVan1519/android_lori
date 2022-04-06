@@ -28,7 +28,6 @@ class AddressesAdapter(
     private val layout: Int,
     private val selectedAddress: Boolean = false
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return ViewHolder(LayoutInflater.from(parent.context).inflate(layout, parent, false))
     }
@@ -36,7 +35,7 @@ class AddressesAdapter(
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val address = addresses[position]
 
-        // Prepare for multiple ViewHolder situations
+        // todo prepare for multiple ViewHolder situations
         when (holder) {
             is ViewHolder -> {
                 holder.itemView.tvAddressFullname.text = address.name
@@ -120,7 +119,7 @@ class AddressesAdapter(
                                     false
                                 )
 
-                                context.getAddresses()
+                                context.getAllAddresses()
                             }
                             .addOnFailureListener { e ->
                                 context.hideProgressDialog()
@@ -129,13 +128,13 @@ class AddressesAdapter(
                                     true
                                 )
 
-                                context.getAddresses()
+                                context.getAllAddresses()
                                 Log.e(javaClass.simpleName, "Errors while deleting addresses", e)
                             }
                         dialogInterface.dismiss()
                     }
                     .setNegativeButton(context.resources.getString(R.string.label_no)) { dialogInterface, _ ->
-                        context.getAddresses()
+                        context.getAllAddresses()
                         dialogInterface.dismiss()
                     }
                     .setCancelable(false)
@@ -151,7 +150,6 @@ class AddressesAdapter(
         private val oldList: ArrayList<Address>,
         private val newList: ArrayList<Address>,
     ) : DiffUtil.Callback() {
-
         override fun getOldListSize() = oldList.size
 
         override fun getNewListSize() = newList.size

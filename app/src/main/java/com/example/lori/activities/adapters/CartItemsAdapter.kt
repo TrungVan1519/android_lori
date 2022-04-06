@@ -22,12 +22,11 @@ import com.example.lori.utils.SwipeToDeleteCallback
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.layout_cart_item.view.*
 
-open class MyCartItemsAdapter(
+open class CartItemsAdapter(
     private val context: Context,
     private var cartItems: ArrayList<CartItem>,
     private var layout: Int
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return ViewHolder(LayoutInflater.from(parent.context).inflate(layout, parent, false))
     }
@@ -35,7 +34,7 @@ open class MyCartItemsAdapter(
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val cartItem = cartItems[position]
 
-        // Prepare for multiple ViewHolder situations
+        // todo prepare for multiple ViewHolder situations
         when (holder) {
             is ViewHolder -> {
                 ImageUtils.loadProductImage(context, cartItem.image, holder.itemView.ivItemImage)
@@ -161,7 +160,7 @@ open class MyCartItemsAdapter(
                     .update(itemHashMap)
                     .addOnSuccessListener {
                         context.hideProgressDialog()
-                        context.getMyCartItems()
+                        context.getCartItems()
                     }
                     .addOnFailureListener { e ->
                         context.hideProgressDialog()
@@ -201,7 +200,7 @@ open class MyCartItemsAdapter(
                                     false
                                 )
 
-                                context.getMyCartItems()
+                                context.getCartItems()
                             }
                             .addOnFailureListener { e ->
                                 context.hideProgressDialog()
@@ -210,13 +209,13 @@ open class MyCartItemsAdapter(
                                     true
                                 )
 
-                                context.getMyCartItems()
+                                context.getCartItems()
                                 Log.e(javaClass.simpleName, "Errors while deleting cart items", e)
                             }
                         dialogInterface.dismiss()
                     }
                     .setNegativeButton(context.resources.getString(R.string.label_no)) { dialogInterface, _ ->
-                        context.getMyCartItems()
+                        context.getCartItems()
                         dialogInterface.dismiss()
                     }
                     .setCancelable(false)

@@ -15,7 +15,6 @@ import com.google.firebase.firestore.SetOptions
 import kotlinx.android.synthetic.main.activity_add_edit_address.*
 
 class AddEditAddressesActivity : BaseActivity(), View.OnClickListener {
-
     private var mAddress: Address? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,72 +52,73 @@ class AddEditAddressesActivity : BaseActivity(), View.OnClickListener {
 
     override fun onClick(v: View?) {
         when (v?.id) {
-            R.id.btSubmit -> saveOrUpdateAddresses()
+            R.id.btSubmit -> {
+                if (validateData()) {
+                    createOrUpdateAddress()
+                }
+            }
         }
     }
 
-    private fun saveOrUpdateAddresses() {
-        if (validateData()) {
-            showProgressDialog(resources.getString(R.string.label_please_wait))
+    private fun createOrUpdateAddress() {
+        showProgressDialog(resources.getString(R.string.label_please_wait))
 
-            val address = Address(
-                name = etFullName.text.toString().trim { it <= ' ' },
-                mobile = etPhoneNumber.text.toString().trim { it <= ' ' }.toLong(),
-                address = etAddress.text.toString().trim { it <= ' ' },
-                zipCode = etZipCode.text.toString().trim { it <= ' ' },
-                additionalNote = etAdditionalNote.text.toString().trim { it <= ' ' },
-                type = when {
-                    rbHome.isChecked -> Constants.HOME
-                    rbOffice.isChecked -> Constants.OFFICE
-                    else -> Constants.OTHER
-                },
-                otherDetails = etOtherDetails.text.toString().trim { it <= ' ' },
-                uid = FirebaseAuth.getInstance().currentUser!!.uid
-            )
+        val address = Address(
+            name = etFullName.text.toString().trim { it <= ' ' },
+            mobile = etPhoneNumber.text.toString().trim { it <= ' ' }.toLong(),
+            address = etAddress.text.toString().trim { it <= ' ' },
+            zipCode = etZipCode.text.toString().trim { it <= ' ' },
+            additionalNote = etAdditionalNote.text.toString().trim { it <= ' ' },
+            type = when {
+                rbHome.isChecked -> Constants.HOME
+                rbOffice.isChecked -> Constants.OFFICE
+                else -> Constants.OTHER
+            },
+            otherDetails = etOtherDetails.text.toString().trim { it <= ' ' },
+            uid = FirebaseAuth.getInstance().currentUser!!.uid
+        )
 
-            // Save new address
-            if (mAddress == null || mAddress!!.id.isEmpty()) {
-                FirebaseFirestore.getInstance()
-                    .collection(Constants.ADDRESSES)
-                    .document()
-                    .set(address, SetOptions.merge())
-                    .addOnSuccessListener {
-                        hideProgressDialog()
-                        showSnackBar(resources.getString(R.string.success_to_add_address), false)
+        // todo create new address
+        if (mAddress == null || mAddress!!.id.isEmpty()) {
+            FirebaseFirestore.getInstance()
+                .collection(Constants.ADDRESSES)
+                .document()
+                .set(address, SetOptions.merge())
+                .addOnSuccessListener {
+                    hideProgressDialog()
+                    showSnackBar(resources.getString(R.string.success_to_add_address), false)
 
-                        Handler(Looper.myLooper()!!).postDelayed({
-                            finish()
-                        }, Constants.DELAYED_MILLIS)
-                    }
-                    .addOnFailureListener { e ->
-                        hideProgressDialog()
-                        showSnackBar(resources.getString(R.string.fail_to_add_addresses), true)
+                    Handler(Looper.myLooper()!!).postDelayed({
+                        finish()
+                    }, Constants.DELAYED_MILLIS)
+                }
+                .addOnFailureListener { e ->
+                    hideProgressDialog()
+                    showSnackBar(resources.getString(R.string.fail_to_add_addresses), true)
 
-                        Log.e(javaClass.simpleName, "Errors while adding addresses", e)
-                    }
-            }
-            // Update existing address by using tricks via SetOptions.merge()
-            // Beside, we can update via "update()" manually
-            else {
-                FirebaseFirestore.getInstance()
-                    .collection(Constants.ADDRESSES)
-                    .document(mAddress!!.id)
-                    .set(address, SetOptions.merge())
-                    .addOnSuccessListener {
-                        hideProgressDialog()
-                        showSnackBar(resources.getString(R.string.success_to_update_address), false)
+                    Log.e(javaClass.simpleName, "Errors while creating addresses", e)
+                }
+        }
+        // todo update existing address by using tricks via SetOptions.merge(). Beside, we can use "update()" manually
+        else {
+            FirebaseFirestore.getInstance()
+                .collection(Constants.ADDRESSES)
+                .document(mAddress!!.id)
+                .set(address, SetOptions.merge())
+                .addOnSuccessListener {
+                    hideProgressDialog()
+                    showSnackBar(resources.getString(R.string.success_to_update_address), false)
 
-                        Handler(Looper.myLooper()!!).postDelayed({
-                            finish()
-                        }, Constants.DELAYED_MILLIS)
-                    }
-                    .addOnFailureListener { e ->
-                        hideProgressDialog()
-                        showSnackBar(resources.getString(R.string.fail_to_update_addresses), true)
+                    Handler(Looper.myLooper()!!).postDelayed({
+                        finish()
+                    }, Constants.DELAYED_MILLIS)
+                }
+                .addOnFailureListener { e ->
+                    hideProgressDialog()
+                    showSnackBar(resources.getString(R.string.fail_to_update_addresses), true)
 
-                        Log.e(javaClass.simpleName, "Errors while updating addresses", e)
-                    }
-            }
+                    Log.e(javaClass.simpleName, "Errors while updating addresses", e)
+                }
         }
     }
 
@@ -151,9 +151,7 @@ class AddEditAddressesActivity : BaseActivity(), View.OnClickListener {
                 showSnackBar(resources.getString(R.string.err_msg_please_enter_zip_code), true)
                 false
             }
-            else -> {
-                true
-            }
+            else -> true
         }
     }
 }

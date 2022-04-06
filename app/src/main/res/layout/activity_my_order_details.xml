@@ -136,7 +136,7 @@
                 android:textSize="@dimen/text_big" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvMyOrders"
+                android:id="@+id/rvAllOrders"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 

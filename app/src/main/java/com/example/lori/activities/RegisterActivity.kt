@@ -39,7 +39,7 @@ class RegisterActivity : BaseActivity(), View.OnClickListener {
     }
 
     private fun registerUser() {
-        if (validateRegisterDetails()) {
+        if (validateData()) {
             showProgressDialog(resources.getString(R.string.label_please_wait))
 
             FirebaseAuth.getInstance()
@@ -55,7 +55,6 @@ class RegisterActivity : BaseActivity(), View.OnClickListener {
                             etEmail.text.toString().trim { it <= ' ' }
                         )
 
-                        // Save to "users" table in FireStore DB
                         FirebaseFirestore.getInstance()
                             .collection(Constants.USERS)
                             .document(user.id)
@@ -79,7 +78,7 @@ class RegisterActivity : BaseActivity(), View.OnClickListener {
 
                                 Log.e(
                                     javaClass.simpleName,
-                                    "Errors while saving user.",
+                                    "Errors while creating user.",
                                     e
                                 )
                             }
@@ -97,7 +96,7 @@ class RegisterActivity : BaseActivity(), View.OnClickListener {
         }
     }
 
-    private fun validateRegisterDetails(): Boolean {
+    private fun validateData(): Boolean {
         return when {
             TextUtils.isEmpty(etFirstName.text.toString().trim { it <= ' ' }) -> {
                 showSnackBar(resources.getString(R.string.err_msg_enter_first_name), true)

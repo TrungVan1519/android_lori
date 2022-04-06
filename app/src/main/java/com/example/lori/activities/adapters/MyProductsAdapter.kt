@@ -24,7 +24,6 @@ class MyProductsAdapter(
     private var products: ArrayList<Product>,
     private val layout: Int
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return ViewHolder(LayoutInflater.from(parent.context).inflate(layout, parent, false))
     }
@@ -32,7 +31,7 @@ class MyProductsAdapter(
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val product = products[position]
 
-        // Prepare for multiple ViewHolder situations
+        // todo prepare for multiple ViewHolder situations
         when (holder) {
             is ViewHolder -> {
                 ImageUtils.loadProductImage(
@@ -113,7 +112,7 @@ class MyProductsAdapter(
                                     false
                                 )
 
-                                fragment.getMyProducts()
+                                fragment.getMyAllProducts()
                             }
                             .addOnFailureListener { e ->
                                 fragment.hideProgressDialog()
@@ -122,17 +121,17 @@ class MyProductsAdapter(
                                     true
                                 )
 
-                                fragment.getMyProducts()
+                                fragment.getMyAllProducts()
                                 Log.e(
                                     fragment.requireActivity().javaClass.simpleName,
-                                    "Error while deleting the product.",
+                                    "Error while deleting products",
                                     e
                                 )
                             }
                         dialogInterface.dismiss()
                     }
                     .setNegativeButton(fragment.resources.getString(R.string.label_no)) { dialogInterface, _ ->
-                        fragment.getMyProducts()
+                        fragment.getMyAllProducts()
                         dialogInterface.dismiss()
                     }
                     .setCancelable(false)
@@ -148,7 +147,6 @@ class MyProductsAdapter(
         private val oldList: ArrayList<Product>,
         private val newList: ArrayList<Product>,
     ) : DiffUtil.Callback() {
-
         override fun getOldListSize() = oldList.size
 
         override fun getNewListSize() = newList.size

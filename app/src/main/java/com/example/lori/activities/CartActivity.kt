@@ -6,7 +6,7 @@ import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.lori.R
-import com.example.lori.activities.adapters.MyCartItemsAdapter
+import com.example.lori.activities.adapters.CartItemsAdapter
 import com.example.lori.models.CartItem
 import com.example.lori.models.Product
 import com.example.lori.utils.Constants
@@ -17,15 +17,14 @@ import com.google.firebase.firestore.Query
 import kotlinx.android.synthetic.main.activity_cart.*
 
 class CartActivity : BaseActivity(), View.OnClickListener {
-
     private lateinit var products: ArrayList<Product>
-    private lateinit var adapter: MyCartItemsAdapter
+    private lateinit var adapter: CartItemsAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cart)
 
-        adapter = MyCartItemsAdapter(this, arrayListOf(), R.layout.layout_cart_item)
+        adapter = CartItemsAdapter(this, arrayListOf(), R.layout.layout_cart_item)
 
         btCheckout.setOnClickListener(this)
     }
@@ -52,15 +51,15 @@ class CartActivity : BaseActivity(), View.OnClickListener {
             .collection(Constants.PRODUCTS)
             .orderBy(Constants.TITLE, Query.Direction.DESCENDING)
             .get()
-            .addOnSuccessListener { querySnapshot ->
+            .addOnSuccessListener { query ->
                 products = ArrayList()
-                querySnapshot.documents.forEach { documentSnapshot ->
-                    val product = documentSnapshot.toObject(Product::class.java)!!
-                    product.id = documentSnapshot.id
+                query.documents.forEach { doc ->
+                    val product = doc.toObject(Product::class.java)!!
+                    product.id = doc.id
                     products.add(product)
                 }
 
-                getMyCartItems()
+                getCartItems()
             }
             .addOnFailureListener { e ->
                 hideProgressDialog()
@@ -73,19 +72,19 @@ class CartActivity : BaseActivity(), View.OnClickListener {
      * so we must call this fun inside of another fun using showProgressDialog() instead
      * such as getProducts(), adapter.updateCartItem(), adapter.deleteCartItem(), etc
      */
-    fun getMyCartItems() {
+    fun getCartItems() {
         FirebaseFirestore.getInstance()
             .collection(Constants.CART_ITEMS)
             .whereEqualTo(Constants.UID, FirebaseAuth.getInstance().currentUser!!.uid)
             .orderBy(Constants.TITLE, Query.Direction.DESCENDING)
             .get()
-            .addOnSuccessListener { querySnapshot ->
+            .addOnSuccessListener { query ->
                 hideProgressDialog()
 
                 val cartItems = ArrayList<CartItem>()
-                querySnapshot.documents.forEach { documentSnapshot ->
-                    val cartItem = documentSnapshot.toObject(CartItem::class.java)!!
-                    cartItem.id = documentSnapshot.id
+                query.documents.forEach { doc ->
+                    val cartItem = doc.toObject(CartItem::class.java)!!
+                    cartItem.id = doc.id
                     cartItems.add(cartItem)
                 }
 
@@ -102,7 +101,7 @@ class CartActivity : BaseActivity(), View.OnClickListener {
                 }
 
                 if (cartItems.size > 0) {
-                    // Calculate product costs and shopping fee
+                    // todo calculate product costs and shipping fee
                     var subTotal = 0.0
                     cartItems.forEach { cartItem ->
                         if (cartItem.stock_quantity > 0) {
@@ -118,7 +117,7 @@ class CartActivity : BaseActivity(), View.OnClickListener {
 
                     rvCartItems.layoutManager = LinearLayoutManager(this)
                     rvCartItems.setHasFixedSize(true)
-                    rvCartItems.adapter = adapter // force redraw RecyclerView items
+                    rvCartItems.adapter = adapter // todo force redraw RecyclerView items
                     adapter.notifyItemChanged(cartItems)
 
                     rvCartItems.visibility = View.VISIBLE
@@ -134,7 +133,7 @@ class CartActivity : BaseActivity(), View.OnClickListener {
                 hideProgressDialog()
                 Log.e(
                     javaClass.simpleName,
-                    "Errors while getting cart items and calculating cart item costs",
+                    "Errors while getting cart items and calculating costs",
                     e
                 )
             }

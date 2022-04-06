@@ -43,7 +43,7 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
     }
 
     private fun loginUser() {
-        if (validateLoginDetails()) {
+        if (validateData()) {
             showProgressDialog(resources.getString(R.string.label_please_wait))
 
             FirebaseAuth.getInstance()
@@ -52,7 +52,7 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
                     etPassword.text.toString().trim { it <= ' ' })
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
-                        // Get the logged user details from FireStore DB
+                        // todo get the logged user details from FireStore DB
                         FirebaseFirestore.getInstance()
                             .collection(Constants.USERS)
                             .document(FirebaseAuth.getInstance().currentUser?.uid ?: "")
@@ -60,10 +60,7 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
                             .addOnSuccessListener { document ->
                                 hideProgressDialog()
 
-                                // Convert to User Data model object
                                 val user = document.toObject(User::class.java)!!
-
-                                // Save to SharedPreference
                                 getSharedPreferences(
                                     Constants.LORI_PREFERENCES,
                                     Context.MODE_PRIVATE
@@ -89,7 +86,7 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
 
                                 Log.e(
                                     javaClass.simpleName,
-                                    "Errors while getting user.",
+                                    "Errors while getting user",
                                     e
                                 )
                             }
@@ -99,7 +96,7 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
 
                         Log.e(
                             javaClass.simpleName,
-                            "Errors while logging user.",
+                            "Errors while logging in user",
                             task.exception
                         )
                     }
@@ -107,7 +104,7 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
         }
     }
 
-    private fun validateLoginDetails(): Boolean {
+    private fun validateData(): Boolean {
         return when {
             TextUtils.isEmpty(etEmail.text.toString().trim { it <= ' ' }) -> {
                 showSnackBar(resources.getString(R.string.err_msg_enter_email), true)

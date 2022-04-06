@@ -6,7 +6,7 @@ import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.lori.R
-import com.example.lori.activities.adapters.MyCartItemsAdapter
+import com.example.lori.activities.adapters.CartItemsAdapter
 import com.example.lori.models.Order
 import com.example.lori.utils.Constants
 import com.example.lori.utils.FormatUtils
@@ -60,9 +60,9 @@ class MyOrderDetailsActivity : AppCompatActivity() {
             }
         }
 
-        rvMyOrders.layoutManager = LinearLayoutManager(this@MyOrderDetailsActivity)
-        rvMyOrders.setHasFixedSize(true)
-        rvMyOrders.adapter = MyCartItemsAdapter(this, order.items, R.layout.layout_cart_item)
+        rvAllOrders.layoutManager = LinearLayoutManager(this@MyOrderDetailsActivity)
+        rvAllOrders.setHasFixedSize(true)
+        rvAllOrders.adapter = CartItemsAdapter(this, order.items, R.layout.layout_cart_item)
 
         tvMyOrderDetailsAddressType.text = order.address.type
         tvMyOrderDetailsFullName.text = order.address.name

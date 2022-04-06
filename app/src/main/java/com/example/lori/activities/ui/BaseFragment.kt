@@ -8,7 +8,6 @@ import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.layout_dialog_progress.*
 
 open class BaseFragment : Fragment() {
-
     private lateinit var pbProgress: Dialog
 
     fun showSnackBar(message: String, isErrorMessage: Boolean) {
