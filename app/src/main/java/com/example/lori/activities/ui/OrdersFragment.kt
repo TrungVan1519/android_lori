@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.lori.R
-import com.example.lori.activities.adapters.OrdersAdapter
+import com.example.lori.activities.adapters.OrderAdapter
 import com.example.lori.models.Order
 import com.example.lori.utils.Constants
 import com.google.firebase.auth.FirebaseAuth
@@ -15,14 +15,14 @@ import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.fragment_orders.*
 
 class OrdersFragment : BaseFragment() {
-    private lateinit var adapter: OrdersAdapter
+    private lateinit var adapter: OrderAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        adapter = OrdersAdapter(this, arrayListOf(), R.layout.layout_orders)
+        adapter = OrderAdapter(this, arrayListOf(), R.layout.layout_order)
         return inflater.inflate(R.layout.fragment_orders, container, false)
     }
 

@@ -12,12 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Lori">
         <activity
-            android:name=".activities.MyFavProductsActivity"
+            android:name=".activities.FavProductActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Lori.NoActionBar" />
         <activity
-            android:name=".activities.MyOrderDetailsActivity"
+            android:name=".activities.OrderActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Lori.NoActionBar" />
@@ -27,32 +27,32 @@
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Lori.NoActionBar" />
         <activity
-            android:name=".activities.AddEditAddressesActivity"
+            android:name=".activities.ModifyAddressActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Lori.NoActionBar" />
         <activity
-            android:name=".activities.AddressesActivity"
+            android:name=".activities.AddressActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Lori.NoActionBar" />
         <activity
-            android:name=".activities.CartActivity"
+            android:name=".activities.CartItemActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Lori.NoActionBar" />
         <activity
-            android:name=".activities.ProductDetailsActivity"
+            android:name=".activities.ProductActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Lori.NoActionBar" />
         <activity
-            android:name=".activities.AddEditProductsActivity"
+            android:name=".activities.ModifyProductActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Lori.NoActionBar" />
         <activity
-            android:name=".activities.SettingsActivity"
+            android:name=".activities.SettingActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Lori.NoActionBar" />
@@ -61,7 +61,7 @@
             android:exported="false"
             android:label="@string/title_activity_dashboard" />
         <activity
-            android:name=".activities.UserProfileActivity"
+            android:name=".activities.ProfileActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Lori.NoActionBar" />

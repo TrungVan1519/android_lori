@@ -6,9 +6,9 @@ import android.util.Log
 import android.view.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.lori.R
-import com.example.lori.activities.AddEditProductsActivity
-import com.example.lori.activities.MyFavProductsActivity
-import com.example.lori.activities.adapters.MyProductsAdapter
+import com.example.lori.activities.ModifyProductActivity
+import com.example.lori.activities.FavProductActivity
+import com.example.lori.activities.adapters.MyProductAdapter
 import com.example.lori.models.Product
 import com.example.lori.utils.Constants
 import com.google.firebase.auth.FirebaseAuth
@@ -17,7 +17,7 @@ import com.google.firebase.firestore.Query
 import kotlinx.android.synthetic.main.fragment_products.*
 
 class ProductsFragment : BaseFragment() {
-    private lateinit var adapter: MyProductsAdapter
+    private lateinit var adapter: MyProductAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,7 +31,7 @@ class ProductsFragment : BaseFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        adapter = MyProductsAdapter(this, arrayListOf(), R.layout.layout_my_products)
+        adapter = MyProductAdapter(this, arrayListOf(), R.layout.layout_my_product)
         return inflater.inflate(R.layout.fragment_products, container, false)
     }
 
@@ -43,11 +43,11 @@ class ProductsFragment : BaseFragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.action_list_fav_products -> {
-                startActivity(Intent(activity, MyFavProductsActivity::class.java))
+                startActivity(Intent(activity, FavProductActivity::class.java))
                 return true
             }
             R.id.action_add_products -> {
-                startActivity(Intent(activity, AddEditProductsActivity::class.java))
+                startActivity(Intent(activity, ModifyProductActivity::class.java))
                 return true
             }
         }

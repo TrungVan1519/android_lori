@@ -10,15 +10,15 @@ import com.example.lori.utils.Constants
 import com.example.lori.utils.ImageUtils
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.android.synthetic.main.activity_settings.*
+import kotlinx.android.synthetic.main.activity_setting.*
 
-class SettingsActivity : BaseActivity(), View.OnClickListener {
+class SettingActivity : BaseActivity(), View.OnClickListener {
 
     private var user: User? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_settings)
+        setContentView(R.layout.activity_setting)
 
         getUser()
 
@@ -30,12 +30,12 @@ class SettingsActivity : BaseActivity(), View.OnClickListener {
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.tvEdit -> {
-                val intent = Intent(this, UserProfileActivity::class.java)
+                val intent = Intent(this, ProfileActivity::class.java)
                 intent.putExtra(Constants.EXTRA_USER_DETAILS, user)
                 startActivity(intent)
             }
             R.id.llAddress -> {
-                startActivity(Intent(this, AddressesActivity::class.java))
+                startActivity(Intent(this, AddressActivity::class.java))
             }
             R.id.btLogout -> {
                 if (FirebaseAuth.getInstance().currentUser != null) {

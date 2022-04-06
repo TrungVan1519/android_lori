@@ -8,7 +8,7 @@ import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.lori.R
-import com.example.lori.activities.adapters.CartItemsAdapter
+import com.example.lori.activities.adapters.CartItemAdapter
 import com.example.lori.models.*
 import com.example.lori.utils.Constants
 import com.example.lori.utils.FormatUtils
@@ -25,7 +25,7 @@ class CheckoutActivity : BaseActivity(), View.OnClickListener {
 
     private lateinit var products: ArrayList<Product>
     private lateinit var cartItems: ArrayList<CartItem>
-    private lateinit var adapter: CartItemsAdapter
+    private lateinit var adapter: CartItemAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,7 +41,7 @@ class CheckoutActivity : BaseActivity(), View.OnClickListener {
             tvCheckoutMobileNumber.text = address?.mobile.toString()
         }
 
-        adapter = CartItemsAdapter(this, arrayListOf(), R.layout.layout_cart_item)
+        adapter = CartItemAdapter(this, arrayListOf(), R.layout.layout_cart_item)
 
         btPlaceOrder.setOnClickListener(this)
     }

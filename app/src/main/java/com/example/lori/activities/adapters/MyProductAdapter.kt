@@ -11,15 +11,15 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lori.R
-import com.example.lori.activities.AddEditProductsActivity
-import com.example.lori.activities.ProductDetailsActivity
+import com.example.lori.activities.ModifyProductActivity
+import com.example.lori.activities.ProductActivity
 import com.example.lori.activities.ui.ProductsFragment
 import com.example.lori.models.Product
 import com.example.lori.utils.*
 import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.android.synthetic.main.layout_my_products.view.*
+import kotlinx.android.synthetic.main.layout_my_product.view.*
 
-class MyProductsAdapter(
+class MyProductAdapter(
     private val fragment: Fragment,
     private var products: ArrayList<Product>,
     private val layout: Int
@@ -75,7 +75,7 @@ class MyProductsAdapter(
     }
 
     private fun getProduct(product: Product) {
-        val intent = Intent(fragment.requireActivity(), ProductDetailsActivity::class.java)
+        val intent = Intent(fragment.requireActivity(), ProductActivity::class.java)
         intent.putExtra(Constants.EXTRA_PRODUCT_ID, product.id)
         intent.putExtra(Constants.EXTRA_PRODUCT_OWNER_ID, product.uid)
         fragment.startActivity(intent)
@@ -84,7 +84,7 @@ class MyProductsAdapter(
     private fun updateProduct(position: Int) {
         when (fragment) {
             is ProductsFragment -> {
-                val intent = Intent(fragment.requireActivity(), AddEditProductsActivity::class.java)
+                val intent = Intent(fragment.requireActivity(), ModifyProductActivity::class.java)
                 intent.putExtra(Constants.EXTRA_PRODUCT_DETAILS, products[position])
                 fragment.startActivity(intent)
             }

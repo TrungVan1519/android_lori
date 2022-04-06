@@ -6,19 +6,19 @@ import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.lori.R
-import com.example.lori.activities.adapters.CartItemsAdapter
+import com.example.lori.activities.adapters.CartItemAdapter
 import com.example.lori.models.Order
 import com.example.lori.utils.Constants
 import com.example.lori.utils.FormatUtils
-import kotlinx.android.synthetic.main.activity_my_order_details.*
+import kotlinx.android.synthetic.main.activity_order.*
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.TimeUnit
 
-class MyOrderDetailsActivity : AppCompatActivity() {
+class OrderActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_my_order_details)
+        setContentView(R.layout.activity_order)
 
         val order = intent.getParcelableExtra<Order>(Constants.EXTRA_MY_ORDER_DETAILS)!!
         tvOrderDetailsId.text = order.title
@@ -60,9 +60,9 @@ class MyOrderDetailsActivity : AppCompatActivity() {
             }
         }
 
-        rvAllOrders.layoutManager = LinearLayoutManager(this@MyOrderDetailsActivity)
+        rvAllOrders.layoutManager = LinearLayoutManager(this@OrderActivity)
         rvAllOrders.setHasFixedSize(true)
-        rvAllOrders.adapter = CartItemsAdapter(this, order.items, R.layout.layout_cart_item)
+        rvAllOrders.adapter = CartItemAdapter(this, order.items, R.layout.layout_cart_item)
 
         tvMyOrderDetailsAddressType.text = order.address.type
         tvMyOrderDetailsFullName.text = order.address.name

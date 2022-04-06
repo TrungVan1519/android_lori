@@ -23,16 +23,16 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.storage.FirebaseStorage
-import kotlinx.android.synthetic.main.activity_add_edit_products.*
+import kotlinx.android.synthetic.main.activity_modify_product.*
 import java.io.IOException
 
-class AddEditProductsActivity : BaseActivity(), View.OnClickListener {
+class ModifyProductActivity : BaseActivity(), View.OnClickListener {
     private var selectedImageFileUri: Uri? = null
     private var mProduct: Product? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_add_edit_products)
+        setContentView(R.layout.activity_modify_product)
 
         mProduct = intent.getParcelableExtra(Constants.EXTRA_PRODUCT_DETAILS)
         if (mProduct != null && mProduct!!.id.isNotEmpty()) {

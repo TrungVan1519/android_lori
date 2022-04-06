@@ -16,20 +16,20 @@ import com.example.lori.utils.SwipeToDeleteCallback
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
-import kotlinx.android.synthetic.main.activity_my_fav_products.*
+import kotlinx.android.synthetic.main.activity_fav_product.*
 
-class MyFavProductsActivity : BaseActivity() {
+class FavProductActivity : BaseActivity() {
     val adapter = FavProductAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_my_fav_products)
+        setContentView(R.layout.activity_fav_product)
 
         getAllFavProducts()
 
         adapter.listener = object : FavProductAdapter.Listener {
             override fun onClick(position: Int) {
-                val intent = Intent(this@MyFavProductsActivity, ProductDetailsActivity::class.java)
+                val intent = Intent(this@FavProductActivity, ProductActivity::class.java)
                 intent.putExtra(Constants.EXTRA_PRODUCT_ID, adapter.currentList[position].pid)
                 startActivity(intent)
             }
@@ -41,7 +41,7 @@ class MyFavProductsActivity : BaseActivity() {
         ItemTouchHelper(object : SwipeToDeleteCallback(this) {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 // todo delete fav products from Firebase
-                AlertDialog.Builder(this@MyFavProductsActivity)
+                AlertDialog.Builder(this@FavProductActivity)
                     .setTitle(R.string.title_delete_dialog)
                     .setMessage(R.string.label_delete_dialog)
                     .setIcon(R.drawable.ic_delete_red_24dp)

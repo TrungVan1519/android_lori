@@ -6,8 +6,8 @@ import android.util.Log
 import android.view.*
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.lori.R
-import com.example.lori.activities.CartActivity
-import com.example.lori.activities.SettingsActivity
+import com.example.lori.activities.CartItemActivity
+import com.example.lori.activities.SettingActivity
 import com.example.lori.activities.adapters.AllProductsAdapter
 import com.example.lori.models.Product
 import com.example.lori.utils.Constants
@@ -39,11 +39,11 @@ class DashboardFragment : BaseFragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.action_settings -> {
-                startActivity(Intent(activity, SettingsActivity::class.java))
+                startActivity(Intent(activity, SettingActivity::class.java))
                 return true
             }
             R.id.action_cart -> {
-                startActivity(Intent(activity, CartActivity::class.java))
+                startActivity(Intent(activity, CartItemActivity::class.java))
                 return true
             }
         }

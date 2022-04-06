@@ -6,7 +6,7 @@ import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.lori.R
-import com.example.lori.activities.adapters.CartItemsAdapter
+import com.example.lori.activities.adapters.CartItemAdapter
 import com.example.lori.models.CartItem
 import com.example.lori.models.Product
 import com.example.lori.utils.Constants
@@ -14,17 +14,17 @@ import com.example.lori.utils.FormatUtils
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
-import kotlinx.android.synthetic.main.activity_cart.*
+import kotlinx.android.synthetic.main.activity_cart_item.*
 
-class CartActivity : BaseActivity(), View.OnClickListener {
+class CartItemActivity : BaseActivity(), View.OnClickListener {
     private lateinit var products: ArrayList<Product>
-    private lateinit var adapter: CartItemsAdapter
+    private lateinit var adapter: CartItemAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_cart)
+        setContentView(R.layout.activity_cart_item)
 
-        adapter = CartItemsAdapter(this, arrayListOf(), R.layout.layout_cart_item)
+        adapter = CartItemAdapter(this, arrayListOf(), R.layout.layout_cart_item)
 
         btCheckout.setOnClickListener(this)
     }
@@ -37,7 +37,7 @@ class CartActivity : BaseActivity(), View.OnClickListener {
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.btCheckout -> {
-                val intent = Intent(this, AddressesActivity::class.java)
+                val intent = Intent(this, AddressActivity::class.java)
                 intent.putExtra(Constants.EXTRA_SELECT_ADDRESS, true)
                 startActivity(intent)
             }

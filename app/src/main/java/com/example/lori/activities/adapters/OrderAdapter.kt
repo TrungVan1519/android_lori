@@ -7,14 +7,14 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.example.lori.activities.MyOrderDetailsActivity
+import com.example.lori.activities.OrderActivity
 import com.example.lori.models.Order
 import com.example.lori.utils.Constants
 import com.example.lori.utils.FormatUtils
 import com.example.lori.utils.ImageUtils
-import kotlinx.android.synthetic.main.layout_orders.view.*
+import kotlinx.android.synthetic.main.layout_order.view.*
 
-class OrdersAdapter(
+class OrderAdapter(
     private val fragment: Fragment,
     private var orders: ArrayList<Order>,
     private var layout: Int
@@ -53,7 +53,7 @@ class OrdersAdapter(
     }
 
     private fun getOrder(order: Order) {
-        val intent = Intent(fragment.requireActivity(), MyOrderDetailsActivity::class.java)
+        val intent = Intent(fragment.requireActivity(), OrderActivity::class.java)
         intent.putExtra(Constants.EXTRA_MY_ORDER_DETAILS, order)
         fragment.requireActivity().startActivity(intent)
     }

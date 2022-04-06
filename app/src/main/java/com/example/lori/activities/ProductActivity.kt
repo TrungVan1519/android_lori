@@ -12,7 +12,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lori.R
-import com.example.lori.activities.adapters.CommentsAdapter
+import com.example.lori.activities.adapters.CommentAdapter
 import com.example.lori.models.*
 import com.example.lori.utils.Constants
 import com.example.lori.utils.FormatUtils
@@ -23,19 +23,19 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.SetOptions
-import kotlinx.android.synthetic.main.activity_product_details.*
+import kotlinx.android.synthetic.main.activity_product.*
 import kotlinx.android.synthetic.main.layout_dialog_add_comments.*
 import kotlinx.android.synthetic.main.layout_dialog_list_comments.*
 
-class ProductDetailsActivity : BaseActivity(), View.OnClickListener {
+class ProductActivity : BaseActivity(), View.OnClickListener {
     private var product: Product? = null
 
     private lateinit var rvComments: RecyclerView
-    val adapter = CommentsAdapter()
+    val adapter = CommentAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_product_details)
+        setContentView(R.layout.activity_product)
 
         getProduct(intent.getStringExtra(Constants.EXTRA_PRODUCT_ID) ?: "")
 
@@ -55,7 +55,7 @@ class ProductDetailsActivity : BaseActivity(), View.OnClickListener {
                 addToCart()
             }
             R.id.btGoToCart -> {
-                startActivity(Intent(this, CartActivity::class.java))
+                startActivity(Intent(this, CartItemActivity::class.java))
             }
             R.id.btListComment -> {
                 getAllComments()
@@ -219,7 +219,7 @@ class ProductDetailsActivity : BaseActivity(), View.OnClickListener {
                 }
 
                 val lp = WindowManager.LayoutParams()
-                val dialog = Dialog(this@ProductDetailsActivity)
+                val dialog = Dialog(this@ProductActivity)
                 dialog.setContentView(R.layout.layout_dialog_list_comments)
                 lp.copyFrom(dialog.window!!.attributes)
                 lp.width = WindowManager.LayoutParams.MATCH_PARENT
@@ -229,7 +229,7 @@ class ProductDetailsActivity : BaseActivity(), View.OnClickListener {
 
                 dialog.findViewById<BoldMontserratButton>(R.id.btCancel).setOnClickListener { dialog.dismiss() }
 
-                adapter.listener = object : CommentsAdapter.Listener {
+                adapter.listener = object : CommentAdapter.Listener {
                     // todo update comments
                     override fun onClick(position: Int) {
                         if (comments[position].uid == FirebaseAuth.getInstance().currentUser!!.uid) {
@@ -240,7 +240,7 @@ class ProductDetailsActivity : BaseActivity(), View.OnClickListener {
                     override fun onLongClick(position: Int) {
                         if (comments[position].uid == FirebaseAuth.getInstance().currentUser!!.uid) {
                             // todo delete product from Firebase
-                            AlertDialog.Builder(this@ProductDetailsActivity)
+                            AlertDialog.Builder(this@ProductActivity)
                                 .setTitle(R.string.title_delete_dialog)
                                 .setMessage(R.string.label_delete_dialog)
                                 .setIcon(R.drawable.ic_delete_red_24dp)
@@ -304,7 +304,7 @@ class ProductDetailsActivity : BaseActivity(), View.OnClickListener {
 
     private fun createOrUpdateComment(addNew: Boolean = true, comment: Comment? = null) {
         val lp = WindowManager.LayoutParams()
-        val dialog = Dialog(this@ProductDetailsActivity)
+        val dialog = Dialog(this@ProductActivity)
         dialog.setContentView(R.layout.layout_dialog_add_comments)
         lp.copyFrom(dialog.window!!.attributes)
         lp.width = WindowManager.LayoutParams.MATCH_PARENT
@@ -315,7 +315,7 @@ class ProductDetailsActivity : BaseActivity(), View.OnClickListener {
         val tvTitleDialog = dialog.findViewById<BoldMontserratTextView>(R.id.tvTitle)
 
         dialog.spCommentStar.adapter = ArrayAdapter(
-            this@ProductDetailsActivity,
+            this@ProductActivity,
             android.R.layout.simple_list_item_1,
             mutableListOf(5, 4, 3, 2, 1)
         )

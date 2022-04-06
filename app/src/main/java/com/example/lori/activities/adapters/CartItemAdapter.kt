@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lori.R
-import com.example.lori.activities.CartActivity
+import com.example.lori.activities.CartItemActivity
 import com.example.lori.activities.CheckoutActivity
 import com.example.lori.models.CartItem
 import com.example.lori.utils.Constants
@@ -22,7 +22,7 @@ import com.example.lori.utils.SwipeToDeleteCallback
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.layout_cart_item.view.*
 
-open class CartItemsAdapter(
+open class CartItemAdapter(
     private val context: Context,
     private var cartItems: ArrayList<CartItem>,
     private var layout: Int
@@ -66,7 +66,7 @@ open class CartItemsAdapter(
                 }
 
                 when (context) {
-                    is CartActivity -> {
+                    is CartItemActivity -> {
                         holder.itemView.ibDecreaseItemQuantity.setOnClickListener {
                             decreaseCartItemQuantity(cartItem)
                         }
@@ -93,7 +93,7 @@ open class CartItemsAdapter(
         super.onAttachedToRecyclerView(recyclerView)
 
         when (context) {
-            is CartActivity -> {
+            is CartItemActivity -> {
                 ItemTouchHelper(object : SwipeToDeleteCallback(context) {
                     override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                         deleteCartItem(cartItems[viewHolder.adapterPosition].id)
@@ -114,7 +114,7 @@ open class CartItemsAdapter(
 
     private fun decreaseCartItemQuantity(cartItem: CartItem) {
         when (context) {
-            is CartActivity -> {
+            is CartItemActivity -> {
                 if (cartItem.cart_quantity == 1) {
                     deleteCartItem(cartItem.id)
                 } else {
@@ -130,7 +130,7 @@ open class CartItemsAdapter(
     @SuppressLint("StringFormatMatches")
     private fun increaseCartItemQuantity(cartItem: CartItem) {
         when (context) {
-            is CartActivity -> {
+            is CartItemActivity -> {
                 if (cartItem.cart_quantity < cartItem.stock_quantity) {
                     updateCartItem(
                         cartItem.id,
@@ -151,7 +151,7 @@ open class CartItemsAdapter(
 
     private fun updateCartItem(id: String, itemHashMap: HashMap<String, Any>) {
         when (context) {
-            is CartActivity -> {
+            is CartItemActivity -> {
                 context.showProgressDialog(context.resources.getString(R.string.label_please_wait))
 
                 FirebaseFirestore.getInstance()
@@ -181,7 +181,7 @@ open class CartItemsAdapter(
 
     private fun deleteCartItem(id: String) {
         when (context) {
-            is CartActivity -> {
+            is CartItemActivity -> {
                 AlertDialog.Builder(context)
                     .setTitle(R.string.title_delete_dialog)
                     .setMessage(R.string.label_delete_dialog)

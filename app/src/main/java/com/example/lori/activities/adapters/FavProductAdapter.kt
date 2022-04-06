@@ -10,7 +10,7 @@ import com.bumptech.glide.Glide
 import com.example.lori.R
 import com.example.lori.models.FavProduct
 import com.example.lori.utils.FormatUtils
-import kotlinx.android.synthetic.main.layout_my_fav_products.view.*
+import kotlinx.android.synthetic.main.layout_fav_product.view.*
 
 class FavProductAdapter : ListAdapter<FavProduct, FavProductAdapter.ViewHolder>(DiffCallback()) {
     var listener: Listener? = null
@@ -18,7 +18,7 @@ class FavProductAdapter : ListAdapter<FavProduct, FavProductAdapter.ViewHolder>(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
             LayoutInflater.from(parent.context)
-                .inflate(R.layout.layout_my_fav_products, parent, false),
+                .inflate(R.layout.layout_fav_product, parent, false),
             listener
         )
     }

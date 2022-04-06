@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.lori.activities.ProductDetailsActivity
+import com.example.lori.activities.ProductActivity
 import com.example.lori.models.Product
 import com.example.lori.utils.Constants
 import com.example.lori.utils.FormatUtils
@@ -39,7 +39,7 @@ class AllProductsAdapter(
     override fun getItemCount() = products.size
 
     private fun getProduct(product: Product) {
-        val intent = Intent(context, ProductDetailsActivity::class.java)
+        val intent = Intent(context, ProductActivity::class.java)
         intent.putExtra(Constants.EXTRA_PRODUCT_ID, product.id)
         intent.putExtra(Constants.EXTRA_PRODUCT_OWNER_ID, product.uid)
         context.startActivity(intent)

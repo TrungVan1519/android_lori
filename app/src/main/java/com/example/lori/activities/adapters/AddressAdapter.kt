@@ -12,17 +12,17 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lori.R
-import com.example.lori.activities.AddEditAddressesActivity
-import com.example.lori.activities.AddressesActivity
+import com.example.lori.activities.ModifyAddressActivity
+import com.example.lori.activities.AddressActivity
 import com.example.lori.activities.CheckoutActivity
 import com.example.lori.models.Address
 import com.example.lori.utils.Constants
 import com.example.lori.utils.SwipeToDeleteCallback
 import com.example.lori.utils.SwipeToEditCallback
 import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.android.synthetic.main.layout_address_item.view.*
+import kotlinx.android.synthetic.main.layout_address.view.*
 
-class AddressesAdapter(
+class AddressAdapter(
     private val context: Context,
     private var addresses: ArrayList<Address>,
     private val layout: Int,
@@ -90,8 +90,8 @@ class AddressesAdapter(
 
     private fun updateAddress(position: Int) {
         when (context) {
-            is AddressesActivity -> {
-                val intent = Intent(context, AddEditAddressesActivity::class.java)
+            is AddressActivity -> {
+                val intent = Intent(context, ModifyAddressActivity::class.java)
                 intent.putExtra(Constants.EXTRA_ADDRESS_DETAILS, addresses[position])
                 context.startActivity(intent)
             }
@@ -100,7 +100,7 @@ class AddressesAdapter(
 
     private fun deleteAddress(position: Int) {
         when (context) {
-            is AddressesActivity -> {
+            is AddressActivity -> {
                 AlertDialog.Builder(context)
                     .setTitle(R.string.title_delete_dialog)
                     .setMessage(R.string.label_delete_addresses_dialog)

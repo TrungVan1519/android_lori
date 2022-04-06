@@ -6,28 +6,28 @@ import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.lori.R
-import com.example.lori.activities.adapters.AddressesAdapter
+import com.example.lori.activities.adapters.AddressAdapter
 import com.example.lori.models.Address
 import com.example.lori.utils.Constants
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
-import kotlinx.android.synthetic.main.activity_addresses.*
+import kotlinx.android.synthetic.main.activity_address.*
 
-class AddressesActivity : BaseActivity(), View.OnClickListener {
+class AddressActivity : BaseActivity(), View.OnClickListener {
     private var selectedAddress = false
-    private lateinit var adapter: AddressesAdapter
+    private lateinit var adapter: AddressAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_addresses)
+        setContentView(R.layout.activity_address)
 
         selectedAddress = intent.getBooleanExtra(Constants.EXTRA_SELECT_ADDRESS, false)
         if (selectedAddress) {
             tvTitle.text = resources.getString(R.string.title_select_address)
         }
 
-        adapter = AddressesAdapter(this, arrayListOf(), R.layout.layout_address_item, selectedAddress)
+        adapter = AddressAdapter(this, arrayListOf(), R.layout.layout_address, selectedAddress)
 
         btAddAddresses.setOnClickListener(this)
     }
@@ -40,7 +40,7 @@ class AddressesActivity : BaseActivity(), View.OnClickListener {
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.btAddAddresses -> {
-                startActivity(Intent(this, AddEditAddressesActivity::class.java))
+                startActivity(Intent(this, ModifyAddressActivity::class.java))
             }
         }
     }

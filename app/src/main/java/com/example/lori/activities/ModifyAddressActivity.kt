@@ -12,14 +12,14 @@ import com.example.lori.utils.Constants
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
-import kotlinx.android.synthetic.main.activity_add_edit_address.*
+import kotlinx.android.synthetic.main.activity_modify_address.*
 
-class AddEditAddressesActivity : BaseActivity(), View.OnClickListener {
+class ModifyAddressActivity : BaseActivity(), View.OnClickListener {
     private var mAddress: Address? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_add_edit_address)
+        setContentView(R.layout.activity_modify_address)
 
         mAddress = intent.getParcelableExtra(Constants.EXTRA_ADDRESS_DETAILS)
         if (mAddress != null && mAddress!!.id.isNotEmpty()) {

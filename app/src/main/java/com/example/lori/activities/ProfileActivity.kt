@@ -21,16 +21,16 @@ import com.example.lori.utils.ImageUtils
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
-import kotlinx.android.synthetic.main.activity_user_profile.*
+import kotlinx.android.synthetic.main.activity_profile.*
 import java.io.IOException
 
-class UserProfileActivity : BaseActivity(), View.OnClickListener {
+class ProfileActivity : BaseActivity(), View.OnClickListener {
     private lateinit var user: User
     private var selectedImageFileUri: Uri? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_user_profile)
+        setContentView(R.layout.activity_profile)
 
         user = intent.getParcelableExtra(Constants.EXTRA_USER_DETAILS)!!
         etFirstName.setText(user.firstName)

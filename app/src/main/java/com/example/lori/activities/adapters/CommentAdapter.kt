@@ -9,15 +9,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.lori.R
 import com.example.lori.models.Comment
-import kotlinx.android.synthetic.main.layout_comments.view.*
+import kotlinx.android.synthetic.main.layout_comment.view.*
 
-class CommentsAdapter : ListAdapter<Comment, CommentsAdapter.ViewHolder>(DiffCallback()) {
+class CommentAdapter : ListAdapter<Comment, CommentAdapter.ViewHolder>(DiffCallback()) {
     var listener: Listener? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
             LayoutInflater.from(parent.context)
-                .inflate(R.layout.layout_comments, parent, false),
+                .inflate(R.layout.layout_comment, parent, false),
             listener
         )
     }
