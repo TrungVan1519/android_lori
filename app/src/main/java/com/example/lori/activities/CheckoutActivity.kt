@@ -155,6 +155,8 @@ class CheckoutActivity : BaseActivity(), View.OnClickListener {
             totalAmount = totalAmount,
             order_datetime = System.currentTimeMillis(),
             uid = FirebaseAuth.getInstance().currentUser!!.uid,
+            createdAt = System.currentTimeMillis(),
+            updatedAt = System.currentTimeMillis(),
         )
 
         FirebaseFirestore.getInstance()

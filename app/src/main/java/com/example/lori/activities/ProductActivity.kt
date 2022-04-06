@@ -166,7 +166,7 @@ class ProductActivity : BaseActivity(), View.OnClickListener {
             price = product!!.price,
             uid = FirebaseAuth.getInstance().currentUser!!.uid,
             pid = product!!.id,
-            createdAt = System.currentTimeMillis()
+            createdAt = System.currentTimeMillis(),
         )
 
         FirebaseFirestore.getInstance()
@@ -414,7 +414,9 @@ class ProductActivity : BaseActivity(), View.OnClickListener {
             image = product!!.image,
             cart_quantity = Constants.DEFAULT_CART_QUANTITY,
             uid = FirebaseAuth.getInstance().uid!!,
-            pid = product!!.id
+            pid = product!!.id,
+            createdAt = System.currentTimeMillis(),
+            updatedAt = System.currentTimeMillis(),
         )
 
         FirebaseFirestore.getInstance()

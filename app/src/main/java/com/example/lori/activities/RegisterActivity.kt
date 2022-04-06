@@ -52,7 +52,9 @@ class RegisterActivity : BaseActivity(), View.OnClickListener {
                             task.result!!.user!!.uid,
                             etFirstName.text.toString().trim { it <= ' ' },
                             etLastName.text.toString().trim { it <= ' ' },
-                            etEmail.text.toString().trim { it <= ' ' }
+                            etEmail.text.toString().trim { it <= ' ' },
+                            createdAt = System.currentTimeMillis(),
+                            updatedAt = System.currentTimeMillis(),
                         )
 
                         FirebaseFirestore.getInstance()

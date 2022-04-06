@@ -75,7 +75,9 @@ class ModifyAddressActivity : BaseActivity(), View.OnClickListener {
                 else -> Constants.OTHER
             },
             otherDetails = etOtherDetails.text.toString().trim { it <= ' ' },
-            uid = FirebaseAuth.getInstance().currentUser!!.uid
+            uid = FirebaseAuth.getInstance().currentUser!!.uid,
+            createdAt = System.currentTimeMillis(),
+            updatedAt = System.currentTimeMillis(),
         )
 
         // todo create new address

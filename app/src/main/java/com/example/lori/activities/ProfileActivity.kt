@@ -89,6 +89,8 @@ class ProfileActivity : BaseActivity(), View.OnClickListener {
                     userHashMap[Constants.MOBILE] =
                         etMobileNumber.text.toString().trim { it <= ' ' }.toLong()
                     userHashMap[Constants.PROFILE_COMPLETED] = 1 // 0: incomplete - 1: completed
+                    userHashMap[Constants.CREATED_AT] = System.currentTimeMillis()
+                    userHashMap[Constants.UPDATED_AT] = System.currentTimeMillis()
 
                     showProgressDialog(resources.getString(R.string.label_please_wait))
 

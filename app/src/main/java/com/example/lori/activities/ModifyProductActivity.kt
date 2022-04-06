@@ -93,6 +93,8 @@ class ModifyProductActivity : BaseActivity(), View.OnClickListener {
                 Constants.LORI_PREFERENCES,
                 Context.MODE_PRIVATE
             ).getString(Constants.LOGGED_IN_USERNAME, "")!!,
+            createdAt = System.currentTimeMillis(),
+            updatedAt = System.currentTimeMillis(),
         )
 
         // todo create new address
