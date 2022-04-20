@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.lori.R
 import com.example.lori.activities.CartItemActivity
 import com.example.lori.activities.CheckoutActivity
+import com.example.lori.activities.OrderActivity
 import com.example.lori.models.CartItem
 import com.example.lori.utils.Constants
 import com.example.lori.utils.FormatUtils
@@ -81,6 +82,11 @@ open class CartItemAdapter(
                         holder.itemView.ibDeleteItem.visibility = View.GONE
                         holder.itemView.ibIncreaseItemQuantity.visibility = View.GONE
                         holder.itemView.ibDecreaseItemQuantity.visibility = View.GONE
+                    }
+                    is OrderActivity -> {
+                        holder.itemView.ibDecreaseItemQuantity.visibility = View.GONE
+                        holder.itemView.ibIncreaseItemQuantity.visibility = View.GONE
+                        holder.itemView.ibDeleteItem.visibility = View.GONE
                     }
                 }
             }
