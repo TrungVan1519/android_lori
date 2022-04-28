@@ -3,6 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+        android:id="@+id/action_search_all_products"
+        android:icon="@drawable/ic_search_24dp"
+        android:title="@string/action_add_products"
+        app:actionViewClass="android.widget.SearchView"
+        app:showAsAction="ifRoom" />
+    <item
         android:id="@+id/action_cart"
         android:icon="@drawable/ic_cart_24dp"
         android:title="@string/action_cart"

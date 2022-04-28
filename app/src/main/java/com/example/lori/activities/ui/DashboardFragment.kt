@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import android.widget.SearchView
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.lori.R
 import com.example.lori.activities.CartItemActivity
@@ -33,6 +34,52 @@ class DashboardFragment : BaseFragment() {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.dashboard_menu, menu)
+
+        val searchView = menu.findItem(R.id.action_search_all_products).actionView as SearchView
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(s: String?): Boolean {
+                searchView.clearFocus()
+                showProgressDialog(resources.getString(R.string.label_please_wait))
+
+                FirebaseFirestore.getInstance()
+                    .collection(Constants.PRODUCTS)
+                    .whereEqualTo(Constants.TITLE, s!!)
+                    .orderBy(Constants.UPDATED_AT, Query.Direction.DESCENDING)
+                    .get()
+                    .addOnSuccessListener { query ->
+                        hideProgressDialog()
+
+                        val products = ArrayList<Product>()
+                        query.documents.forEach { doc ->
+                            val product = doc.toObject(Product::class.java)!!
+                            product.id = doc.id
+                            products.add(product)
+                        }
+
+                        if (products.size > 0) {
+                            rvAllProducts.visibility = View.VISIBLE
+                            tvNoProductsFound.visibility = View.GONE
+
+                            rvAllProducts.layoutManager = GridLayoutManager(activity, 2)
+                            rvAllProducts.setHasFixedSize(true)
+                            rvAllProducts.adapter =
+                                AllProductsAdapter(requireActivity(), products, R.layout.layout_all_products)
+                        } else {
+                            rvAllProducts.visibility = View.GONE
+                            tvNoProductsFound.visibility = View.VISIBLE
+                        }
+                    }
+                    .addOnFailureListener { e ->
+                        hideProgressDialog()
+                        Log.e(javaClass.simpleName, "Errors while searching all products", e)
+                    }
+
+                return true
+            }
+
+            override fun onQueryTextChange(s: String?) = true
+        })
+
         super.onCreateOptionsMenu(menu, inflater)
     }
 
