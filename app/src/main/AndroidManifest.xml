@@ -12,6 +12,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Lori">
         <activity
+            android:name=".activities.TermsAndConditionActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Lori.NoActionBar" />
+        <activity
             android:name=".activities.FavProductActivity"
             android:exported="false"
             android:screenOrientation="portrait"

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.example.lori.widgets.BoldMontserratTextView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/tvTermsAndConditionContent"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:drawablePadding="@dimen/padding_big"
+    android:orientation="horizontal"
+    android:padding="@dimen/padding_medium"
+    tools:drawableStart="@drawable/ic_check_circle_24dp"
+    tools:text="Term content is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s," />

@@ -1,5 +1,6 @@
 package com.example.lori.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -23,12 +24,16 @@ class RegisterActivity : BaseActivity(), View.OnClickListener {
             finish()
         }
 
+        tvTermsAndCondition.setOnClickListener(this)
         btRegister.setOnClickListener(this)
         tvLogin.setOnClickListener(this)
     }
 
     override fun onClick(v: View?) {
         when (v?.id) {
+            R.id.tvTermsAndCondition -> {
+                startActivity(Intent(this, TermsAndConditionActivity::class.java))
+            }
             R.id.btRegister -> {
                 registerUser()
             }

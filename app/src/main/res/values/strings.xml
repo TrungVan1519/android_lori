@@ -92,6 +92,7 @@
     <string name="title_add_comments">ADD COMMENTS</string>
     <string name="title_update_comments">UPDATE COMMENTS</string>
     <string name="title_list_comments">ALL COMMENTS</string>
+    <string name="title_terms_and_condition">TERMS AND CONDITION</string>
 
     <string name="action_settings">Settings</string>
     <string name="action_add_products">Add Products</string>
@@ -147,6 +148,8 @@
     <string name="success_to_delete_address">Your address is deleted successfully</string>
     <string name="success_to_update_products">Your product is updated successfully</string>
     <string name="success_to_delete_orders">Your order is deleted successfully</string>
+    <string name="success_to_add_fav_product">Add to favorite successfully</string>
+    <string name="success_to_place_orders">Your order placed successfully</string>
 
     <string name="fail_to_register">Fail to register</string>
     <string name="fail_to_select_image">Fail to select the image</string>
@@ -167,11 +170,9 @@
     <string name="fail_to_update_comment">Fail to update comments</string>
     <string name="fail_to_update_addresses">Fail to update addresses</string>
     <string name="fail_to_delete_addresses">Fail to delete addresses</string>
-    <string name="success_to_place_orders">Your order placed successfully</string>
     <string name="fail_to_place_orders">Fail to place orders</string>
     <string name="fail_to_update_products">Fail to update products</string>
     <string name="fail_to_delete_orders">Fail to delete orders</string>
     <string name="fail_to_list_all_comments">Fail to list all comments</string>
-    <string name="success_to_add_fav_product">Add to favorite successfully</string>
     <string name="fail_to_add_fav_product">Fail to add favorite products</string>
 </resources>
