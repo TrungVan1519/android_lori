@@ -36,23 +36,23 @@
                 android:id="@+id/tvAddressType"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/ic_bg"
+                android:background="@drawable/ic_button_background"
                 android:padding="@dimen/padding_medium"
                 android:textColor="@color/white"
                 android:textSize="@dimen/text_small"
                 tools:text="Home" />
         </LinearLayout>
 
-        <com.example.lori.widgets.BoldMontserratTextView
+        <com.example.lori.widgets.RegularMontserratTextView
             android:id="@+id/tvAddressDetails"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginVertical="@dimen/margin_small"
             android:textColor="@color/primary_text"
             android:textSize="@dimen/text_small"
-            tools:text="XYZ" />
+            tools:text="Ha Noi, Viet Nam" />
 
-        <com.example.lori.widgets.BoldMontserratTextView
+        <com.example.lori.widgets.RegularMontserratTextView
             android:id="@+id/tvAddressMobileNumber"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
