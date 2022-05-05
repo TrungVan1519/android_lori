@@ -41,7 +41,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingBottom="@dimen/padding_massive">
+            android:paddingBottom="@dimen/padding_big">
 
             <com.example.lori.widgets.BoldMontserratTextView
                 android:layout_width="match_parent"
@@ -154,12 +154,13 @@
                 android:orientation="vertical"
                 android:padding="@dimen/padding_medium">
 
-                <com.example.lori.widgets.RegularMontserratTextView
+                <com.example.lori.widgets.BoldMontserratTextView
                     android:id="@+id/tvMyOrderDetailsAddressType"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingVertical="@dimen/margin_small"
-                    android:textColor="@color/primary_text"
+                    android:background="@drawable/ic_button_background"
+                    android:padding="@dimen/padding_big"
+                    android:textColor="@color/white"
                     android:textSize="@dimen/text_medium"
                     android:textStyle="bold"
                     tools:text="Home" />
@@ -168,6 +169,7 @@
                     android:id="@+id/tvMyOrderDetailsFullName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_small"
                     android:textColor="@color/primary_text"
                     android:textSize="@dimen/text_medium"
                     tools:text="Trung" />
@@ -180,6 +182,15 @@
                     android:textColor="@color/primary_text"
                     android:textSize="@dimen/text_medium"
                     tools:text="address" />
+
+                <com.example.lori.widgets.RegularMontserratTextView
+                    android:id="@+id/tvMyOrderDetailsMobileNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_small"
+                    android:textColor="@color/primary_text"
+                    android:textSize="@dimen/text_medium"
+                    tools:text="0123456789" />
 
                 <com.example.lori.widgets.RegularMontserratTextView
                     android:id="@+id/tvMyOrderDetailsAdditionalNote"
@@ -198,15 +209,6 @@
                     android:textColor="@color/primary_text"
                     android:textSize="@dimen/text_medium"
                     tools:text="other details" />
-
-                <com.example.lori.widgets.RegularMontserratTextView
-                    android:id="@+id/tvMyOrderDetailsMobileNumber"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_small"
-                    android:textColor="@color/primary_text"
-                    android:textSize="@dimen/text_medium"
-                    tools:text="0123456789" />
             </LinearLayout>
 
             <com.example.lori.widgets.BoldMontserratTextView
@@ -315,6 +317,20 @@
                     android:textColor="@color/colorAccent"
                     android:textSize="@dimen/text_medium" />
             </LinearLayout>
+
+            <com.example.lori.widgets.BoldMontserratButton
+                android:id="@+id/btConfirmReceiveOrder"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginHorizontal="@dimen/margin_medium"
+                android:layout_marginTop="@dimen/margin_big"
+                android:background="@drawable/ic_button_background"
+                android:foreground="?attr/selectableItemBackground"
+                android:gravity="center"
+                android:text="@string/label_btn_i_have_received_this_order"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/text_small" />
         </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

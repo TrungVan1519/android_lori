@@ -16,6 +16,7 @@ data class Order(
     val shippingCharge: Double = 0.0,
     val totalAmount: Double = 0.0,
     val order_datetime: Long = 0,
+    var status: Boolean = false,
     val uid: String = "",
     var createdAt: Long = 0,
     var updatedAt: Long = 0,

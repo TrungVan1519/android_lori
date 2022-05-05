@@ -41,7 +41,12 @@ class CommentAdapter : ListAdapter<Comment, CommentAdapter.ViewHolder>(DiffCallb
         }
 
         fun displayData(comment: Comment) {
-            Glide.with(itemView.context).load(comment.userImage).centerCrop().into(itemView.ivUserImage)
+            Glide
+                .with(itemView.context)
+                .load(comment.userImage)
+                .placeholder(R.drawable.im_user_placeholder)
+                .centerCrop()
+                .into(itemView.ivUserImage)
             itemView.tvUserEmail.text = comment.userEmail
             itemView.tvCommentStart.text = comment.start.toString()
             itemView.tvCommentContent.text = comment.content

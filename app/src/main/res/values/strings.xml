@@ -62,10 +62,12 @@
     <string name="label_order_status_pending">Pending</string>
     <string name="label_order_status_in_process">In Process</string>
     <string name="label_order_status_delivered">Delivered</string>
+    <string name="label_order_status_received">Received</string>
     <string name="label_no_favorite_products_found">No favorite products are available!</string>
     <string name="label_btn_add_comments">Add comments</string>
     <string name="label_btn_list_comments">List comments</string>
     <string name="label_no_comments_found">No comments are available!</string>
+    <string name="label_btn_i_have_received_this_order">I have received this order</string>
 
     <string name="title_login">LOGIN</string>
     <string name="title_forgot_password">FORGOT PASSWORD?</string>
@@ -175,4 +177,5 @@
     <string name="fail_to_delete_orders">Fail to delete orders</string>
     <string name="fail_to_list_all_comments">Fail to list all comments</string>
     <string name="fail_to_add_fav_product">Fail to add favorite products</string>
+    <string name="fail_to_confirm_receive_orders">Fail to confirm receive orders</string>
 </resources>

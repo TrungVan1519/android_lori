@@ -154,6 +154,7 @@ class CheckoutActivity : BaseActivity(), View.OnClickListener {
             shippingCharge = Constants.SHIPPING_CHARGE.toDouble(),
             totalAmount = totalAmount,
             order_datetime = System.currentTimeMillis(),
+            status = false,
             uid = FirebaseAuth.getInstance().currentUser!!.uid,
             createdAt = System.currentTimeMillis(),
             updatedAt = System.currentTimeMillis(),

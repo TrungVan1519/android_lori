@@ -1,7 +1,8 @@
 package com.example.lori.activities
 
-import androidx.appcompat.app.AppCompatActivity
+import android.app.AlertDialog
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -10,17 +11,20 @@ import com.example.lori.activities.adapters.CartItemAdapter
 import com.example.lori.models.Order
 import com.example.lori.utils.Constants
 import com.example.lori.utils.FormatUtils
+import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_order.*
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.TimeUnit
 
-class OrderActivity : AppCompatActivity() {
+class OrderActivity : BaseActivity(), View.OnClickListener {
+    var order = Order()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_order)
 
-        val order = intent.getParcelableExtra<Order>(Constants.EXTRA_MY_ORDER_DETAILS)!!
+        order = intent.getParcelableExtra(Constants.EXTRA_MY_ORDER_DETAILS)!!
         tvOrderDetailsId.text = order.title
 
         val cal = Calendar.getInstance()
@@ -28,35 +32,47 @@ class OrderActivity : AppCompatActivity() {
         tvOrderDetailsDate.text =
             SimpleDateFormat("dd MMM yyyy HH:mm", Locale.getDefault()).format(cal.time)
 
-        val diffInHours =
-            TimeUnit.MICROSECONDS.toHours(System.currentTimeMillis() - order.order_datetime)
-        when {
-            diffInHours < 1 -> {
-                tvOrderStatus.text = resources.getString(R.string.label_order_status_pending)
-                tvOrderStatus.setTextColor(
-                    ContextCompat.getColor(
-                        this,
-                        R.color.colorAccent
-                    )
+        if (order.status) {
+            btConfirmReceiveOrder.visibility = View.GONE
+            tvOrderStatus.text =
+                resources.getString(R.string.label_order_status_received)
+            tvOrderStatus.setTextColor(
+                ContextCompat.getColor(
+                    this,
+                    R.color.order_status_delivered
                 )
-            }
-            diffInHours < 2 -> {
-                tvOrderStatus.text = resources.getString(R.string.label_order_status_in_process)
-                tvOrderStatus.setTextColor(
-                    ContextCompat.getColor(
-                        this,
-                        R.color.order_status_in_process
+            )
+        } else {
+            val diffInHours =
+                TimeUnit.MICROSECONDS.toHours(System.currentTimeMillis() - order.order_datetime)
+            when {
+                diffInHours < 1 -> {
+                    tvOrderStatus.text = resources.getString(R.string.label_order_status_pending)
+                    tvOrderStatus.setTextColor(
+                        ContextCompat.getColor(
+                            this,
+                            R.color.colorAccent
+                        )
                     )
-                )
-            }
-            else -> {
-                tvOrderStatus.text = resources.getString(R.string.label_order_status_delivered)
-                tvOrderStatus.setTextColor(
-                    ContextCompat.getColor(
-                        this,
-                        R.color.order_status_delivered
+                }
+                diffInHours < 2 -> {
+                    tvOrderStatus.text = resources.getString(R.string.label_order_status_in_process)
+                    tvOrderStatus.setTextColor(
+                        ContextCompat.getColor(
+                            this,
+                            R.color.order_status_in_process
+                        )
                     )
-                )
+                }
+                else -> {
+                    tvOrderStatus.text = resources.getString(R.string.label_order_status_delivered)
+                    tvOrderStatus.setTextColor(
+                        ContextCompat.getColor(
+                            this,
+                            R.color.order_status_delivered
+                        )
+                    )
+                }
             }
         }
 
@@ -78,5 +94,60 @@ class OrderActivity : AppCompatActivity() {
         tvOrderDetailsShippingCharge.text =
             "${FormatUtils.format(num = Constants.SHIPPING_CHARGE)} VND"
         tvOrderDetailsTotalAmount.text = "${FormatUtils.format(num = order.totalAmount)} VND"
+
+        btConfirmReceiveOrder.setOnClickListener(this)
+    }
+
+    override fun onClick(v: View?) {
+        when (v?.id) {
+            R.id.btConfirmReceiveOrder -> confirmReceiveOrders()
+        }
+    }
+
+    private fun confirmReceiveOrders() {
+        AlertDialog.Builder(this)
+            .setTitle("Confirmation")
+            .setMessage("Have you received your orders?")
+            .setIcon(R.drawable.ic_products_24dp)
+            .setPositiveButton("Yes, I have") { dialog, _ ->
+                showProgressDialog(resources.getString(R.string.label_please_wait))
+
+                FirebaseFirestore.getInstance()
+                    .collection(Constants.ORDERS)
+                    .document(order.id)
+                    .update(mapOf(Constants.STATUS to true))
+                    .addOnSuccessListener {
+                        hideProgressDialog()
+                        btConfirmReceiveOrder.visibility = View.GONE
+                        tvOrderStatus.text =
+                            resources.getString(R.string.label_order_status_received)
+                        tvOrderStatus.setTextColor(
+                            ContextCompat.getColor(
+                                this,
+                                R.color.order_status_delivered
+                            )
+                        )
+                    }
+                    .addOnFailureListener { e ->
+                        hideProgressDialog()
+                        showSnackBar(
+                            resources.getString(R.string.fail_to_confirm_receive_orders),
+                            true
+                        )
+
+                        Log.e(
+                            javaClass.simpleName,
+                            "Error while confirming receive orders",
+                            e
+                        )
+                    }
+
+                dialog.dismiss()
+            }
+            .setNegativeButton("No, I haven't") { dialog, _ ->
+                dialog.dismiss()
+            }
+            .create()
+            .show()
     }
 }

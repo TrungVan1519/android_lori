@@ -51,6 +51,8 @@ object Constants {
 
     const val ADDRESS = "address"
 
+    const val STATUS = "status"
+
     const val CREATED_AT = "createdAt"
     const val UPDATED_AT = "updatedAt"
 

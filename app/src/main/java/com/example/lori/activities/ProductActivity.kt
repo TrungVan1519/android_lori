@@ -78,7 +78,18 @@ class ProductActivity : BaseActivity(), View.OnClickListener {
                 product!!.id = id
 
                 ImageUtils.loadProductImage(this, product!!.image, ivProductDetailImage)
-                tvProductOwnerName.text = "By owner: ${product!!.username}"
+                FirebaseFirestore.getInstance()
+                    .collection(Constants.USERS)
+                    .document(product!!.uid)
+                    .get()
+                    .addOnSuccessListener { doc1 ->
+                        val user = doc1.toObject(User::class.java)!!
+                        tvProductOwnerName.text =
+                            "${product!!.username}\n${user.mobile}\n${user.email}"
+                    }
+                    .addOnFailureListener {
+                        tvProductOwnerName.text = product!!.username
+                    }
                 tvProductDetailsTitle.text = product!!.title
                 tvProductDetailsPrice.text = "${FormatUtils.format(num = product!!.price)} VND"
                 tvProductDetailsDescription.text = product!!.description
@@ -336,39 +347,43 @@ class ProductActivity : BaseActivity(), View.OnClickListener {
                     .collection(Constants.USERS)
                     .get()
                     .addOnSuccessListener { query ->
-                        val user = query.documents[0].toObject(User::class.java)!!
-                        val newComment = Comment(
-                            content = dialog.etCommentContent.text.toString(),
-                            start = dialog.spCommentStar.selectedItem as Int,
-                            userEmail = FirebaseAuth.getInstance().currentUser!!.email.toString(),
-                            userImage = user.image,
-                            uid = FirebaseAuth.getInstance().currentUser!!.uid,
-                            pid = product!!.id,
-                            createdAt = System.currentTimeMillis(),
-                            updatedAt = System.currentTimeMillis(),
-                        )
+                        query.documents.forEach { item ->
+                            if (item.id == FirebaseAuth.getInstance().currentUser!!.uid) {
+                                val user = item.toObject(User::class.java)!!
+                                val newComment = Comment(
+                                    content = dialog.etCommentContent.text.toString(),
+                                    start = dialog.spCommentStar.selectedItem as Int,
+                                    userEmail = FirebaseAuth.getInstance().currentUser!!.email.toString(),
+                                    userImage = user.image,
+                                    uid = FirebaseAuth.getInstance().currentUser!!.uid,
+                                    pid = product!!.id,
+                                    createdAt = System.currentTimeMillis(),
+                                    updatedAt = System.currentTimeMillis(),
+                                )
 
-                        FirebaseFirestore.getInstance()
-                            .collection(Constants.COMMENTS)
-                            .document()
-                            .set(newComment, SetOptions.merge())
-                            .addOnSuccessListener {
-                                hideProgressDialog()
-                                showSnackBar(
-                                    resources.getString(R.string.success_to_add_comment),
-                                    false
-                                )
-                                dialog.dismiss()
+                                FirebaseFirestore.getInstance()
+                                    .collection(Constants.COMMENTS)
+                                    .document()
+                                    .set(newComment, SetOptions.merge())
+                                    .addOnSuccessListener {
+                                        hideProgressDialog()
+                                        showSnackBar(
+                                            resources.getString(R.string.success_to_add_comment),
+                                            false
+                                        )
+                                        dialog.dismiss()
+                                    }
+                                    .addOnFailureListener { e ->
+                                        hideProgressDialog()
+                                        showSnackBar(
+                                            resources.getString(R.string.fail_to_add_comment),
+                                            true
+                                        )
+                                        dialog.dismiss()
+                                        Log.e(javaClass.simpleName, "Errors while creating comments", e)
+                                    }
                             }
-                            .addOnFailureListener { e ->
-                                hideProgressDialog()
-                                showSnackBar(
-                                    resources.getString(R.string.fail_to_add_comment),
-                                    true
-                                )
-                                dialog.dismiss()
-                                Log.e(javaClass.simpleName, "Errors while creating comments", e)
-                            }
+                        }
                     }
                     .addOnFailureListener { e ->
                         dialog.dismiss()
