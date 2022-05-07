@@ -27,7 +27,7 @@ class ModifyAddressActivity : BaseActivity(), View.OnClickListener {
             btSubmit.text = resources.getString(R.string.label_btn_update)
 
             etFullName.setText(mAddress?.name)
-            etPhoneNumber.setText(mAddress?.mobile.toString())
+            etPhoneNumber.setText(mAddress?.mobile)
             etAddress.setText(mAddress?.address)
             etZipCode.setText(mAddress?.zipCode)
             etAdditionalNote.setText(mAddress?.additionalNote)
@@ -65,7 +65,7 @@ class ModifyAddressActivity : BaseActivity(), View.OnClickListener {
 
         val address = Address(
             name = etFullName.text.toString().trim { it <= ' ' },
-            mobile = etPhoneNumber.text.toString().trim { it <= ' ' }.toLong(),
+            mobile = etPhoneNumber.text.toString().trim { it <= ' ' },
             address = etAddress.text.toString().trim { it <= ' ' },
             zipCode = etZipCode.text.toString().trim { it <= ' ' },
             additionalNote = etAdditionalNote.text.toString().trim { it <= ' ' },

@@ -64,7 +64,7 @@ class SettingActivity : BaseActivity(), View.OnClickListener {
                 ImageUtils.loadUserImage(this, user!!.image, ivUserPhoto)
                 tvName.text = "${user!!.firstName} ${user!!.lastName}"
                 tvEmail.text = user!!.email
-                tvMobileNumber.text = user!!.mobile.toString()
+                tvMobileNumber.text = user!!.mobile
                 tvGender.text = user!!.gender
             }
             .addOnFailureListener { e ->

@@ -10,7 +10,7 @@ data class User(
     val lastName: String = "",
     val email: String = "",
     val image: String = "",
-    val mobile: Long = 0,
+    val mobile: String = "",
     val gender: String = "",
     val profileCompleted: Int = 0,
     var createdAt: Long = 0,

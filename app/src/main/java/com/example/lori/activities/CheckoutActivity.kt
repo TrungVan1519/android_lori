@@ -37,8 +37,12 @@ class CheckoutActivity : BaseActivity(), View.OnClickListener {
             tvCheckoutFullName.text = address?.name
             tvCheckoutAddress.text = "${address!!.address}, ${address!!.zipCode}"
             tvCheckoutAdditionalNote.text = address?.additionalNote
+            tvCheckoutAdditionalNote.visibility =
+                if (address?.additionalNote!!.isNotEmpty()) View.VISIBLE else View.GONE
             tvCheckoutOtherDetails.text = address?.otherDetails ?: ""
-            tvCheckoutMobileNumber.text = address?.mobile.toString()
+            tvCheckoutOtherDetails.visibility =
+                if (address?.otherDetails!!.isNotEmpty()) View.VISIBLE else View.GONE
+            tvCheckoutMobileNumber.text = address?.mobile
         }
 
         adapter = CartItemAdapter(this, arrayListOf(), R.layout.layout_cart_item)

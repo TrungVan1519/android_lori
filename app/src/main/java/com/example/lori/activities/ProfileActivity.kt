@@ -36,7 +36,7 @@ class ProfileActivity : BaseActivity(), View.OnClickListener {
         etFirstName.setText(user.firstName)
         etLastName.setText(user.lastName)
         etEmail.setText(user.email)
-        etMobileNumber.setText(if (user.mobile != 0L) user.mobile.toString() else "")
+        etMobileNumber.setText(user.mobile.ifEmpty { "" })
         if (user.gender == Constants.FEMALE) {
             rbFemale.isChecked = true
         } else {
@@ -87,7 +87,7 @@ class ProfileActivity : BaseActivity(), View.OnClickListener {
                     userHashMap[Constants.GENDER] =
                         if (rbMale.isChecked) Constants.MALE else Constants.FEMALE
                     userHashMap[Constants.MOBILE] =
-                        etMobileNumber.text.toString().trim { it <= ' ' }.toLong()
+                        etMobileNumber.text.toString().trim { it <= ' ' }
                     userHashMap[Constants.PROFILE_COMPLETED] = 1 // 0: incomplete - 1: completed
                     userHashMap[Constants.CREATED_AT] = System.currentTimeMillis()
                     userHashMap[Constants.UPDATED_AT] = System.currentTimeMillis()

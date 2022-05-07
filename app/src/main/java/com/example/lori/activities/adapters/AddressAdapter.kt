@@ -41,7 +41,7 @@ class AddressAdapter(
                 holder.itemView.tvAddressFullname.text = address.name
                 holder.itemView.tvAddressType.text = address.type
                 holder.itemView.tvAddressDetails.text = "${address.address} - ${address.zipCode}"
-                holder.itemView.tvAddressMobileNumber.text = address.mobile.toString()
+                holder.itemView.tvAddressMobileNumber.text = address.mobile
                 holder.itemView.setOnClickListener {
                     if (!selectedAddress) {
                         Toast.makeText(

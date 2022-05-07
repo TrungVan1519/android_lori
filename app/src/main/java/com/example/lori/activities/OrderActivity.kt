@@ -83,12 +83,14 @@ class OrderActivity : BaseActivity(), View.OnClickListener {
         tvMyOrderDetailsAddressType.text = order.address.type
         tvMyOrderDetailsFullName.text = order.address.name
         tvMyOrderDetailsAddress.text =
-            "${order.address.address}, ${order.address.zipCode}"
+            "${order.address.address} - ${order.address.zipCode}"
         tvMyOrderDetailsAdditionalNote.text = order.address.additionalNote
+        tvMyOrderDetailsAdditionalNote.visibility =
+            if (order.address.additionalNote.isNotEmpty()) View.VISIBLE else View.GONE
         tvMyOrderDetailsOtherDetails.text = order.address.otherDetails
         tvMyOrderDetailsOtherDetails.visibility =
             if (order.address.otherDetails.isNotEmpty()) View.VISIBLE else View.GONE
-        tvMyOrderDetailsMobileNumber.text = order.address.mobile.toString()
+        tvMyOrderDetailsMobileNumber.text = order.address.mobile
 
         tvOrderDetailsSubTotal.text = "${FormatUtils.format(num = order.subTotalAmount)} VND"
         tvOrderDetailsShippingCharge.text =
