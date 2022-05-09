@@ -184,7 +184,7 @@ class CheckoutActivity : BaseActivity(), View.OnClickListener {
                         totalAmount = order.totalAmount,
                         order_datetime = order.order_datetime,
                         status = false,
-                        oid = order.id, // order id
+                        oid = order.title, // order id
                         uid = FirebaseAuth.getInstance().currentUser!!.uid,
                         pid = cartItem.pid,
                         product_owner_id = cartItem.product_owner_id,
