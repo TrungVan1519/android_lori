@@ -18,6 +18,7 @@ object Constants {
     const val EXTRA_SELECT_ADDRESS = "extra_select_address"
     const val EXTRA_SELECTED_ADDRESS = "extra_selected_address"
     const val EXTRA_MY_ORDER_DETAILS = "extra_my_order_details"
+    const val EXTRA_SOLD_PRODUCT_DETAILS = "extra_sold_product_details"
 
     // Permission codes
     const val PICK_IMAGE_REQUEST_CODE = 1
@@ -27,6 +28,7 @@ object Constants {
     const val USERS = "users"
     const val PRODUCTS = "products"
     const val FAV_PRODUCTS = "fav_products"
+    const val SOLD_PRODUCTS = "sold_products"
     const val COMMENTS = "comments"
     const val CART_ITEMS = "cart_items"
     const val ADDRESSES = "addresses"
@@ -52,6 +54,7 @@ object Constants {
     const val ADDRESS = "address"
 
     const val STATUS = "status"
+    const val PRODUCT_OWNER_ID = "product_owner_id"
 
     const val CREATED_AT = "createdAt"
     const val UPDATED_AT = "updatedAt"

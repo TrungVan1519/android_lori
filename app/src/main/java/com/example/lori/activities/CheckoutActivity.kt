@@ -39,7 +39,7 @@ class CheckoutActivity : BaseActivity(), View.OnClickListener {
             tvCheckoutAdditionalNote.text = address?.additionalNote
             tvCheckoutAdditionalNote.visibility =
                 if (address?.additionalNote!!.isNotEmpty()) View.VISIBLE else View.GONE
-            tvCheckoutOtherDetails.text = address?.otherDetails ?: ""
+            tvCheckoutOtherDetails.text = address?.otherDetails
             tvCheckoutOtherDetails.visibility =
                 if (address?.otherDetails!!.isNotEmpty()) View.VISIBLE else View.GONE
             tvCheckoutMobileNumber.text = address?.mobile
@@ -172,6 +172,32 @@ class CheckoutActivity : BaseActivity(), View.OnClickListener {
                 val writeBatch = FirebaseFirestore.getInstance().batch()
 
                 cartItems.forEach { cartItem ->
+                    // todo create sold product
+                    val soldProduct = SoldProduct(
+                        address = order.address,
+                        image = cartItem.image,
+                        title = cartItem.title,
+                        price = cartItem.price,
+                        sold_quantity = cartItem.cart_quantity,
+                        subTotalAmount = order.subTotalAmount,
+                        shippingCharge = Constants.SHIPPING_CHARGE.toDouble(),
+                        totalAmount = order.totalAmount,
+                        order_datetime = order.order_datetime,
+                        status = false,
+                        oid = order.id, // order id
+                        uid = FirebaseAuth.getInstance().currentUser!!.uid,
+                        pid = cartItem.pid,
+                        product_owner_id = cartItem.product_owner_id,
+                        createdAt = System.currentTimeMillis(),
+                        updatedAt = System.currentTimeMillis(),
+                    )
+                    writeBatch.set(
+                        FirebaseFirestore.getInstance()
+                            .collection(Constants.SOLD_PRODUCTS)
+                            .document(),
+                        soldProduct
+                    )
+
                     // todo update stock quantity of products based on cart quantity
                     writeBatch.update(
                         FirebaseFirestore.getInstance()

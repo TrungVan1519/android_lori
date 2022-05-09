@@ -67,6 +67,7 @@
     <string name="label_btn_add_comments">Add comments</string>
     <string name="label_btn_list_comments">List comments</string>
     <string name="label_no_comments_found">No comments are available!</string>
+    <string name="label_no_sold_products_found">No products sold yet!</string>
     <string name="label_btn_i_have_received_this_order">I have received this order</string>
 
     <string name="title_login">LOGIN</string>
@@ -95,6 +96,8 @@
     <string name="title_update_comments">UPDATE COMMENTS</string>
     <string name="title_list_comments">ALL COMMENTS</string>
     <string name="title_terms_and_condition">TERMS AND CONDITION</string>
+    <string name="title_sold_products">SOLD</string>
+    <string name="title_sold_product_details">SOLD PRODUCT DETAILS</string>
 
     <string name="action_settings">Settings</string>
     <string name="action_add_products">Add Products</string>

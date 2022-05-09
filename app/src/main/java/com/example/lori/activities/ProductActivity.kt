@@ -29,6 +29,7 @@ import kotlinx.android.synthetic.main.layout_dialog_list_comments.*
 
 class ProductActivity : BaseActivity(), View.OnClickListener {
     private var product: Product? = null
+    private var productOwnerId = ""
 
     private lateinit var rvComments: RecyclerView
     val adapter = CommentAdapter()
@@ -38,6 +39,7 @@ class ProductActivity : BaseActivity(), View.OnClickListener {
         setContentView(R.layout.activity_product)
 
         getProduct(intent.getStringExtra(Constants.EXTRA_PRODUCT_ID) ?: "")
+        productOwnerId = intent.getStringExtra(Constants.EXTRA_PRODUCT_OWNER_ID) ?: ""
 
         ivAddToFav.setOnClickListener(this)
         btAddToCart.setOnClickListener(this)
@@ -177,6 +179,7 @@ class ProductActivity : BaseActivity(), View.OnClickListener {
             price = product!!.price,
             uid = FirebaseAuth.getInstance().currentUser!!.uid,
             pid = product!!.id,
+            product_owner_id = productOwnerId, // seller id
             createdAt = System.currentTimeMillis(),
         )
 
@@ -430,6 +433,7 @@ class ProductActivity : BaseActivity(), View.OnClickListener {
             cart_quantity = Constants.DEFAULT_CART_QUANTITY,
             uid = FirebaseAuth.getInstance().uid!!,
             pid = product!!.id,
+            product_owner_id = productOwnerId,
             createdAt = System.currentTimeMillis(),
             updatedAt = System.currentTimeMillis(),
         )

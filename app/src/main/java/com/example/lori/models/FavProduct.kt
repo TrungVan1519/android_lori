@@ -9,7 +9,8 @@ class FavProduct(
     var image: String = "",
     val title: String = "",
     val price: Long = 0,
-    var uid: String = "",
-    var pid: String = "",
+    var uid: String = "", // user id == buyer id
+    var pid: String = "", // product id
+    val product_owner_id: String = "", // seller id
     var createdAt: Long = 0
 ) : Parcelable

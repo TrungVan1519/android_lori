@@ -43,11 +43,7 @@
                 android:id="@+id/tvProductItems"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_medium"
-                android:layout_marginTop="@dimen/margin_medium"
-                android:layout_marginEnd="@dimen/margin_medium"
-                android:layout_marginBottom="@dimen/margin_medium"
-                android:padding="@dimen/padding_medium"
+                android:layout_margin="@dimen/margin_medium"
                 android:text="@string/label_checkout_product_items"
                 android:textColor="@color/primary_text"
                 android:textSize="@dimen/text_big" />
@@ -63,11 +59,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/rvCartItems"
-                android:layout_marginStart="@dimen/margin_medium"
-                android:layout_marginTop="@dimen/margin_medium"
-                android:layout_marginEnd="@dimen/margin_medium"
-                android:layout_marginBottom="@dimen/margin_medium"
-                android:padding="@dimen/padding_medium"
+                android:layout_margin="@dimen/margin_medium"
                 android:text="@string/label_checkout_selected_address"
                 android:textColor="@color/primary_text"
                 android:textSize="@dimen/text_big" />
@@ -79,8 +71,7 @@
                 android:layout_below="@id/tvSelectedAddress"
                 android:layout_margin="@dimen/margin_medium"
                 android:background="@color/white"
-                android:orientation="vertical"
-                android:padding="@dimen/padding_medium">
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -152,11 +143,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/llCheckoutAddressDetails"
-                android:layout_marginStart="@dimen/margin_medium"
-                android:layout_marginTop="@dimen/margin_medium"
-                android:layout_marginEnd="@dimen/margin_medium"
-                android:layout_marginBottom="@dimen/margin_medium"
-                android:padding="@dimen/padding_medium"
+                android:layout_margin="@dimen/margin_medium"
                 android:text="@string/label_checkout_items_receipt"
                 android:textColor="@color/primary_text"
                 android:textSize="@dimen/text_big" />
@@ -167,8 +154,7 @@
                 android:layout_below="@id/tvItemsReceipt"
                 android:layout_margin="@dimen/margin_medium"
                 android:background="@color/white"
-                android:orientation="vertical"
-                android:padding="@dimen/padding_medium">
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"

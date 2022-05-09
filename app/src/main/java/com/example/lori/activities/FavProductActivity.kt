@@ -31,6 +31,7 @@ class FavProductActivity : BaseActivity() {
             override fun onClick(position: Int) {
                 val intent = Intent(this@FavProductActivity, ProductActivity::class.java)
                 intent.putExtra(Constants.EXTRA_PRODUCT_ID, adapter.currentList[position].pid)
+                intent.putExtra(Constants.EXTRA_PRODUCT_OWNER_ID, adapter.currentList[position].product_owner_id)
                 startActivity(intent)
             }
 
