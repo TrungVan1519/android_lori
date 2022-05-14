@@ -47,26 +47,26 @@ class ModifyProductActivity : BaseActivity(), View.OnClickListener {
             etProductPrice.setText(mProduct?.price.toString())
             etProductDescription.setText(mProduct?.description)
             etProductQuantity.setText(mProduct?.stock_quantity.toString())
-
-            FirebaseFirestore.getInstance()
-                .collection(Constants.USERS)
-                .document(FirebaseAuth.getInstance().currentUser?.uid ?: "")
-                .get()
-                .addOnSuccessListener { doc ->
-                    val user = doc.toObject(User::class.java)!!
-                    if (user.role == Constants.ROLE_ADMIN) {
-                        cbProductAR.visibility = View.VISIBLE
-                        cbProductAR.isChecked = mProduct!!.ar
-                    }
-                }
-                .addOnFailureListener { e ->
-                    Log.e(
-                        javaClass.simpleName,
-                        "Errors while getting user",
-                        e
-                    )
-                }
         }
+
+        FirebaseFirestore.getInstance()
+            .collection(Constants.USERS)
+            .document(FirebaseAuth.getInstance().currentUser?.uid ?: "")
+            .get()
+            .addOnSuccessListener { doc ->
+                val user = doc.toObject(User::class.java)!!
+                if (user.role == Constants.ROLE_ADMIN) {
+                    cbProductAR.visibility = View.VISIBLE
+                    cbProductAR.isChecked = mProduct?.ar ?: false
+                }
+            }
+            .addOnFailureListener { e ->
+                Log.e(
+                    javaClass.simpleName,
+                    "Errors while getting user",
+                    e
+                )
+            }
 
         ivUploadProductImage.setOnClickListener(this)
         btSubmit.setOnClickListener(this)

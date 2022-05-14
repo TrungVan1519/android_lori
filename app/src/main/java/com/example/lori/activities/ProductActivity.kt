@@ -3,6 +3,7 @@ package com.example.lori.activities
 import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -42,6 +43,7 @@ class ProductActivity : BaseActivity(), View.OnClickListener {
         productOwnerId = intent.getStringExtra(Constants.EXTRA_PRODUCT_OWNER_ID) ?: ""
 
         ivAddToFav.setOnClickListener(this)
+        ivOpenAR.setOnClickListener(this)
         btAddToCart.setOnClickListener(this)
         btGoToCart.setOnClickListener(this)
         btListComment.setOnClickListener(this)
@@ -52,6 +54,9 @@ class ProductActivity : BaseActivity(), View.OnClickListener {
         when (v?.id) {
             R.id.ivAddToFav -> {
                 addToFav()
+            }
+            R.id.ivOpenAR -> {
+                openAR()
             }
             R.id.btAddToCart -> {
                 addToCart()
@@ -92,6 +97,7 @@ class ProductActivity : BaseActivity(), View.OnClickListener {
                     .addOnFailureListener {
                         tvProductOwnerName.text = product!!.username
                     }
+                ivOpenAR.visibility = if (product!!.ar) View.VISIBLE else View.GONE
                 tvProductDetailsTitle.text = product!!.title
                 tvProductDetailsPrice.text = "${FormatUtils.format(num = product!!.price)} VND"
                 tvProductDetailsDescription.text = product!!.description
@@ -212,6 +218,12 @@ class ProductActivity : BaseActivity(), View.OnClickListener {
                 showSnackBar(resources.getString(R.string.fail_to_add_fav_product), false)
                 Log.e(javaClass.simpleName, "Errors while getting fav products", e)
             }
+    }
+
+    private fun openAR() {
+        val intent = Intent(Intent.ACTION_VIEW)
+        intent.data = Uri.parse("unitydl://lori?SampleScene")
+        startActivity(intent)
     }
 
     private fun getAllComments() {

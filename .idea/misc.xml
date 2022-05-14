@@ -43,6 +43,8 @@
         <entry key="app/src/main/res/drawable/ic_vector_chevron_right.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_vector_delete.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_vector_orders.xml" value="0.1365" />
+        <entry key="app/src/main/res/drawable/ic_view_ar.xml" value="0.1235" />
+        <entry key="app/src/main/res/drawable/ic_view_ar1.xml" value="0.1285" />
         <entry key="app/src/main/res/drawable/item_dashboard_background.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/item_grey_border_background.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/rv_item_image_background.xml" value="0.1" />
