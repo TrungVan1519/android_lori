@@ -64,6 +64,16 @@
                     app:riv_oval="false"
                     app:riv_tile_mode="clamp" />
 
+                <CheckBox
+                    android:id="@+id/cbProductAR"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|bottom"
+                    android:layout_margin="@dimen/margin_big"
+                    android:button="@drawable/checkbox_selector"
+                    android:visibility="gone"
+                    tools:visibility="visible" />
+
                 <com.makeramen.roundedimageview.RoundedImageView
                     android:id="@+id/ivUploadProductImage"
                     android:layout_width="wrap_content"

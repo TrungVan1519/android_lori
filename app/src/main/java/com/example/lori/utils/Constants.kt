@@ -41,10 +41,12 @@ object Constants {
     const val MOBILE = "mobile"
     const val GENDER = "gender"
     const val PROFILE_COMPLETED = "profileCompleted"
+    const val ROLE = "role"
     const val USER_PROFILE_IMAGE = "User_Profile_Image"
 
     const val TITLE = "title"
     const val UID = "uid"
+    const val AR = "ar"
     const val PRODUCT_IMAGE = "Product_Image"
 
     const val PID = "pid"
@@ -62,6 +64,8 @@ object Constants {
     // For "users" collection
     const val MALE = "Male"
     const val FEMALE = "Female"
+    const val ROLE_ADMIN = "Admin"
+    const val ROLE_USER = "User"
 
     // For "cart_items" collection
     const val DEFAULT_CART_QUANTITY = 1

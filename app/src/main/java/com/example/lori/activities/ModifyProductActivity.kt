@@ -17,6 +17,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.example.lori.R
 import com.example.lori.models.Product
+import com.example.lori.models.User
 import com.example.lori.utils.Constants
 import com.example.lori.utils.ImageUtils
 import com.google.firebase.auth.FirebaseAuth
@@ -46,6 +47,25 @@ class ModifyProductActivity : BaseActivity(), View.OnClickListener {
             etProductPrice.setText(mProduct?.price.toString())
             etProductDescription.setText(mProduct?.description)
             etProductQuantity.setText(mProduct?.stock_quantity.toString())
+
+            FirebaseFirestore.getInstance()
+                .collection(Constants.USERS)
+                .document(FirebaseAuth.getInstance().currentUser?.uid ?: "")
+                .get()
+                .addOnSuccessListener { doc ->
+                    val user = doc.toObject(User::class.java)!!
+                    if (user.role == Constants.ROLE_ADMIN) {
+                        cbProductAR.visibility = View.VISIBLE
+                        cbProductAR.isChecked = mProduct!!.ar
+                    }
+                }
+                .addOnFailureListener { e ->
+                    Log.e(
+                        javaClass.simpleName,
+                        "Errors while getting user",
+                        e
+                    )
+                }
         }
 
         ivUploadProductImage.setOnClickListener(this)
@@ -93,6 +113,7 @@ class ModifyProductActivity : BaseActivity(), View.OnClickListener {
                 Constants.LORI_PREFERENCES,
                 Context.MODE_PRIVATE
             ).getString(Constants.LOGGED_IN_USERNAME, "")!!,
+            ar = cbProductAR.isChecked,
             createdAt = System.currentTimeMillis(),
             updatedAt = System.currentTimeMillis(),
         )

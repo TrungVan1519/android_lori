@@ -13,6 +13,7 @@ data class User(
     val mobile: String = "",
     val gender: String = "",
     val profileCompleted: Int = 0,
+    val role: String = "",
     var createdAt: Long = 0,
     var updatedAt: Long = 0,
 ) : Parcelable

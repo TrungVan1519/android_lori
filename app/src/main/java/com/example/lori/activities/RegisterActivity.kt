@@ -58,6 +58,7 @@ class RegisterActivity : BaseActivity(), View.OnClickListener {
                             etFirstName.text.toString().trim { it <= ' ' },
                             etLastName.text.toString().trim { it <= ' ' },
                             etEmail.text.toString().trim { it <= ' ' },
+                            role = Constants.ROLE_USER,
                             createdAt = System.currentTimeMillis(),
                             updatedAt = System.currentTimeMillis(),
                         )

@@ -13,6 +13,7 @@ data class Product(
     val stock_quantity: Int = 0,
     val uid: String = "", // user id
     val username: String = "",
+    var ar: Boolean = false,
     var createdAt: Long = 0,
     var updatedAt: Long = 0,
 ) : Parcelable
