@@ -221,9 +221,13 @@ class ProductActivity : BaseActivity(), View.OnClickListener {
     }
 
     private fun openAR() {
-        val intent = Intent(Intent.ACTION_VIEW)
-        intent.data = Uri.parse("unitydl://lori?SampleScene")
-        startActivity(intent)
+        try {
+            val intent = Intent(Intent.ACTION_VIEW)
+            intent.data = Uri.parse("unitydl://lori?SampleScene")
+            startActivity(intent)
+        } catch (e: Exception) {
+            showSnackBar("AR is not available", true)
+        }
     }
 
     private fun getAllComments() {
